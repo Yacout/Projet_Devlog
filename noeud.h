@@ -4,9 +4,8 @@ class noeud
 	private: 
 
 		int nb_aretes = 0;
-		int* var = nullptr;
-		noeud* edges = nullptr;
-		bool* res = nullptr;
+		int* var = nullptr; //tableau
+		noeud* edges = nullptr; //tableau
 
 	public: 
 
