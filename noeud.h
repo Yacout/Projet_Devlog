@@ -3,8 +3,10 @@ class noeud
 
 	private: 
 
+		int op = 0; //1 pour AND, 2 pour OR, 3 pour NOT
 		int nb_aretes = 0;
 		int* var = nullptr; //tableau
+		bool* consts = nullptr; //tableau
 		noeud* edges = nullptr; //tableau
 
 	public: 
