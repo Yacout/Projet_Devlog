@@ -23,3 +23,15 @@ noeud::noeud(int op_par, int var1, int var2){
 	var[1] = var2;
 	nb_aretes = 0;
 }
+
+//============================================================================
+//Constructeur avec deux variables
+//============================================================================
+
+noeud::noeud(int op_par, noeud* noeud1, noeud* noeud2){
+	op = op_par;	
+	aretes = new noeud*[2];
+	aretes[0] = noeud1;
+	aretes[1] = noeud2;
+	nb_aretes = 2;
+}
