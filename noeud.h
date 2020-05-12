@@ -7,7 +7,7 @@ class noeud
 		int nb_aretes = 0;
 		int* var = nullptr; //tableau
 		bool* consts = nullptr; //tableau
-		noeud* aretes = nullptr; //tableau
+		noeud** aretes = nullptr; //tableau
 
 	public: 
 
