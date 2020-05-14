@@ -99,3 +99,16 @@ noeud::noeud(int op_par, bool const1, int var1){
 	nb_const = 1;
 }
 
+//============================================================================
+//Constructeur pour not avec une variable
+//============================================================================
+
+noeud::noeud(int op_par, int var1){
+	op = op_par;	
+	var = new int[1];
+	var[0] = var1;
+	nb_aretes = 0;
+	nb_var = 1;
+	nb_const = 0;
+}
+
