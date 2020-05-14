@@ -55,9 +55,9 @@ noeud::noeud(int op_par, int var1, noeud* noeud1){
 	nb_const = 0;
 }
 
-//===========================================================================
+//============================================================================
 //Constructeur avec deux constantes
-//===========================================================================
+//============================================================================
 
 noeud::noeud(int op_par, bool const1, bool const2){
 	op = op_par;	
@@ -69,9 +69,9 @@ noeud::noeud(int op_par, bool const1, bool const2){
 	nb_const = 2;
 }
 
-//===========================================================================
+//============================================================================
 //Constructeur avec une constante et un noeud
-//===========================================================================
+//============================================================================
 
 noeud::noeud(int op_par, bool const1, noeud* noeud1){
 	op = op_par;	
@@ -81,6 +81,21 @@ noeud::noeud(int op_par, bool const1, noeud* noeud1){
 	consts[0] = const1;
 	nb_aretes = 1;
 	nb_var = 0;
+	nb_const = 1;
+}
+
+//============================================================================
+//Constructeur avec une constante et une variable
+//============================================================================
+
+noeud::noeud(int op_par, bool const1, int var1){
+	op = op_par;	
+	var = new int[1];
+	consts = new bool[1];
+	var[0] = var1;
+	consts[0] = const1;
+	nb_aretes = 0;
+	nb_var = 1;
 	nb_const = 1;
 }
 
