@@ -141,31 +141,31 @@ noeud::~noeud(){
 //
 //============================================================================
 
-int noeud::op(){
+int noeud::op() const{
 	return op_;
 }
 
-int noeud::nb_aretes(){
+int noeud::nb_aretes() const{
 	return nb_aretes_;
 }
 
-int noeud::nb_var(){
+int noeud::nb_var() const{
 	return nb_var_;
 }
 
-int noeud::nb_const(){
+int noeud::nb_const() const{
 	return nb_const_;
 }
 
-int* noeud::var(){
+int* noeud::var() const{
 	return var_;
 }
 
-bool* noeud::consts(){
+bool* noeud::consts() const{
 	return consts_;
 }
 
-noeud** noeud::aretes(){
+noeud** noeud::aretes() const{
 	return aretes_;
 }
 
@@ -175,7 +175,7 @@ noeud** noeud::aretes(){
 //
 //============================================================================
 
-bool noeud::compute(bool* list){
+bool noeud::compute(const bool* list){
 
 	//========================================================================
 	//Cas pour AND and OR 
@@ -249,6 +249,7 @@ bool noeud::compute(bool* list){
 		return !list[var_[0]];
 	}
 
-	return 0;
+	return 0; //return par défaut pour éviter les erreurs de compilation,
+			  //à modifier
 
 }

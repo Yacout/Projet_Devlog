@@ -14,7 +14,9 @@ class noeud
 	public: 
 
 		//====================================================================
+		//
 		//Constructeurs
+		//
 		//====================================================================
 		
 		//Pour les constructeurs, l'operation doit être précisée sous forme d' 
@@ -23,10 +25,15 @@ class noeud
 		//2 pour OR
 		//3 pour NOT
 		
+		//====================================================================
 		//ctor par defaut
+		//====================================================================
+		
 		noeud(); 
 
+		//====================================================================
 		//Constructeurs pour AND and OR
+		//====================================================================
 		
 		//ctor avec deux variables
 		noeud(int op_par, int var1, int var2); 
@@ -41,7 +48,9 @@ class noeud
 		//ctor avec une constante et une variable
 		noeud(int op_par, bool const1, int var1);
 
+		//====================================================================
 		//Constructeurs pour NOT
+		//====================================================================
 		
 		//ctor pour not avec une variable
 		noeud(int op_par, int var1);
@@ -49,29 +58,35 @@ class noeud
 		noeud(int op_par, noeud* noeud1);
 
 		//====================================================================
+		//
 		//Destructeur
+		//
 		//====================================================================
 		
-		~noeud(); //destructeur
+		~noeud(); 
 
 		//====================================================================
+		//
 		//Getters
+		//
 		//====================================================================
 
-		int op();
-		int nb_aretes();
-		int nb_var();
-		int nb_const();
-		int* var();
-		bool* consts();
-		noeud** aretes();
+		int op() const;
+		int nb_aretes() const;
+		int nb_var() const;
+		int nb_const() const;
+		int* var() const;
+		bool* consts() const;
+		noeud** aretes() const;
 
 		//====================================================================
+		//
 		//Compute
+		//
 		//====================================================================
 
 		//Calcule la valeur du noeud à partir d'une liste de valeurs
-		bool compute(bool* list);
+		bool compute(const bool* list);
 
 
 };
