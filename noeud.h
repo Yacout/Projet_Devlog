@@ -25,6 +25,9 @@ class noeud
 		
 		//ctor par defaut
 		noeud(); 
+
+		//Constructeurs pour AND and OR
+		
 		//ctor avec deux variables
 		noeud(int op_par, int var1, int var2); 
 		//ctor avec deux noeuds
@@ -37,6 +40,9 @@ class noeud
 		noeud(int op_par, bool const1, noeud* noeud1);
 		//ctor avec une constante et une variable
 		noeud(int op_par, bool const1, int var1);
+
+		//Constructeurs pour NOT
+		
 		//ctor pour not avec une variable
 		noeud(int op_par, int var1);
 		//ctor pour not avec un noeud

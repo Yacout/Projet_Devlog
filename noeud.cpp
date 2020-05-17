@@ -248,4 +248,7 @@ bool noeud::compute(bool* list){
 	else if (op_ == 3 && nb_var_ == 1){
 		return !list[var_[0]];
 	}
+
+	return 0;
+
 }
