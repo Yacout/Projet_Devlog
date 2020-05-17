@@ -134,3 +134,37 @@ noeud::~noeud(){
 	delete[] var_;
 	delete[] consts_;
 }
+
+//============================================================================
+//
+//Getters
+//
+//============================================================================
+
+int noeud::op(){
+	return op_;
+}
+
+int noeud::nb_aretes(){
+	return nb_aretes_;
+}
+
+int noeud::nb_var(){
+	return nb_var_;
+}
+
+int noeud::nb_const(){
+	return nb_const_;
+}
+
+int* noeud::var(){
+	return var_;
+}
+
+bool* noeud::consts(){
+	return consts_;
+}
+
+noeud** noeud::aretes(){
+	return aretes_;
+}
