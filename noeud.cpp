@@ -168,3 +168,84 @@ bool* noeud::consts(){
 noeud** noeud::aretes(){
 	return aretes_;
 }
+
+//============================================================================
+//
+//Compute
+//
+//============================================================================
+
+bool noeud::compute(bool* list){
+
+	//========================================================================
+	//Cas pour AND and OR 
+	//========================================================================
+	
+	//Deux noeuds
+	if (nb_aretes_ == 2){ switch (op_){
+			case 1: return aretes_[0]->compute(list) 
+					&& aretes_[1]->compute(list);
+			case 2: return aretes_[0]->compute(list) 
+					|| aretes_[1]->compute(list);
+		}
+	} 
+	//Un noeud et une variable
+	else if (nb_aretes_ == 1 && nb_var_ == 1){
+		switch (op_){
+			case 1: return aretes_[0]->compute(list)
+					&& list[var_[0]];
+			case 2: return aretes_[0]->compute(list)
+					|| list[var_[0]];
+		}
+	} 
+	//Un noeud et une constante
+	else if (nb_aretes_ == 1 && nb_const_ == 1){
+		switch (op_){
+			case 1: return aretes_[0]->compute(list)
+					&& consts_[0];
+			case 2: return aretes_[0]->compute(list)
+					|| consts_[0];
+		}
+	} 
+    //Deux variables
+	else if (nb_var_ == 2){
+		switch (op_){
+			case 1: return list[var_[0]]
+					&& list[var_[1]];
+			case 2: return list[var_[0]]
+					|| list[var_[1]];
+		}
+	} 
+	//Une variable et une constante
+	else if (nb_var_ == 1 && nb_const_ == 1){
+		switch (op_){
+			case 1: return list[var_[0]]
+					&& consts_[0];
+			case 2: return list[var_[0]]
+					|| consts_[0];
+		}
+	} 
+	//Deux constantes
+	else if (nb_const_ == 2){
+		switch (op_){
+			case 1: return consts_[0]
+					&& consts_[1];
+			case 2: return consts_[0]
+					|| consts_[1];
+		}
+	}
+
+	//========================================================================
+	//Cas pour NOT
+	//======================================================================== 
+	
+	//Un noeud
+	else if (op_ == 3 && nb_aretes_ == 1){
+		return !aretes_[0]->compute(list);
+	}
+
+	//Une variable
+	else if (op_ == 3 && nb_var_ == 1){
+		return !list[var_[0]];
+	}
+}
