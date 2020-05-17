@@ -3,7 +3,7 @@
 
 const char* test_exemple(){
 
-	bool* list = new bool[2];
+	bool list[2];
 	list[0] = 1;
 	list[1] = 0;
 
