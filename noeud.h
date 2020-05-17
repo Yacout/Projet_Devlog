@@ -48,4 +48,17 @@ class noeud
 		
 		~noeud(); //destructeur
 
+		//====================================================================
+		//Getters
+		//====================================================================
+
+		int op();
+		int nb_aretes();
+		int nb_var();
+		int nb_const();
+		int* var();
+		bool* consts();
+		noeud** aretes();
+
+
 };
