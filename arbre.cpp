@@ -1,6 +1,7 @@
 #include "arbre.h"
 #include "noeud.cpp"
 #include <random>
+#include <stdlib.h>  
 
 
 
@@ -56,7 +57,7 @@ arbre::mutation_random() {
 }
 
 arbre::mutation_ajout() {
-
+	
 }
 
 arbre::mutation_deletion() {
@@ -64,5 +65,40 @@ arbre::mutation_deletion() {
 }
 
 arbre::mutation_substitution() {
+	//Choix du noeud à modifier
+	int numnoeud = rand() % nbr_noeuds_;
+	//Choix du nouveau type d'opérateur du noeud
+	int monrand = rand() % 100;
+	int newop;
+	switch (liste_noeuds_[numnoeud].op())
+	{
+	case 1:
+		if (monrand > 49) {
+			newop = 2;
+		}
+		else {
+			newop = 3;
+		}
+	case 2:
+		if (monrand > 49) {
+			newop = 1;
+		}
+		else {
+			newop = 3;
+		}
+	default:
+		if (monrand > 49) {
+			newop = 1;
+		}
+		else {
+			newop = 2;
+		}
+		break;
+	}
 
+
+	//APPEL DES MODIFIERS DU NOEUD
 }
+
+
+
