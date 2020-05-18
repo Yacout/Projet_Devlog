@@ -22,7 +22,11 @@ arbre::arbre(const arbre arbre_copie) {
 
 
 arbre::calcul_fitness(const bool* data) {
-	fitness_ = -10;
+	int f=0;
+	for(int size_t i=0; i<data.size(); i++){
+		f=f+ (liste_noeuds_[i].compute()-data[i])*(liste_noeuds_[i].compute()-data[i]);
+	}
+	fitness_=-f;
 }
 
 arbre::cree_arbre_random() {
