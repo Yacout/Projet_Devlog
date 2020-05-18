@@ -60,11 +60,17 @@ arbre::mutation_ajout() {
 	
 }
 
-arbre::mutation_deletion() {
-
+void arbre::mutation_deletion() {
+	int numnoeud = rand() % nbr_noeuds_;
+	if (liste_noeuds_[numnoeud].nb_aretes() == 1) {
+		delete[](liste_noeuds_[numnoeud].aretes[0])*;
+	}elif(iste_noeuds_[numnoeud].nb_aretes() == 2){
+		int monrand = ran() % 2;
+		delete[](liste_noeuds_[numnoeud].aretes[monrand])*;
+	}
 }
 
-arbre::mutation_substitution() {
+void arbre::mutation_substitution() {
 	//Choix du noeud à modifier
 	int numnoeud = rand() % nbr_noeuds_;
 	//Choix du nouveau type d'opérateur du noeud
