@@ -183,7 +183,8 @@ bool noeud::compute(const bool* list){
 	//========================================================================
 	
 	//Deux noeuds
-	if (nb_aretes_ == 2){ switch (op_){
+	if (nb_aretes_ == 2){ 
+		switch (op_){
 			case 1: return aretes_[0]->compute(list) 
 					&& aretes_[1]->compute(list);
 			case 2: return aretes_[0]->compute(list) 
@@ -266,5 +267,18 @@ void noeud::size(int &ret){
 		for (int i=0; i<nb_aretes_; i++){
 			aretes_[i]->size(ret);
 		}
+	}
+}
+
+//============================================================================
+//
+//Liste
+//
+//============================================================================
+
+void noeud::liste(noeud** array, int i){
+	array[i] = this;
+	for (int i=0; i<nb_aretes_; i++){
+		aretes_[i]->liste(array, i+1);
 	}
 }

@@ -94,6 +94,17 @@ class noeud
 		//
 		//====================================================================
 
-		//Renvoie le nombre de noeuds dans le tableau
+		//donne le nombre de noeuds dans le tableau
 		void size(int &ret);
+
+		//====================================================================
+		//
+		//Liste
+		//
+		//====================================================================
+
+		//Renvoie une liste de pointeurs vers les noeuds
+		void liste(noeud** array, int i = 0); //attend en paramètre une liste de la bonne
+								  //taille
+
 };
