@@ -1,22 +1,10 @@
-CXXFLAGS = Wall
-objects = run_tests.o noeud.o tests.o
+CXXFLAGS= -Wall
 
-all: run_tests
+MyTest: google_tests.o
+	g++ $(CXXFLAGS) -o run_tests google_tests.o googletest-release-1.10.0/build/lib/libgtest.a googletest-release-1.10.0/build/lib/libgtest_main.a -pthread
 
-run_tests: $(objects)
-	g++ -o run_tests $(objects) 
-
-run_tests.o: run_tests.cpp
-	g++ -o run_tests.o -c run_tests.cpp 
-
-noeud.o: noeud.cpp noeud.h
-	g++ -c -o noeud.o noeud.cpp
-
-tests.o: tests.cpp tests.h
-	g++ -c -o tests.o tests.cpp
-
-check:
-	./run_tests
+google_tests.o: google_tests.cpp 
+	g++ $(CXXFLAGS) -c google_tests.cpp -o google_tests.o -Igoogletest-release-1.10.0/googletest/include/ -std=c++11 
 
 clean:
-	rm $(objects)
+	rm google_tests.o run_tests 
