@@ -95,5 +95,5 @@ class noeud
 		//====================================================================
 
 		//Renvoie le nombre de noeuds dans le tableau
-		void size(int& ret);
+		void size(int &ret);
 };

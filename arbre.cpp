@@ -1,5 +1,5 @@
 #include "arbre.h"
-#include "noeud.h"
+#include "noeud.cpp"
 #include <random>
 #include <stdlib.h>  
 
@@ -40,14 +40,17 @@ arbre::cree_arbre_random() {
 	
 }
 
-arbre::compter_noeuds() {
-	nbr_noeuds_ = 1;
-	pacourir_noeud(noeud1_);
+void arbre::compter_noeuds() {
+        nbr_noeuds_ = 1;
+        int* ret = new int;
+        noeud1_.size(ret);
+        nbr_noeuds_ = ret;
+
+        delete [] ret;
+        ret = NULL;
+
 }
 
-arbre::parcourir_noeud(noeud n) {
-	//Regarde le noeud donnée, compte le nombre de noeuds affiliés, lance parcourir_noeud() sur chacun des affiliés
-}
 
 arbre::mutation_random() {
 
@@ -93,5 +96,9 @@ arbre::mutation_substitution() {
 		break;
 	}
 
+
 	//APPEL DES MODIFIERS DU NOEUD
 }
+
+
+
