@@ -18,7 +18,7 @@ const char* test_exemple(){
 	noeud noeud5(1, &noeud4, &noeud3);
 
 	int size;
-	noeud5.size(&size);
+	noeud5.size(size);
 	std::cout << size << std::endl;
 
 	if (noeud5.compute(list) == true && size == 5){
