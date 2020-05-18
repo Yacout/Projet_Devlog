@@ -1,5 +1,5 @@
 #include "gtest/gtest.h"
-#include "noeud.cpp"
+#include "noeud.h"
 #include <iostream>
 
 TEST(GTestTests, ExampleTest){
