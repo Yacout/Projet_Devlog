@@ -88,5 +88,12 @@ class noeud
 		//Calcule la valeur du noeud à partir d'une liste de valeurs
 		bool compute(const bool* list);
 
+		//====================================================================
+		//
+		//size
+		//
+		//====================================================================
 
+		//Renvoie le nombre de noeuds dans le tableau
+		void size(int& ret);
 };
