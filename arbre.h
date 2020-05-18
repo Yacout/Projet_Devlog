@@ -4,7 +4,6 @@ class arbre{
 public : 
 	arbre(); //constructeur par défaut
 	arbre(arbre arbre_mere); //constructeur à partir d'un arbre
-	arbre();
 	~arbre(); //destructeur
 	void calcul_fitness(const bool* data); 
 	arbre creer_fille();

@@ -1,4 +1,5 @@
 #include "./noeud.h"
+#include <iostream>
 
 //============================================================================
 //
@@ -130,12 +131,9 @@ noeud::noeud(int op_par, noeud* noeud1){
 //============================================================================
 
 noeud::~noeud(){
-	for (int i = 0; i < nb_aretes_; i++){
-		delete aretes_[i];
-	}
-	delete[] aretes_;
 	delete[] var_;
 	delete[] consts_;
+	delete[] aretes_;
 }
 
 //============================================================================
@@ -264,7 +262,9 @@ bool noeud::compute(const bool* list){
 
 void noeud::size(int& ret){
 	ret++;
-	for (int i=0; i<nb_aretes_; i++){
-		aretes_[i]->size(ret);
+	if (nb_aretes_ > 0){
+		for (int i=0; i<nb_aretes_; i++){
+			aretes_[i]->size(ret);
+		}
 	}
 }

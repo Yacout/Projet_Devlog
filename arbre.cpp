@@ -2,16 +2,11 @@
 #include "noeud.h"
 #include <random>
 
-arbre::arbre() {
-	fitness_ = -1000;
-}
+
 
 arbre::arbre() {
 	//Créer arbre
 	cree_arbre_random()
-	
-	
-	calcul_fitness();
 
 }
 
