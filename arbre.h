@@ -4,19 +4,18 @@ class arbre{
 public : 
 	arbre(); //constructeur par défaut
 	arbre(arbre arbre_mere); //constructeur à partir d'un arbre
-	arbre(bool* d);
+	arbre();
 	~arbre(); //destructeur
-	void calcul_fitness(); 
+	void calcul_fitness(const bool* data); 
 	arbre creer_fille();
+	int fitness_;
 
 
 	//attributs
 private : 
 	noeud noeud1_; //1er noeud de l'arbre
-	const bool* data_;
-	int fitness_;
 	noeud* liste_noeuds_ []; // une liste de noeuds sans ordre précis
-	int longueur_liste_;
+	int nbr_noeuds_;
 	void mutation_ajout();
 	void mutation_deletion();
 	void mutation_substitution();
