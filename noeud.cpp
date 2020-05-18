@@ -260,7 +260,7 @@ bool noeud::compute(const bool* list){
 //
 //============================================================================
 
-void noeud::size(int& ret){
+void noeud::size(int &ret){
 	ret++;
 	if (nb_aretes_ > 0){
 		for (int i=0; i<nb_aretes_; i++){

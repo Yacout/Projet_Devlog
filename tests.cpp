@@ -1,5 +1,6 @@
 #include "./tests.h"
 #include "./noeud.h"
+#include <iostream>
 
 const char* test_exemple(){
 
@@ -16,7 +17,11 @@ const char* test_exemple(){
 	noeud noeud4(2, &noeud1, &noeud2);
 	noeud noeud5(1, &noeud4, &noeud3);
 
-	if (noeud5.compute(list) == true){
+	int size;
+	noeud5.size(&size);
+	std::cout << size << std::endl;
+
+	if (noeud5.compute(list) == true && size == 5){
 		return "PASS";
 	} else {
 		return "FAIL";
