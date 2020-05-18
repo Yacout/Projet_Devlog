@@ -2,32 +2,25 @@
 #include "noeud.h"
 #include <random>
 
-arbre::arbre() {
-	fitness_ = -1000;
-}
 
-arbre::arbre(bool* d) {
-	data_ = d;
+
+arbre::arbre() {
 	//Créer arbre
-	cree_arbre_random
-	
-	
-	calcul_fitness();
+	cree_arbre_random()
 
 }
 
 arbre::arbre(const arbre arbre_copie) {
 	fitness_ = arbre_copie.fitness_;
-	data_ = arbre_copie.data_;
-	memcpy(liste_noeuds_, arbre_copie.liste_noeuds_, arbre_copie.longueur_liste_);
-	longueur_liste_ = arbre_copie.longueur_liste_;
+	memcpy(liste_noeuds_, arbre_copie.liste_noeuds_, arbre_copie.nbr_noeuds_);
+	nbr_noeuds_ = arbre_copie.nbr_noeuds_;
 	noeud1_ = arbre_copie.noeud1_;
 }
 
 
 
 
-arbre::calcul_fitness() {
+arbre::calcul_fitness(const bool* data) {
 	fitness_ = -10;
 }
 
@@ -47,7 +40,7 @@ arbre::cree_arbre_random() {
 }
 
 arbre::compter_noeuds() {
-	longueur_liste_ = 1;
+	nbr_noeuds_ = 1;
 	pacourir_noeud(noeud1_);
 }
 
