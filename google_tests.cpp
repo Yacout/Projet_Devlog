@@ -56,3 +56,11 @@ TEST(GTestTests, TestListe){
 	EXPECT_TRUE(true);
 };
 
+TEST(GTestTests, TestOpMut){
+
+	noeud noeud1(1, true, false);
+	noeud1.op(2);
+
+	EXPECT_EQ(noeud1.op(), 2);
+};
+
