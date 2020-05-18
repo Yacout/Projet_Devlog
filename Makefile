@@ -3,7 +3,7 @@ objects = noeud.o google_tests.o
 
 all: run_tests
 
-run_tests: google_tests.o noeud.o
+run_tests: $(objects)
 	g++ $(CXXFLAGS) -o run_tests $(objects) googletest-release-1.10.0/build/lib/libgtest.a googletest-release-1.10.0/build/lib/libgtest_main.a -pthread
 
 noeud.o: noeud.cpp noeud.h
