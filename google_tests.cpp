@@ -1,8 +1,7 @@
 #include "gtest/gtest.h"
 #include "noeud.cpp"
 #include <iostream>
-TEST(GTestTests, ExampleTest) {
-	const char* test_exemple();
+TEST(GTestTests, ExampleTest){
 
 	bool list[2];
 	list[0] = 1;
