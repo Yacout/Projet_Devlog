@@ -1,3 +1,4 @@
+#include "noeud.cpp"
 class arbre{
 
 	//méthodes
