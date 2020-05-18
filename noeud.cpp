@@ -142,7 +142,7 @@ noeud::~noeud(){
 //
 //Getters
 //
-//============c++=============================================================
+//============================================================================
 
 int noeud::op() const{
 	return op_;
@@ -254,5 +254,17 @@ bool noeud::compute(const bool* list){
 
 	return 0; //return par défaut pour éviter les erreurs de compilation,
 			  //à modifier
+}
 
+//============================================================================
+//
+//Size
+//
+//============================================================================
+
+void noeud::size(int& ret){
+	ret++;
+	for (int i=0; i<nb_aretes_; i++){
+		aretes_[i]->size(ret);
+	}
 }
