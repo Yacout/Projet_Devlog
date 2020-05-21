@@ -93,7 +93,7 @@ class noeud
 		//====================================================================
 
 		//Renvoie une liste de pointeurs vers les noeuds
-		void liste(noeud** array, int i = 0); //attend en paramètre une liste 
+		void liste(noeud** array,noeud* defaut); //attend en paramètre une liste 
 											  //de la bonne taille
 
 };
