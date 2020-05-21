@@ -290,9 +290,34 @@ void noeud::size(int &ret){
 //
 //============================================================================
 
-void noeud::liste(noeud** array, int i){
-	array[i] = this;
-	for (int i=0; i<nb_aretes_; i++){
-		aretes_[i]->liste(array, i+1);
+void noeud::liste(noeud** array, noeud* defaut){
+	int u=0;
+	while(array[u]!=defaut){
+		u++;
 	}
+	array[u]=this;
+	if(nb_aretes_>=1){
+		aretes_[0]->liste(array,defaut);
+		
+		if(nb_aretes_==2){
+			aretes_[1]->liste(array,defaut);	
+		}
+	}
+		
 }
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
