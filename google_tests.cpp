@@ -30,7 +30,7 @@ TEST(GTestTests, TestSize){
 	noeud noeud4(2, &noeud1, &noeud2);
 	noeud noeud5(1, &noeud4, &noeud3);
 	
-	int s;
+	int s=0;
 	noeud5.size(s);
 
 	EXPECT_EQ(s, 5);
@@ -46,14 +46,29 @@ TEST(GTestTests, TestListe){
 	noeud noeud3(1, true, 0);
 	noeud noeud4(2, &noeud1, &noeud2);
 	noeud noeud5(1, &noeud4, &noeud3);
-
-	int s;
+	noeud defaut(1, F, F);
+	int s=0;
 	noeud5.size(s);
-	
 	noeud* arr2[s];
-	noeud5.liste(arr2);
-
-	EXPECT_TRUE(true);
+	
+	for(int i=0; i<s;i++){		//remplissage du tableau de pointeurs, pour savoir quelles parties du tableau ont été utilisés
+		arr2[i]=&defaut;
+	}
+	EXPECT_EQ(arr2[0],&defaut);
+	EXPECT_EQ(arr2[1],&defaut);
+	EXPECT_EQ(arr2[2],&defaut);
+	EXPECT_EQ(arr2[3],&defaut);
+	EXPECT_EQ(arr2[4],&defaut);
+	
+	
+	noeud5.liste(arr2,&defaut);			
+	
+	EXPECT_EQ(arr2[0],&noeud5);
+	EXPECT_EQ(arr2[1],&noeud4);
+	EXPECT_EQ(arr2[2],&noeud1);
+	EXPECT_EQ(arr2[3],&noeud2);
+	EXPECT_EQ(arr2[4],&noeud3);
+	
 };
 
 TEST(GTestTests, TestOpMut){
