@@ -47,7 +47,7 @@ void arbre::cree_arbre_random() {
 	//Crée un arbre aléatoire avec 5 opérateurs
 	//Création d'un arbre avec un opérateur puis 4 mutations ajout successives
 
-	noeud1_ = new noeud(); //Noeud créé dans le heap
+//	noeud1_ = new noeud(); //Noeud créé dans le heap
 
 	//Ajouter les une ou deux variables en dessous de l'opérateur dans le tableau
 	for (int i = 1; i < 5; ++i) {
