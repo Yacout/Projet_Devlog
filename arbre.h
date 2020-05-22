@@ -17,7 +17,7 @@ public :
 	//attributs
 private : 
 	noeud* noeud1_; //1er noeud de l'arbre
-	noeud* liste_noeuds_ ; // une liste de noeuds sans ordre précis
+	noeud** liste_noeuds_ ; // une liste des pointeurs des noeuds sans ordre précis
 	int nbr_noeuds_;
 	void mutation_ajout();
 	void mutation_deletion();
