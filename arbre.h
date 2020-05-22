@@ -12,6 +12,7 @@ class arbre{
 public : 
 	arbre(); //constructeur par défaut
 	arbre(const arbre& arbre_copie); //constructeur à partir d'un arbre
+	arbre(int dummyfacor); //Dummy constructor
 	~arbre(); //destructeur
 	void calcul_fitness(const bool* data); 
 	arbre creer_fille();
