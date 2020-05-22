@@ -11,12 +11,15 @@ TEST(GTestTests, ExampleTest){
 	bool F = 0;
 	bool T = 1;
 
-	noeud noeud1(1);
-	noeud noeud2(1, F, T);
-	noeud noeud3(1, true, 0);
-	noeud noeud4(2, &noeud1, &noeud2);
-	noeud noeud5(1, &noeud4, &noeud3);
-	EXPECT_EQ(noeud5.compute(list), 1);
+	noeud** liste_noeud = new noeud*[5];
+
+	liste_noeud[0] = new noeud(1);
+	liste_noeud[1] = new noeud(1, F, T);
+	liste_noeud[2] = new noeud(1, true, 0);
+	liste_noeud[3] = new noeud(2, liste_noeud[0], liste_noeud[1]);
+	liste_noeud[4] = new noeud(1, liste_noeud[2], liste_noeud[3]);
+
+	EXPECT_EQ(liste_noeud[4]->compute(list), 1);
 };
 
 TEST(GTestTests, TestSize){
@@ -24,14 +27,16 @@ TEST(GTestTests, TestSize){
 	bool F = 0;
 	bool T = 1;
 
-	noeud noeud1(1);
-	noeud noeud2(1, F, T);
-	noeud noeud3(1, true, 0);
-	noeud noeud4(2, &noeud1, &noeud2);
-	noeud noeud5(1, &noeud4, &noeud3);
-	
+	noeud** liste_noeud = new noeud*[5];
+
+	liste_noeud[0] = new noeud(1);
+	liste_noeud[1] = new noeud(1, F, T);
+	liste_noeud[2] = new noeud(1, true, 0);
+	liste_noeud[3] = new noeud(2, liste_noeud[0], liste_noeud[1]);
+	liste_noeud[4] = new noeud(1, liste_noeud[2], liste_noeud[3]);
+
 	int s=0;
-	noeud5.size(s);
+	liste_noeud[4]->size(s);
 
 	EXPECT_EQ(s, 5);
 };
@@ -78,4 +83,3 @@ TEST(GTestTests, TestOpMut){
 
 	EXPECT_EQ(noeud1.op(), 2);
 };
-
