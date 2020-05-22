@@ -2,9 +2,9 @@
 #include "noeud.h"
 #include <iostream>
 
-TEST(GTestTests, ExampleTest){
+/*TEST(GTestTests, ExampleTest){
 
-	bool list[2];
+	vector<bool> list;
 	list[0] = 1;
 	list[1] = 0;
 
@@ -17,7 +17,7 @@ TEST(GTestTests, ExampleTest){
 	noeud noeud4(2, &noeud1, &noeud2);
 	noeud noeud5(1, &noeud4, &noeud3);
 	EXPECT_EQ(noeud5.compute(list), 1);
-};
+};*/
 
 TEST(GTestTests, TestSize){
 

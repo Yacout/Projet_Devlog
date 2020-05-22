@@ -1,6 +1,10 @@
 #include "noeud.h"
+#include <vector>
+using namespace std;
 #if ! defined(ARBRE_H)
 #define ARBRE_H
+
+
 
 class arbre{
 

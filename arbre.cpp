@@ -3,7 +3,7 @@
 #include <stdlib.h> 
 #include <cstring> 
 
-
+using namespace std;
 
 arbre::arbre() {
 	//Créer arbre
@@ -23,11 +23,10 @@ arbre::arbre(const arbre& arbre_copie) {
 
 
 
-void arbre::calcul_fitness(const bool* data) {
+void arbre::calcul_fitness(const vector<vector<bool>> data) {
 	int f=0;
-	for(int i=0; i<data.size(); i++){ // data est un tableau, n'a pas de méthode size.
-	//Changer le type de data pour un vector dans la déclaration pour pouvoir utiliser size()
-		int diff=liste_noeuds_[i]->compute() -data[i]; //Conversion implicite de bool à int
+	for(int i=0; i<data.size(); i++){ 
+		int diff=noeud1_->compute(data[i]) -data[i][data[i].size()-1]; //Conversion implicite de bool à int
 		f=f+ diff*diff; //Il faut fournir la liste de données à compute (liste qui correspond à une ligne du tableau)
 	}
 	fitness_=-f;

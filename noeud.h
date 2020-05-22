@@ -1,3 +1,5 @@
+#include <vector>
+using namespace std;
 class noeud
 {
 
@@ -79,7 +81,7 @@ class noeud
 		//====================================================================
 
 		//Calcule la valeur du noeud à partir d'une liste de valeurs
-		bool compute(const bool* list);
+		bool compute(const vector<bool> list);
 
 		//====================================================================
 		//Size
