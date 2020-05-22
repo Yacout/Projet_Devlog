@@ -303,7 +303,6 @@ void noeud::liste(noeud** array, noeud* defaut){
 			aretes_[1]->liste(array,defaut);	
 		}
 	}
-		
 }
 
 
