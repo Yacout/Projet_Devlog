@@ -1,6 +1,10 @@
 #include "noeud.h"
+#include <vector>
+using namespace std;
 #if ! defined(ARBRE_H)
 #define ARBRE_H
+
+
 
 class arbre{
 
@@ -10,7 +14,7 @@ public :
 	arbre(const arbre& arbre_copie); //constructeur à partir d'un arbre
 	arbre(int dummyfacor); //Dummy constructor
 	~arbre(); //destructeur
-	void calcul_fitness(const bool* data); 
+	void calcul_fitness(const vector<vector<bool>> data); 
 	arbre creer_fille();
 	int fitness_;
 

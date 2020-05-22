@@ -3,7 +3,7 @@
 #include <stdlib.h> 
 #include <cstring> 
 
-
+using namespace std;
 
 arbre::arbre() {
 	//Créer arbre
@@ -27,18 +27,17 @@ arbre::arbre(int dummyfacor){
 	liste_noeuds_[0] = new noeud(1,2,3); //Noeud AND entre variable 2 et 3
 	liste_noeuds_[1] = new noeud(1,1,5); //Noeud AND entre variable 1 et 5
 	liste_noeuds_[2] = new noeud(2,1,liste_noeuds_[0]); //Noeud OR entre variable 1 et noeud 0
-	liste_noeuds_[3] = new noeud(3, liste_noeuds_[1]); //Noeud NOT sur noeud 1
+	liste_noeuds_[3] = new noeud( liste_noeuds_[1]); //Noeud NOT sur noeud 1
 	liste_noeuds_[4] = new noeud(1,liste_noeuds_[2],liste_noeuds_[3]); //Noeud AND entre noeud 2 et 3
 	nbr_noeuds_ = 5;
 	noeud1_ = liste_noeuds_[4];
 }
 
 
-void arbre::calcul_fitness(const bool* data) {
+void arbre::calcul_fitness(const vector<vector<bool>> data) {
 	int f=0;
-	for(int i=0; i<data.size(); i++){ // data est un tableau, n'a pas de méthode size.
-	//Changer le type de data pour un vector dans la déclaration pour pouvoir utiliser size()
-		int diff=liste_noeuds_[i]->compute() -data[i]; //Conversion implicite de bool à int
+	for(unsigned i=0; i<data.size(); i++){ 
+		int diff=noeud1_->compute(data[i]) -data[i][data[i].size()-1]; //Conversion implicite de bool à int
 		f=f+ diff*diff; //Il faut fournir la liste de données à compute (liste qui correspond à une ligne du tableau)
 	}
 	fitness_=-f;

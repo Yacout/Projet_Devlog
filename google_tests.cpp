@@ -2,27 +2,7 @@
 #include "noeud.h"
 #include <iostream>
 
-TEST(GTestTests, ExampleTest){
-
-	bool list[2];
-	list[0] = 1;
-	list[1] = 0;
-
-	bool F = 0;
-	bool T = 1;
-
-	noeud** liste_noeud = new noeud*[5];
-
-	liste_noeud[0] = new noeud(1);
-	liste_noeud[1] = new noeud(1, F, T);
-	liste_noeud[2] = new noeud(1, true, 0);
-	liste_noeud[3] = new noeud(2, liste_noeud[0], liste_noeud[1]);
-	liste_noeud[4] = new noeud(1, liste_noeud[2], liste_noeud[3]);
-
-	EXPECT_EQ(liste_noeud[4]->compute(list), 1);
-};
-
-TEST(GTestTests, TestSize){
+/*TEST(GTestTests, TestSize){
 
 	bool F = 0;
 	bool T = 1;
@@ -39,7 +19,7 @@ TEST(GTestTests, TestSize){
 	liste_noeud[4]->size(s);
 
 	EXPECT_EQ(s, 5);
-};
+};*/
 
 TEST(GTestTests, TestListe){
 
