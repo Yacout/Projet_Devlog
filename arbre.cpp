@@ -36,7 +36,7 @@ arbre::arbre(int dummyfacor){
 
 void arbre::calcul_fitness(const vector<vector<bool>> data) {
 	int f=0;
-	for(int i=0; i<data.size(); i++){ 
+	for(unsigned i=0; i<data.size(); i++){ 
 		int diff=noeud1_->compute(data[i]) -data[i][data[i].size()-1]; //Conversion implicite de bool à int
 		f=f+ diff*diff; //Il faut fournir la liste de données à compute (liste qui correspond à une ligne du tableau)
 	}
