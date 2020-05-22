@@ -65,6 +65,18 @@ void arbre::compter_noeuds() {
 
 void arbre::mutation_random() {
 
+    random_device rd;  
+    mt19937 gen(rd());
+    uniform_int_distribution<> dis(1, 3);
+    
+    if (dis(gen)==1) {
+    	mutation_ajout();
+    } else if (dis(gen)==2){
+    	mutation_deletion();
+    } else{
+    	mutation_substitution();
+    }
+
 }
 
 void arbre::mutation_ajout() {
