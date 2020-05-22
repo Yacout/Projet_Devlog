@@ -190,7 +190,7 @@ void noeud::op(int op_par){
 //
 //============================================================================
 
-bool noeud::compute(const bool* list){
+bool noeud::compute(const vector<bool> list){
 
 	//========================================================================
 	//Cas pour AND and OR 
