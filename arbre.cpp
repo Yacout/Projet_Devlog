@@ -6,12 +6,12 @@
 
 
 arbre::arbre() {
-	//Créer arbre
+	//CrÃ©er arbre
 	cree_arbre_random();
 
 }
 
-//Constructeur de copie. Supprimer si non utilisé (mais pas du .h pour éviter que C++ esssaye d'en faire un par lui même)
+//Constructeur de copie. Supprimer si non utilisÃ© (mais pas du .h pour Ã©viter que C++ esssaye d'en faire un par lui mÃªme)
 
 arbre::arbre(const arbre& arbre_copie) {
 	fitness_ = arbre_copie.fitness_;
@@ -25,25 +25,27 @@ arbre::arbre(const arbre& arbre_copie) {
 
 void arbre::calcul_fitness(const bool* data) {
 	int f=0;
-	for(int i=0; i<data.size(); i++){ // data est un tableau, n'a pas de méthode size.
-	//Changer le type de data pour un vector dans la déclaration pour pouvoir utiliser size()
-		f=f+ (liste_noeuds_[i].compute() -data[i]) * (liste_noeuds_[i].compute() - data[i]); //Il faut fournir la liste de données à compute (liste qui correspond à une ligne du tableau)
+	for(int i=0; i<data.size(); i++){ // data est un tableau, n'a pas de mÃ©thode size.
+	//Changer le type de data pour un vector dans la dÃ©claration pour pouvoir utiliser size()
+		int diff=liste_noeuds_[i]->compute() -data[i]; //Conversion implicite de bool Ã  int
+		f=f+ diff*diff; //Il faut fournir la liste de donnÃ©es Ã  compute (liste qui correspond Ã  une ligne du tableau)
 	}
 	fitness_=-f;
 }
 
 void arbre::cree_arbre_random() {
-	//Crée un arbre aléatoire avec 5 opérateurs
-	//Création d'un arbre avec un opérateur puis 4 mutations ajout successives
+	//CrÃ©e un arbre alÃ©atoire avec 5 opÃ©rateurs
+	//CrÃ©ation d'un arbre avec un opÃ©rateur puis 4 mutations ajout successives
 
-	noeud1_ = new noeud(); //Noeud créé dans le heap
+	noeud1_ = new noeud(); //Noeud crÃ©Ã© dans le heap
 
-	//Ajouter les une ou deux variables en dessous de l'opérateur dans le tableau
+	//Ajouter les une ou deux variables en dessous de l'opÃ©rateur dans le tableau
 	for (int i = 1; i < 5; ++i) {
-		//Sélection d'un noeud random où faire l'ajout
-		mutation_ajout(); //Dépend de comment marche les noeuds
+		//SÃ©lection d'un noeud random oÃ¹ faire l'ajout
+		mutation_ajout(); //DÃ©pend de comment marche les noeuds
 	}
 	compter_noeuds();
+	//Il faut ajouter les noeuds Ã  liste_noeuds_
 	
 }
 
@@ -71,21 +73,21 @@ void arbre::mutation_ajout() {
 
 void arbre::mutation_deletion() {
 	int numnoeud = rand() % nbr_noeuds_;
-	if (liste_noeuds_[numnoeud].nb_aretes() == 1) {
-		delete[](liste_noeuds_[numnoeud].aretes()[0]);
-	}else if(liste_noeuds_[numnoeud].nb_aretes() == 2){
+	if (liste_noeuds_[numnoeud]->nb_aretes() == 1) {
+		delete[](liste_noeuds_[numnoeud]->aretes()[0]);
+	}else if(liste_noeuds_[numnoeud]->nb_aretes() == 2){
 		int monrand = rand() % 2;
-		delete[](liste_noeuds_[numnoeud].aretes()[monrand]);
+		delete[](liste_noeuds_[numnoeud]->aretes()[monrand]);
 	}
 }
 
 void arbre::mutation_substitution() {
-	//Choix du noeud à modifier
+	//Choix du noeud Ã  modifier
 	int numnoeud = rand() % nbr_noeuds_;
-	//Choix du nouveau type d'opérateur du noeud
+	//Choix du nouveau type d'opÃ©rateur du noeud
 	int monrand = rand() % 100;
 	int newop;
-	switch (liste_noeuds_[numnoeud].op())
+	switch (liste_noeuds_[numnoeud]->op())
 	{
 	case 1:
 		if (monrand > 49) {
@@ -116,6 +118,10 @@ void arbre::mutation_substitution() {
 }
 
 arbre::~arbre(){
+	for(int i=0; i<nbr_noeuds_;i++){
+		delete[] liste_noeuds_[i];
+	}
+	delete[] liste_noeuds_;
 }
 
 
