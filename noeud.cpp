@@ -292,7 +292,7 @@ void noeud::size(int &ret){
 
 void noeud::liste(noeud** array, int i){
 	array[i] = this;
-	for (int i=0; i<nb_aretes_; i++){
+	for (i; i<nb_aretes_; i++){
 		aretes_[i]->liste(array, i+1);
 	}
 }
