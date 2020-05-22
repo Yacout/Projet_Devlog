@@ -10,9 +10,9 @@ class arbre{
 
 	//méthodes
 public : 
-	arbre(); //constructeur par défaut
+	arbre(int nbrvar); 
 	arbre(const arbre& arbre_copie); //constructeur à partir d'un arbre
-	arbre(int dummyfacor); //Dummy constructor
+	arbre(int nbrvar,int dummyfacor); //Dummy constructor
 	~arbre(); //destructeur
 	void calcul_fitness(const vector<vector<bool>> data); 
 	arbre creer_fille();
@@ -30,6 +30,7 @@ private :
 	void mutation_random();
 	void compter_noeuds();
 	void cree_arbre_random();
+	int nbrvar_;
 
 
 
