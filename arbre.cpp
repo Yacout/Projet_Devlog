@@ -5,9 +5,10 @@
 
 using namespace std;
 
-arbre::arbre() {
+arbre::arbre(int nbrvar) {
 	//Créer arbre
 	cree_arbre_random();
+	nbrvar_=nbrvar;
 
 }
 
@@ -18,11 +19,12 @@ arbre::arbre(const arbre& arbre_copie) {
 	memcpy(liste_noeuds_, arbre_copie.liste_noeuds_, arbre_copie.nbr_noeuds_); //Vieille fonction, ne plait pas au compileur
 	nbr_noeuds_ = arbre_copie.nbr_noeuds_;
 	noeud1_ = arbre_copie.noeud1_;
+	nbrvar_=arbre_copie.nbrvar_;
 }
 
 //Dummy constructor pour les tests
 
-arbre::arbre(int dummyfacor){
+arbre::arbre(int nbrvar, int dummyfacor){
 	liste_noeuds_=new noeud*[5];
 	liste_noeuds_[0] = new noeud(1,2,3); //Noeud AND entre variable 2 et 3
 	liste_noeuds_[1] = new noeud(1,1,5); //Noeud AND entre variable 1 et 5
@@ -31,6 +33,7 @@ arbre::arbre(int dummyfacor){
 	liste_noeuds_[4] = new noeud(1,liste_noeuds_[2],liste_noeuds_[3]); //Noeud AND entre noeud 2 et 3
 	nbr_noeuds_ = 5;
 	noeud1_ = liste_noeuds_[4];
+	nbrvar_=nbrvar;
 }
 
 
@@ -95,11 +98,15 @@ void arbre::mutation_ajout() {
 
 void arbre::mutation_deletion() {
 	int numnoeud = rand() % nbr_noeuds_;
-	if (liste_noeuds_[numnoeud]->nb_aretes() == 1) {
-		delete[](liste_noeuds_[numnoeud]->aretes()[0]);
-	}else if(liste_noeuds_[numnoeud]->nb_aretes() == 2){
-		int monrand = rand() % 2;
-		delete[](liste_noeuds_[numnoeud]->aretes()[monrand]);
+	if(liste_noeuds_[numnoeud]->nb_aretes() >= 1){
+		if (liste_noeuds_[numnoeud]->nb_aretes() == 1) {
+			delete[](liste_noeuds_[numnoeud]->aretes()[0]); //Pas possible car les getters sont const, obviously
+		}else{
+			int monrand = rand() % 2;
+			delete[](liste_noeuds_[numnoeud]->aretes()[monrand]); //Pas possible car les getters sont const, obviously
+		}
+		int monrand = rand() % nbrvar_;
+		liste_noeuds_[numnoeud]->var()[liste_noeuds_[numnoeud]->nb_var()]=monrand; //Pas possible car les getters sont const, obviously
 	}
 }
 
