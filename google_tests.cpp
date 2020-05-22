@@ -54,12 +54,12 @@ TEST(GTestTests, TestListe){
 	for(int i=0; i<s;i++){		//remplissage du tableau de pointeurs, pour savoir quelles parties du tableau ont été utilisés
 		arr2[i]=&defaut;
 	}
+
 	EXPECT_EQ(arr2[0],&defaut);
 	EXPECT_EQ(arr2[1],&defaut);
 	EXPECT_EQ(arr2[2],&defaut);
 	EXPECT_EQ(arr2[3],&defaut);
 	EXPECT_EQ(arr2[4],&defaut);
-	
 	
 	noeud5.liste(arr2,&defaut);			
 	
