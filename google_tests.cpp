@@ -11,7 +11,7 @@ TEST(GTestTests, ExampleTest){
 	bool F = 0;
 	bool T = 1;
 
-	noeud noeud1(3, 1);
+	noeud noeud1(1);
 	noeud noeud2(1, F, T);
 	noeud noeud3(1, true, 0);
 	noeud noeud4(2, &noeud1, &noeud2);
@@ -24,7 +24,7 @@ TEST(GTestTests, TestSize){
 	bool F = 0;
 	bool T = 1;
 
-	noeud noeud1(3, 1);
+	noeud noeud1(1);
 	noeud noeud2(1, F, T);
 	noeud noeud3(1, true, 0);
 	noeud noeud4(2, &noeud1, &noeud2);
@@ -41,7 +41,7 @@ TEST(GTestTests, TestListe){
 	bool F = 0;
 	bool T = 1;
 
-	noeud noeud1(3, 1);
+	noeud noeud1(1);
 	noeud noeud2(1, F, T);
 	noeud noeud3(1, true, 0);
 	noeud noeud4(2, &noeud1, &noeud2);

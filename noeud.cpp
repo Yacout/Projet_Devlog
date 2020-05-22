@@ -102,8 +102,8 @@ noeud::noeud(int op_par, bool const1, int var1){
 //Constructeur pour not avec une variable
 //============================================================================
 
-noeud::noeud(int op_par, int var1){
-	op_ = op_par;	
+noeud::noeud(int var1){
+	op_ = 3;	
 	var_ = new int[1];
 	var_[0] = var1;
 	nb_aretes_ = 0;
@@ -115,8 +115,8 @@ noeud::noeud(int op_par, int var1){
 //Constructeur pour not avec un noeud
 //============================================================================
 
-noeud::noeud(int op_par, noeud* noeud1){
-	op_ = op_par;	
+noeud::noeud(noeud* noeud1){
+	op_ = 3;	
 	aretes_ = new noeud*[1];
 	aretes_[0] = noeud1;
 	nb_aretes_ = 1;

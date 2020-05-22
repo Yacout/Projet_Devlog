@@ -45,9 +45,9 @@ class noeud
 		//Constructeurs pour NOT
 		
 		//ctor pour not avec une variable
-		noeud(int op_par, int var1);
+		noeud(int var1);
 		//ctor pour not avec un noeud
-		noeud(int op_par, noeud* noeud1);
+		noeud(noeud* noeud1);
 
 		//====================================================================
 		//Destructeur
