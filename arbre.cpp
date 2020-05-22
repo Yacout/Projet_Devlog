@@ -93,7 +93,46 @@ void arbre::mutation_random() {
 }
 
 void arbre::mutation_ajout() {
+	noeud* raccord;
+	int raccordvar;
+	bool israccordvar=False;
+	int numnoeud = rand() % nbr_noeuds_;
+	int monrand = rand() % 2;
+	int nbrvar=liste_noeuds_[numnoeud]->nb_var();
+	int nbrarete=liste_noeuds_[numnoeud]->nb_arete();
 	
+	if(liste_noeuds_[numnoeud]->op()==3){ //Si le noeud sélectionné est un NOT
+		if (nbrvar!=0){
+			raccordvar=liste_noeuds_[numnoeud] -> var()[0];
+			israccordvar=TRUE;
+		}else{
+			raccord=liste_noeuds_[numnoeud] -> aretes()[0];
+		}
+	}else{ //Si le noeud sélectionné est un AND ou un OR
+		if(nbrvar==2){
+			raccordvar=liste_noeuds_[numnoeud] -> var()[monrand];
+			israccordvar=TRUE;
+		} else if (nbrarete==2){
+			raccord=liste_noeuds_[numnoeud] -> aretes()[monrand];
+		} else {
+			if (monrand==0){
+				raccordvar=liste_noeuds_[numnoeud] -> var()[0];
+				israccordvar=TRUE;
+			} else {
+				raccord = liste_noeud_[numnoeud] -> aretes()[0];
+			}
+		}
+	}
+	monrand = rand() % 3 + 1;
+	noeud* nvnoeud;
+	if (monrand==3){
+		nvnoeud = new noeud (israccordvar ? raccordvar : raccord);
+	} else {
+		int varcomp = rand() % nbr_var_;
+		nvnoeud = new noeud(monrand,israccordvar ? raccordvar : raccord, varcomp);
+	}
+ 	liste_noeuds_[nbr_noeuds_] = nvnoeud; //On suppose qu'il reste au moins une place dans le tableau liste_noeuds_ (cas normal)
+	liste_noeuds_[numnoeud] -> aretes()[nbrarete]=nvnoeud;
 }
 
 void arbre::mutation_deletion() {
