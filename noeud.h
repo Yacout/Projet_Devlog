@@ -50,6 +50,10 @@ class noeud
 		noeud(int var1);
 		//ctor pour not avec un noeud
 		noeud(noeud* noeud1);
+		
+		//Constructeur de copie
+		
+		noeud(noeud&);
 
 		//====================================================================
 		//Destructeur

@@ -125,6 +125,66 @@ noeud::noeud(noeud* noeud1){
 }
 
 //============================================================================
+//Constructeur de copie
+//============================================================================
+
+noeud::noeud(noeud &acopier){
+	op_ = acopier.op();
+	nb_aretes_ = acopier.nb_aretes();
+	nb_var_ = acopier.nb_var();
+	nb_const_ = acopier.nb_const();
+
+	if (op_ == 1 || op_ == 2){
+		if (nb_aretes_ == 2){
+			aretes_ = new noeud*[2];
+			noeud** aretes_acopier = acopier.aretes();
+			aretes_[0] = aretes_acopier[0];
+			aretes_[1] = aretes_acopier[1];
+		}
+		else if (nb_aretes_ == 1 && nb_var_ == 1){
+			aretes_ = new noeud*[1];
+			var_ = new int[1];
+			noeud** aretes_acopier = acopier.aretes();
+			int* var_acopier = acopier.var();
+			aretes_[0] = aretes_acopier[0];
+			var_[0] = var_acopier[0];
+		}
+		else if (nb_aretes_ == 1 && nb_const_ == 1){
+			aretes_ = new noeud*[1];
+			consts_ = new bool[1];
+			noeud** aretes_acopier = acopier.aretes();
+			bool* const_acopier = acopier.consts();
+			aretes_[0] = aretes_acopier[0];
+			consts_[0] = const_acopier[0];
+		}
+		else if (nb_var_ == 2){
+			var_ = new int[2];
+			int* var_acopier = acopier.var();
+			var_[0] = var_acopier[0];
+			var_[1] = var_acopier[1];
+		}
+		else if (nb_const_ == 2){
+			consts_ = new bool[2];
+			bool* const_acopier = acopier.consts();
+			consts_[0] = const_acopier[0];
+			consts_[1] = const_acopier[1];
+		}
+	}
+	else if (op_ == 3){
+		if (nb_aretes_ == 1){
+			aretes_ = new noeud*[1];
+			noeud** aretes_acopier = acopier.aretes();
+			aretes_[0] = aretes_acopier[0];
+		}
+		else if (nb_var_ == 1){
+			var_ = new int[1];
+			int* var_acopier = acopier.var();
+			var_[0] = var_acopier[0];
+		}
+	}
+}
+
+//============================================================================
 //
 //Destructeur
 //
