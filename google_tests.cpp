@@ -1,10 +1,10 @@
 #include "gtest/gtest.h"
 #include "noeud.h"
-#include <iostream>
+#include <vector>
 
-/*TEST(GTestTests, ExampleTest){
+TEST(GTestTests, ExampleTest){
 
-	bool list[2];
+	std::vector<bool> list(2);
 	list[0] = 1;
 	list[1] = 0;
 
@@ -20,7 +20,7 @@
 	liste_noeud[4] = new noeud(1, liste_noeud[2], liste_noeud[3]);
 
 	EXPECT_EQ(liste_noeud[4]->compute(list), 1);
-};*/
+};
 
 TEST(GTestTests, TestSize){
 
@@ -83,3 +83,26 @@ TEST(GTestTests, TestOpMut){
 
 	EXPECT_EQ(noeud1.op(), 2);
 };
+
+TEST(GTestTests, TestCopie){
+
+	std::vector<bool> list(2);
+	list[0] = 1;
+	list[1] = 0;
+
+	bool F = 0;
+	bool T = 1;
+
+	noeud** liste_noeud = new noeud*[5];
+
+	liste_noeud[0] = new noeud(1);
+	liste_noeud[1] = new noeud(1, F, T);
+	liste_noeud[2] = new noeud(1, true, 0);
+	liste_noeud[3] = new noeud(2, liste_noeud[0], liste_noeud[1]);
+	liste_noeud[4] = new noeud(1, liste_noeud[2], liste_noeud[3]);
+
+	noeud copie(liste_noeud[4]);
+
+	EXPECT_EQ(copie.compute(list), 1);
+};
+
