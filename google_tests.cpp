@@ -105,7 +105,16 @@ TEST(GTestTests, TestCopie){
 };
 
 
-<<<<<<< HEAD
+TEST(GTestTests, TestMutAjout){
+
+	noeud** liste_noeud = new noeud*[1];
+	liste_noeud[0] = new noeud(1);
+	
+	arbre arbretest(5, 1);
+	arbretest.mutation_ajout();
+	
+}
+
 TEST(GTestTests, TestFitness){
 	std::vector<bool> l1{0, 0, 0, 0, 1, 0 };
 
@@ -122,26 +131,5 @@ TEST(GTestTests, TestFitness){
 	EXPECT_EQ(tree->fitness_,5);
 
 };
-
-
-
-
-
-
-=======
-TEST(GTestTests, TestMutAjout){
-
-	noeud** liste_noeud = new noeud*[1];
-	liste_noeud[0] = new noeud(1);
-	
-	arbre arbretest(5, 1);
-	arbretest.mutation_ajout();
-	
-	
-	
-
-}
->>>>>>> 6e4a0d97e379495619db5f2f332e187610d650de
-
 
 
