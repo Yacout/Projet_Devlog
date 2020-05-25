@@ -77,14 +77,6 @@ TEST(GTestTests, TestListe){
 	
 };
 
-TEST(GTestTests, TestOpMut){
-
-	noeud noeud1(1, true, false);
-	noeud1.op(2);
-
-	EXPECT_EQ(noeud1.op(), 2);
-};
-
 TEST(GTestTests, TestCopie){
 
 	std::vector<bool> list(2);
