@@ -1,5 +1,6 @@
 #include <vector>
 using namespace std;
+
 class noeud
 {
 
@@ -72,36 +73,6 @@ class noeud
 		int* var() const;
 		bool* consts() const;
 		noeud** aretes() const;
-
-		//====================================================================
-		//Mutateurs
-		//====================================================================
-
-		//Mutateur d'opération
-		void op(int op_par);
-
-		//Mutateurs pour AND and OR
-		
-		//mutateur avec deux variables
-		void mutate(int op_par, int var1, int var2); 
-		//mutateur avec deux noeuds
-		void mutate(int op_par, noeud* noeud1, noeud* noeud2);
-		//mutateur avec un noeud et une variable
-		void mutate(int op_par, int var1, noeud* noeud1);
-		//mutateur avec deux constantes
-		void mutate(int op_par, bool const1, bool const2);
-		//mutateur avec une constante et un noeud
-		void mutate(int op_par, bool const1, noeud* noeud1);
-		//mutateur avec une constante et une variable
-		void mutate(int op_par, bool const1, int var1);
-
-		//Mutateur pour NOT
-		
-		//mutateur pour not avec une variable
-		void mutate(int var1);
-		//mutateur pour not avec un noeud
-		void mutate(noeud* noeud1);
-
 
 		//====================================================================
 		//Compute
