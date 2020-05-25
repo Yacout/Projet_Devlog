@@ -84,16 +84,16 @@ TEST(GTestTests, TestListe){
 			|| arr2[2] == &noeud3
 			|| arr2[2] == &noeud4
 			|| arr2[2] == &noeud5);
-	EXPECT_TRUE(arr2[2] == &noeud1
-			|| arr2[2] == &noeud2
-			|| arr2[2] == &noeud3
-			|| arr2[2] == &noeud4
-			|| arr2[2] == &noeud5);
-	EXPECT_TRUE(arr2[2] == &noeud1
-			|| arr2[2] == &noeud2
-			|| arr2[2] == &noeud3
-			|| arr2[2] == &noeud4
-			|| arr2[2] == &noeud5);
+	EXPECT_TRUE(arr2[3] == &noeud1
+			|| arr2[3] == &noeud2
+			|| arr2[3] == &noeud3
+			|| arr2[3] == &noeud4
+			|| arr2[3] == &noeud5);
+	EXPECT_TRUE(arr2[4] == &noeud1
+			|| arr2[4] == &noeud2
+			|| arr2[4] == &noeud3
+			|| arr2[4] == &noeud4
+			|| arr2[4] == &noeud5);
 };
 
 TEST(GTestTests, TestCopie){
