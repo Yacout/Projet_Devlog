@@ -22,7 +22,7 @@ arbre::arbre(const arbre& arbre_copie) {
 
 //Dummy constructor pour les tests
 
-arbre::arbre(int nbrvar, int dummyfacor){
+arbre::arbre(int nbrvar, int dummyfactor){
 	liste_noeuds_=new noeud*[5];
 	liste_noeuds_[0] = new noeud(1,2,3); //Noeud AND entre variable 2 et 3
 	liste_noeuds_[1] = new noeud(1,1,5); //Noeud AND entre variable 1 et 5
@@ -58,6 +58,7 @@ void arbre::cree_arbre_random() {
 		noeud1_ = new noeud(operation, var1, var2);
 	}
 	nbr_noeuds_=1;
+	lister_noeuds();
 
 	//Ajouter les une ou deux variables en dessous de l'opérateur dans le tableau
 	for (int i = 1; i < 5; ++i) {
@@ -65,7 +66,8 @@ void arbre::cree_arbre_random() {
 		mutation_ajout(); //Dépend de comment marche les noeuds
 		nbr_noeuds_++;
 	}
-	
+    delete [] liste_noeuds_;
+    liste_noeuds_ = NULL;
 	lister_noeuds();
 	
 }
@@ -74,7 +76,8 @@ void arbre::cree_arbre_random() {
 arbre::arbre(noeud* noeudf){
 	noeud1_ = noeudf;
 	compter_noeuds(); 
-	lister_noeuds();
+	liste_noeuds_= new noeud*[5];
+	liste_noeuds_[0]=noeud1_;
 	mutation_random();
 	
 	delete [] liste_noeuds_;
@@ -85,9 +88,9 @@ arbre::arbre(noeud* noeudf){
 	
 }
 
-arbre arbre::creer_fille(){
+arbre* arbre::creer_fille(){
 	noeud* noeudf = new noeud(noeud1_);
-	arbre arbrette(noeudf);
+	arbre* arbrette = new arbre(noeudf);
 	
 	return arbrette;
 }
@@ -95,10 +98,6 @@ arbre arbre::creer_fille(){
 
 void arbre::lister_noeuds(){
 	liste_noeuds_ = new noeud*[nbr_noeuds_];
-	noeud defaut(1, false, false); //Necessaire à l'utilisation de liste()...
-	for (int i=0; i<nbr_noeuds_;i++){
-		liste_noeuds_[i]=&defaut;
-	}
 	noeud1_->liste(liste_noeuds_);
 }
 
@@ -163,13 +162,21 @@ void arbre::mutation_ajout() {
 	}
 	monrand = rand() % 3 + 1;
 	noeud* nvnoeud;
-	if (monrand==3){
+	if (monrand==3){ //Si le nouveau noeud est un NOT
 		nvnoeud = (israccordvar ? new noeud(raccordvar) : new noeud(raccord));
 	} else {
 		int varcomp = rand() % nbrvar_;
 		nvnoeud = (israccordvar ? new noeud(monrand,raccordvar,varcomp) : new noeud(monrand,raccord,varcomp));
 	}
  	liste_noeuds_[nbr_noeuds_] = nvnoeud; //On suppose qu'il reste au moins une place dans le tableau liste_noeuds_ (cas normal)
+ 	if(israccordvar){
+ 	    noeud** temp = new noeud*[nbrarete+1];
+ 	    for(int i=0;i<nbrarete;i++){
+ 	        temp[i]=liste_noeuds_[numnoeud]->aretes_[i];
+ 	    }
+ 	    delete[] liste_noeuds_[numnoeud]->aretes_;
+        liste_noeuds_[numnoeud]->aretes_=temp;
+ 	}
 	liste_noeuds_[numnoeud] -> aretes()[nbrarete]=nvnoeud;
 }
 
