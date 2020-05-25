@@ -16,7 +16,7 @@ public :
 	arbre(noeud* noeudf); // Constructeur de l'arbre fille 
 	~arbre(); //destructeur
 	void calcul_fitness(const vector<vector<bool>> data); 
-	arbre creer_fille();
+	arbre* creer_fille();
 	int fitness_;
 
 	//attributs
