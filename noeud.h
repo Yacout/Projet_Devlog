@@ -176,7 +176,9 @@ class noeud
 		 *
 		 *
 		 * Ce destructeur est récursif: il détruit le noeud sur lequel il est
-		 * appelé, ainsi que tous les noeuds en dessous de celui-ci
+		 * appelé, ainsi que tous les noeuds en dessous de celui-ci.
+		 * Attention: ce destructeur entre en conflit avec le destructeur 
+		 * automatique du C++ si les noeuds ne se trouvent pas dans le heap
 		 */
 		
 		~noeud(); 
@@ -185,19 +187,54 @@ class noeud
 		//Getters
 		//====================================================================
 
-		int op() const;
-		int nb_aretes() const;
-		int nb_var() const;
-		int nb_const() const;
-		int* var() const;
-		bool* consts() const;
-		noeud** aretes() const;
+		int op() const; /*!< Renvoie l'opération réalisée par le noeud:
+							 * 1 pour AND,
+							 * 2 pour OR,
+							 * 3 pour NOT */
+
+		int nb_aretes() const; /*!< Renvoie le nombre de noeuds auquel le noeud
+								 est relié */
+
+		int nb_var() const; /*!< Renvoie le nombre de variables que contient le
+							  noeud */
+
+		int nb_const() const; /*!< Renvoie le nombre de constantes que contient
+								le noeud */
+
+		int* var() const; /*!< Renvoie un pointeur vers le tableau des
+							   * variables du noeud
+							   * 
+							   * Renvoie un pointeur nul si le tableau n'existe
+							   * pas */
+
+		bool* consts() const; /*!< Renvoie un pointeur vers le tableau des
+							   * constantes du noeud
+							   * 
+							   * Renvoie un pointeur nul si le tableau n'existe
+							   * pas */
+
+		noeud** aretes() const; /*!< Renvoie un pointeur vers le tableau des
+							   * noeuds
+							   * 
+							   * Renvoie un pointeur nul si le tableau n'existe
+							   * pas */
+
 
 		//====================================================================
 		//Compute
 		//====================================================================
 
 		//Calcule la valeur du noeud à partir d'une liste de valeurs
+
+		/**
+		 * Calcule le résultat de l'opération réalisé par le noeud
+		 * 
+		 * Recursif: prend en compte le résultats des noeuds situés en dessous
+		 *
+		 * @param list une liste de booléens correspondant aux valeurs
+		 * prises par les variables contenues dans les noeuds
+		 */
+
 		bool compute(const vector<bool> list);
 
 		//====================================================================
@@ -205,6 +242,15 @@ class noeud
 		//====================================================================
 
 		//donne le nombre de noeuds dans le tableau
+
+		/**
+		 * Permet de connaître le nombre de noeud situé en dessous du noeud sur 
+		 * lequel cette méthode est appelée
+		 *
+		 * @param ret un entier nul incrémenté par la méthode : 
+		 * sa valeur finale correspond au nombre de noeuds en dessous
+		 */
+
 		void size(int &ret);
 
 		//====================================================================
@@ -212,6 +258,17 @@ class noeud
 		//====================================================================
 
 		//Renvoie une liste de pointeurs vers les noeuds
+
+		/**
+		 * Permet d'obtenir une liste de pointeurs vers les noeuds situés en
+		 * dessous du noeud sur lequel cette méthode est appelée
+		 *
+		 * @param array une liste de taille suffisante (à determiner avec size)
+		 * qui contiendra à la fin les pointeurs vers les noeuds
+		 * @param i un entier qui permet à la fonction de connaître l'index
+		 * de la liste à modifier, ne pas changer la valeur par défaut
+		 */
+
 		void liste(noeud** array,int i = 0); //attend en paramètre une liste 
 											  //de la bonne taille
 
