@@ -115,4 +115,3 @@ TEST(GTestTests, TestCopie){
 	delete[] liste_noeud;
 	delete copie;
 };
-
