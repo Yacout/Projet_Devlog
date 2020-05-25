@@ -61,22 +61,11 @@ TEST(GTestTests, TestListe){
 	liste_noeud[3] = new noeud(2, liste_noeud[0], liste_noeud[1]);
 	liste_noeud[4] = new noeud(1, liste_noeud[2], liste_noeud[3]);
 
-	noeud defaut(1, F, F);
 	int s=0;
 	liste_noeud[4]->size(s);
 	noeud* arr2[s];
 	
-	for(int i=0; i<s;i++){		//remplissage du tableau de pointeurs, pour savoir quelles parties du tableau ont été utilisés
-		arr2[i]=&defaut;
-	}
-
-	EXPECT_EQ(arr2[0],&defaut);
-	EXPECT_EQ(arr2[1],&defaut);
-	EXPECT_EQ(arr2[2],&defaut);
-	EXPECT_EQ(arr2[3],&defaut);
-	EXPECT_EQ(arr2[4],&defaut);
-	
-	liste_noeud[4]->liste(arr2,&defaut);			
+	liste_noeud[4]->liste(arr2);			
 	
 	EXPECT_EQ(arr2[0],liste_noeud[4]);
 	EXPECT_EQ(arr2[1],liste_noeud[2]);

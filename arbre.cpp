@@ -99,7 +99,7 @@ void arbre::lister_noeuds(){
 	for (int i=0; i<nbr_noeuds_;i++){
 		liste_noeuds_[i]=&defaut;
 	}
-	noeud1_->liste(liste_noeuds_,&defaut);
+	noeud1_->liste(liste_noeuds_);
 }
 
 void arbre::compter_noeuds() {
