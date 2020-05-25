@@ -96,9 +96,6 @@ arbre arbre::creer_fille(){
 void arbre::lister_noeuds(){
 	liste_noeuds_ = new noeud*[nbr_noeuds_];
 	noeud defaut(1, false, false); //Necessaire à l'utilisation de liste()...
-	for (int i=0; i<nbr_noeuds_;i++){
-		liste_noeuds_[i]=&defaut;
-	}
 	noeud1_->liste(liste_noeuds_);
 }
 
