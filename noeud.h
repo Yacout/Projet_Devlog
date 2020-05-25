@@ -1,7 +1,11 @@
 #include <vector>
+class arbre;
 using namespace std;
+
 class noeud
 {
+
+	friend class arbre;
 
 	private: 
 
@@ -74,36 +78,6 @@ class noeud
 		noeud** aretes() const;
 
 		//====================================================================
-		//Mutateurs
-		//====================================================================
-
-		//Mutateur d'opération
-		void op(int op_par);
-
-		//Mutateurs pour AND and OR
-		
-		//mutateur avec deux variables
-		void mutate(int op_par, int var1, int var2); 
-		//mutateur avec deux noeuds
-		void mutate(int op_par, noeud* noeud1, noeud* noeud2);
-		//mutateur avec un noeud et une variable
-		void mutate(int op_par, int var1, noeud* noeud1);
-		//mutateur avec deux constantes
-		void mutate(int op_par, bool const1, bool const2);
-		//mutateur avec une constante et un noeud
-		void mutate(int op_par, bool const1, noeud* noeud1);
-		//mutateur avec une constante et une variable
-		void mutate(int op_par, bool const1, int var1);
-
-		//Mutateur pour NOT
-		
-		//mutateur pour not avec une variable
-		void mutate(int var1);
-		//mutateur pour not avec un noeud
-		void mutate(noeud* noeud1);
-
-
-		//====================================================================
 		//Compute
 		//====================================================================
 
@@ -122,7 +96,7 @@ class noeud
 		//====================================================================
 
 		//Renvoie une liste de pointeurs vers les noeuds
-		void liste(noeud** array,noeud* defaut); //attend en paramètre une liste 
+		void liste(noeud** array,int i = 0); //attend en paramètre une liste 
 											  //de la bonne taille
 
 };
