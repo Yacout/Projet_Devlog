@@ -70,6 +70,29 @@ void arbre::cree_arbre_random() {
 	
 }
 
+
+arbre::arbre(noeud* noeudf){
+	noeud1_ = noeudf;
+	compter_noeuds(); 
+	lister_noeuds();
+	mutation_random();
+	
+	delete [] liste_noeuds_;
+	liste_noeuds_ = NULL;
+	
+	compter_noeuds();
+	lister_noeuds();
+	
+}
+
+arbre arbre::creer_fille(){
+	noeud* noeudf = new noeud(noeud1_);
+	arbre arbrette(noeudf);
+	
+	return arbrette;
+}
+
+
 void arbre::lister_noeuds(){
 	liste_noeuds_ = new noeud*[nbr_noeuds_];
 	noeud defaut(1, false, false); //Necessaire à l'utilisation de liste()...

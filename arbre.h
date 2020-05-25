@@ -13,11 +13,12 @@ public :
 	arbre(int nbrvar); 
 	arbre(const arbre& arbre_copie); //constructeur à partir d'un arbre
 	arbre(int nbrvar,int dummyfacor); //Dummy constructor
+	arbre(noeud* noeudf); // Constructeur de l'arbre fille 
 	~arbre(); //destructeur
 	void calcul_fitness(const vector<vector<bool>> data); 
 	arbre creer_fille();
 	int fitness_;
-
+	
 
 	//attributs
 private : 
