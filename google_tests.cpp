@@ -68,32 +68,13 @@ TEST(GTestTests, TestListe){
 	EXPECT_EQ(arr2[4],&defaut);
 	
 	noeud5.liste(arr2,&defaut);			
-
-	EXPECT_TRUE(arr2[0] == &noeud1
-			|| arr2[0] == &noeud2
-			|| arr2[0] == &noeud3
-			|| arr2[0] == &noeud4
-			|| arr2[0] == &noeud5);
-	EXPECT_TRUE(arr2[1] == &noeud1
-			|| arr2[1] == &noeud2
-			|| arr2[1] == &noeud3
-			|| arr2[1] == &noeud4
-			|| arr2[1] == &noeud5);
-	EXPECT_TRUE(arr2[2] == &noeud1
-			|| arr2[2] == &noeud2
-			|| arr2[2] == &noeud3
-			|| arr2[2] == &noeud4
-			|| arr2[2] == &noeud5);
-	EXPECT_TRUE(arr2[3] == &noeud1
-			|| arr2[3] == &noeud2
-			|| arr2[3] == &noeud3
-			|| arr2[3] == &noeud4
-			|| arr2[3] == &noeud5);
-	EXPECT_TRUE(arr2[4] == &noeud1
-			|| arr2[4] == &noeud2
-			|| arr2[4] == &noeud3
-			|| arr2[4] == &noeud4
-			|| arr2[4] == &noeud5);
+	
+	EXPECT_EQ(arr2[0],&noeud5);
+	EXPECT_EQ(arr2[1],&noeud4);
+	EXPECT_EQ(arr2[2],&noeud1);
+	EXPECT_EQ(arr2[3],&noeud2);
+	EXPECT_EQ(arr2[4],&noeud3);
+	
 };
 
 TEST(GTestTests, TestCopie){
