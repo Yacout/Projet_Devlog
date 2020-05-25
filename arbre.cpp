@@ -188,9 +188,9 @@ void arbre::mutation_deletion() {
 }
 
 void arbre::mutation_substitution() {
-	//Choix du noeud Ã  modifier
+	//Choix du noeud à modifier
 	int numnoeud = rand() % nbr_noeuds_;
-	//Choix du nouveau type d'opÃ©rateur du noeud
+	//Choix du nouveau type d'opérateur du noeud
 	int monrand = rand() % 100;
 	int newop;
 	switch (liste_noeuds_[numnoeud]->op())
@@ -218,9 +218,58 @@ void arbre::mutation_substitution() {
 		}
 		break;
 	}
-
-
-	//APPEL DES MODIFIERS DU NOEUD
+	noeud* noeudm = liste_noeuds_[numnoeud];
+	if (noeudm->op_!=3 && newop != 3){ //Si le noeud n'était pas un NOT et ne devient pas un NOT
+		noeudm -> op_ = newop;
+	}else if (noeudm->op_==3){ //Si le noeud était un NOT
+		noeudm->op_=newop;
+		int * temp = new int[noeudm->nb_var_+1];
+		for(int i =0; i<noeudm->nb_var_;i++){
+			temp[i]=noeudm -> var_[0];
+			delete[] noeudm->var_;
+		}
+		temp[noeudm->nb_var_]= rand() % nbrvar_;
+		noeudm->var_ = temp;
+		noeudm ->nb_var_=noeudm ->nb_var_+1;
+	}else{ //Si le noeud devient un NOT
+		monrand = rand() % 2;
+		noeudm->op_=newop;
+		switch(noeudm->nb_aretes_)
+		{
+		case 0: //Le noeud était relié à deux variables
+			{
+			int* temp1 = new int[1];
+			temp1[monrand]=noeudm->var_[monrand];
+			delete[] noeudm->var_;
+			noeudm->var_=temp1;
+			noeudm -> nb_var_=1;
+			}
+			break;
+		case 1: //Le noeud était relié à une variable et un noeud
+			if (monrand==0){
+				delete[] noeudm->var_;
+				noeudm ->var_=nullptr;
+				noeudm -> nb_var_=0;
+			} else {
+				delete [] noeudm ->aretes_[0];
+				delete[] noeudm->aretes_;
+				noeudm -> aretes_=nullptr;
+				noeudm -> nb_aretes_=0;
+			}
+			break;
+		default: //Le noeud était relié à deux noeuds
+			{
+			noeud** temp2 = new noeud*[1];
+			temp2[monrand]=noeudm->aretes_[monrand];
+			delete[] noeudm -> aretes_[1-monrand];
+			delete[] noeudm->aretes_;
+			noeudm->aretes_=temp2;
+			noeudm -> nb_aretes_=1;
+			}
+			break;
+		}
+	}
+	
 }
 
 arbre::~arbre(){
