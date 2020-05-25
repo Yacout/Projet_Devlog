@@ -22,7 +22,7 @@ arbre::arbre(const arbre& arbre_copie) {
 
 //Dummy constructor pour les tests
 
-arbre::arbre(int nbrvar, int dummyfacor){
+arbre::arbre(int nbrvar, int dummyfactor){
 	liste_noeuds_=new noeud*[5];
 	liste_noeuds_[0] = new noeud(1,2,3); //Noeud AND entre variable 2 et 3
 	liste_noeuds_[1] = new noeud(1,1,5); //Noeud AND entre variable 1 et 5
