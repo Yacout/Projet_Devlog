@@ -23,13 +23,14 @@ public :
 private : 
 	noeud* noeud1_; //1er noeud de l'arbre
 	noeud** liste_noeuds_ ; // une liste des pointeurs des noeuds sans ordre précis
-	int nbr_noeuds_;
+	int nbr_noeuds_; //Nombre de noeuds dans l'arbre
 	void mutation_ajout();
 	void mutation_deletion();
 	void mutation_substitution();
-	void mutation_random();
-	void compter_noeuds();
-	void cree_arbre_random();
+	void mutation_random(); //Choix aléatoire d'une des trois mutations
+	void compter_noeuds(); //Compte le nombre de noeuds dans l'arbre
+	void lister_noeuds(); //Liste les noeuds de l'arbre dans liste_noeuds_
+	void cree_arbre_random(); //Crée un arbre aléatoire avec 5 noeuds
 	int nbrvar_;
 
 

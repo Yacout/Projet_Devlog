@@ -6,10 +6,8 @@
 using namespace std;
 
 arbre::arbre(int nbrvar) {
-	//Cr√©er arbre
-	cree_arbre_random();
 	nbrvar_=nbrvar;
-
+	cree_arbre_random();
 }
 
 //Constructeur de copie. Supprimer si non utilis√© (mais pas du .h pour √©viter que C++ esssaye d'en faire un par lui m√™me)
@@ -47,22 +45,39 @@ void arbre::calcul_fitness(const vector<vector<bool>> data) {
 }
 
 void arbre::cree_arbre_random() {
-	//Cr√©e un arbre al√©atoire avec 5 op√©rateurs
-	//Cr√©ation d'un arbre avec un op√©rateur puis 4 mutations ajout successives
-
-//	noeud1_ = new noeud(); //Noeud cr√©√© dans le heap
-
-	//Ajouter les une ou deux variables en dessous de l'op√©rateur dans le tableau
-	for (int i = 1; i < 5; ++i) {
-		//S√©lection d'un noeud random o√π faire l'ajout
-		mutation_ajout(); //D√©pend de comment marche les noeuds
+	//CrÈe un arbre alÈatoire avec 5 opÈrateurs
+	//CrÈation d'un arbre avec un opÈrateur puis 4 mutations ajout successives
+	
+	int operation = rand() %3+1;
+	if(operation==3){
+		int var = rand() %nbrvar_ ;
+		noeud1_ = new noeud(var);
+	} else {
+		int var1 = rand() %nbrvar_ ;
+		int var2 = rand() %nbrvar_ ;
+		noeud1_ = new noeud(operation, var1, var2);
 	}
-	compter_noeuds();
-	//Il faut ajouter les noeuds √† liste_noeuds_
+	nbr_noeuds_=1;
+
+	//Ajouter les une ou deux variables en dessous de l'opÈrateur dans le tableau
+	for (int i = 1; i < 5; ++i) {
+		//SÈlection d'un noeud random o˘ faire l'ajout
+		mutation_ajout(); //DÈpend de comment marche les noeuds
+		nbr_noeuds_++;
+	}
+	
+	lister_noeuds();
 	
 }
 
-
+void arbre::lister_noeuds(){
+	liste_noeuds_ = new noeud*[nbr_noeuds_];
+	noeud defaut(1, false, false); //Necessaire ‡ l'utilisation de liste()...
+	for (int i=0; i<nbr_noeuds_;i++){
+		liste_noeuds_[i]=&defaut;
+	}
+	noeud1_->liste(liste_noeuds_,&defaut);
+}
 
 void arbre::compter_noeuds() {
         nbr_noeuds_ = 1;
