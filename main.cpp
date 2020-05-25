@@ -159,12 +159,18 @@ int main() {
     tab2= ConversionTableau(tab);
     
     arbre** arbres_acomparer = new arbre*[20];
-    //int nombrevar = tab2[0].size()-1;
-    arbre* monarbre = new arbre(50);
+    //cout << tab2.at(0).at(119) << endl;
+    //int nombrevar = (tab2[1].size())-1;
+    ///arbre* monarbre = new arbre(119);
     
-    /*for(int i=0; i<5;i++){
-    	arbres_acomparer[i] = new arbre(nombrevar);
-    }*/
+    for(int i=0; i<5;i++){
+    	arbres_acomparer[i] = new arbre(119);
+    	arbres_acomparer[i]->calcul_fitness(tab2); // Ne fait pas appel à calcul_fitness-)
+    }
+    int* scores = new int[5];
+    for(int i=0;i<5;i++){
+        cout << arbres_acomparer[i]->fitness_ <<endl;
+    }
 
     //Affichage(tab2);
 
