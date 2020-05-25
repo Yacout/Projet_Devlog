@@ -1,6 +1,7 @@
 #include "gtest/gtest.h"
 #include "noeud.h"
 #include <vector>
+#include <iostream>
 
 TEST(GTestTests, ExampleTest){
 
@@ -101,8 +102,10 @@ TEST(GTestTests, TestCopie){
 	liste_noeud[3] = new noeud(2, liste_noeud[0], liste_noeud[1]);
 	liste_noeud[4] = new noeud(1, liste_noeud[2], liste_noeud[3]);
 
-	noeud copie(liste_noeud[4]);
-
+	noeud copie(*liste_noeud[4]);
+	std::cout << copie.compute(list) << std::endl;
 	EXPECT_EQ(copie.compute(list), 1);
+	std::cout << copie.aretes()[0] << std::endl;
+	std::cout << liste_noeud[4]->aretes()[0] << std::endl; //Pas les mêmes adresses
 };
 

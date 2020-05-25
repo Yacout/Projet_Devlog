@@ -53,7 +53,7 @@ class noeud
 		
 		//Constructeur de copie
 		
-		noeud(noeud&);
+		noeud(const noeud&);
 
 		//====================================================================
 		//Destructeur
