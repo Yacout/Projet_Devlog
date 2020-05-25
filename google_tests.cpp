@@ -22,7 +22,7 @@ TEST(GTestTests, ExampleTest){
 
 	EXPECT_EQ(liste_noeud[4]->compute(list), 1);
 
-	liste_noeud[4]->~noeud();
+	delete liste_noeud[4];
 	delete[] liste_noeud;
 };
 
@@ -44,7 +44,7 @@ TEST(GTestTests, TestSize){
 
 	EXPECT_EQ(s, 5);
 
-	liste_noeud[4]->~noeud();
+	delete liste_noeud[4];
 	delete[] liste_noeud;
 };
 
@@ -84,7 +84,7 @@ TEST(GTestTests, TestListe){
 	EXPECT_EQ(arr2[3],liste_noeud[0]);
 	EXPECT_EQ(arr2[4],liste_noeud[1]);
 	
-	liste_noeud[4]->~noeud();
+	delete liste_noeud[4];
 	delete[] liste_noeud;
 };
 
@@ -105,13 +105,13 @@ TEST(GTestTests, TestCopie){
 	liste_noeud[3] = new noeud(2, liste_noeud[0], liste_noeud[1]);
 	liste_noeud[4] = new noeud(1, liste_noeud[2], liste_noeud[3]);
 
-	noeud copie(*liste_noeud[4]);
-	std::cout << copie.compute(list) << std::endl;
-	EXPECT_EQ(copie.compute(list), 1);
-	std::cout << copie.aretes()[0] << std::endl;
+	noeud* copie = new noeud(*liste_noeud[4]);
+	std::cout << copie->compute(list) << std::endl;
+	EXPECT_EQ(copie->compute(list), 1);
+	std::cout << copie->aretes()[0] << std::endl;
 	std::cout << liste_noeud[4]->aretes()[0] << std::endl; //Pas les mêmes adresses
 
-	liste_noeud[4]->~noeud();
+	delete liste_noeud[4];
 	delete[] liste_noeud;
+	delete copie;
 };
-
