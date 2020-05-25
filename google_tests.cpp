@@ -46,6 +46,14 @@ TEST(GTestTests, TestListe){
 
 	bool F = 0;
 	bool T = 1;
+	
+	noeud** liste_noeud = new noeud*[5];
+
+	liste_noeud[0] = new noeud(1);
+	liste_noeud[1] = new noeud(1, F, T);
+	liste_noeud[2] = new noeud(1, true, 0);
+	liste_noeud[3] = new noeud(2, liste_noeud[0], liste_noeud[1]);
+	liste_noeud[4] = new noeud(1, liste_noeud[2], liste_noeud[3]);
 
 	noeud noeud1(1);
 	noeud noeud2(1, F, T);
@@ -67,13 +75,13 @@ TEST(GTestTests, TestListe){
 	EXPECT_EQ(arr2[3],&defaut);
 	EXPECT_EQ(arr2[4],&defaut);
 	
-	noeud5.liste(arr2,&defaut);			
+	liste_noeud[4]->liste(arr2,&defaut);			
 	
-	EXPECT_EQ(arr2[0],&noeud5);
-	EXPECT_EQ(arr2[1],&noeud4);
-	EXPECT_EQ(arr2[2],&noeud1);
-	EXPECT_EQ(arr2[3],&noeud2);
-	EXPECT_EQ(arr2[4],&noeud3);
+	EXPECT_EQ(arr2[0],liste_noeud[4]);
+	EXPECT_EQ(arr2[1],liste_noeud[2]);
+	EXPECT_EQ(arr2[2],liste_noeud[3]);
+	EXPECT_EQ(arr2[3],liste_noeud[0]);
+	EXPECT_EQ(arr2[4],liste_noeud[1]);
 	
 };
 
