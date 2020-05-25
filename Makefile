@@ -1,10 +1,14 @@
 CXXFLAGS= -Wall
-objects = noeud.o google_tests.o
+objects = noeud.o google_tests.o arbre.o
 
 all: run_tests
 
 run_tests: $(objects)
 	g++ $(CXXFLAGS) -o run_tests $(objects) googletest-release-1.10.0/build/lib/libgtest.a googletest-release-1.10.0/build/lib/libgtest_main.a -pthread
+
+arbre.o : arbre.cpp arbre.h
+	g++ $(CXXFLAGS) -c -o arbre.o arbre.cpp	
+
 
 noeud.o: noeud.cpp noeud.h
 	g++ $(CXXFLAGS) -c -o noeud.o noeud.cpp

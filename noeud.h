@@ -1,5 +1,11 @@
+#include <vector>
+class arbre;
+using namespace std;
+
 class noeud
 {
+
+	friend class arbre;
 
 	private: 
 
@@ -45,9 +51,13 @@ class noeud
 		//Constructeurs pour NOT
 		
 		//ctor pour not avec une variable
-		noeud(int op_par, int var1);
+		noeud(int var1);
 		//ctor pour not avec un noeud
-		noeud(int op_par, noeud* noeud1);
+		noeud(noeud* noeud1);
+		
+		//Constructeur de copie
+		
+		noeud(const noeud&);
 
 		//====================================================================
 		//Destructeur
@@ -68,18 +78,11 @@ class noeud
 		noeud** aretes() const;
 
 		//====================================================================
-		//Mutateurs
-		//====================================================================
-
-		//Mutateur d'opération
-		void op(int op_par);
-
-		//====================================================================
 		//Compute
 		//====================================================================
 
 		//Calcule la valeur du noeud à partir d'une liste de valeurs
-		bool compute(const bool* list);
+		bool compute(const vector<bool> list);
 
 		//====================================================================
 		//Size
@@ -93,7 +96,7 @@ class noeud
 		//====================================================================
 
 		//Renvoie une liste de pointeurs vers les noeuds
-		void liste(noeud** array, int i = 0); //attend en paramètre une liste 
+		void liste(noeud** array,noeud* defaut); //attend en paramètre une liste 
 											  //de la bonne taille
 
 };

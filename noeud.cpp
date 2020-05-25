@@ -102,8 +102,8 @@ noeud::noeud(int op_par, bool const1, int var1){
 //Constructeur pour not avec une variable
 //============================================================================
 
-noeud::noeud(int op_par, int var1){
-	op_ = op_par;	
+noeud::noeud(int var1){
+	op_ = 3;	
 	var_ = new int[1];
 	var_[0] = var1;
 	nb_aretes_ = 0;
@@ -115,13 +115,45 @@ noeud::noeud(int op_par, int var1){
 //Constructeur pour not avec un noeud
 //============================================================================
 
-noeud::noeud(int op_par, noeud* noeud1){
-	op_ = op_par;	
+noeud::noeud(noeud* noeud1){
+	op_ = 3;	
 	aretes_ = new noeud*[1];
 	aretes_[0] = noeud1;
 	nb_aretes_ = 1;
 	nb_var_ = 0;
 	nb_const_ = 0;
+}
+
+//============================================================================
+//Constructeur de copie
+//============================================================================
+
+noeud::noeud(const noeud &acopier){
+	op_ = acopier.op();
+	nb_aretes_ = acopier.nb_aretes();
+	nb_var_ = acopier.nb_var();
+	nb_const_ = acopier.nb_const();
+
+	if (nb_aretes_!=0){
+		aretes_=new noeud*[nb_aretes_];
+		for (int i=0;i<nb_aretes_;i++){
+			aretes_[i]= new noeud(*(acopier.aretes()[i])); 
+		}
+	}
+
+	if (nb_var_!=0){
+		var_=new int[nb_var_];
+		for (int i=0;i<nb_var_;i++){
+			var_[i]=acopier.var()[i]; 
+		}
+	}
+
+	if (nb_const_!=0){
+		consts_=new bool[nb_const_];
+		for (int i=0;i<nb_const_;i++){
+			consts_[i]=acopier.consts()[i]; 
+		}
+	}
 }
 
 //============================================================================
@@ -131,6 +163,9 @@ noeud::noeud(int op_par, noeud* noeud1){
 //============================================================================
 
 noeud::~noeud(){
+	for (int i = 0; i<nb_aretes_; i++){
+		delete aretes_[i];
+	}
 	delete[] var_;
 	delete[] consts_;
 	delete[] aretes_;
@@ -172,25 +207,11 @@ noeud** noeud::aretes() const{
 
 //============================================================================
 //
-//Mutateurs
-//
-//============================================================================
-
-//============================================================================
-//Mutateur d'opération
-//============================================================================
-
-void noeud::op(int op_par){
-	op_ = op_par;
-}
-
-//============================================================================
-//
 //Compute
 //
 //============================================================================
 
-bool noeud::compute(const bool* list){
+bool noeud::compute(const vector<bool> list){
 
 	//========================================================================
 	//Cas pour AND and OR 
