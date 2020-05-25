@@ -1,8 +1,11 @@
 #include <vector>
+class arbre;
 using namespace std;
 
 class noeud
 {
+
+	friend class arbre;
 
 	private: 
 
