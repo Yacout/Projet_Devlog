@@ -8,6 +8,8 @@
 
 #include <fstream>
 
+#include "arbre.h"
+
 using namespace std;
 
 /**
@@ -103,7 +105,6 @@ vector<vector<bool>> ConversionTableau(vector<vector<string>> tab){
 
         tab2.push_back(tab_ligne);
 
-        cout << "\n";
 
     }
 
@@ -156,8 +157,16 @@ int main() {
     //AffichageString(tab);
 
     tab2= ConversionTableau(tab);
+    
+    arbre** arbres_acomparer = new arbre*[20];
+    //int nombrevar = tab2[0].size()-1;
+    arbre* monarbre = new arbre(50);
+    
+    /*for(int i=0; i<5;i++){
+    	arbres_acomparer[i] = new arbre(nombrevar);
+    }*/
 
-    Affichage(tab2);
+    //Affichage(tab2);
 
     //cout<<tab2.size()<<endl;
 

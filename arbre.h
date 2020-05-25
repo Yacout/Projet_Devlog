@@ -16,9 +16,8 @@ public :
 	arbre(noeud* noeudf); // Constructeur de l'arbre fille 
 	~arbre(); //destructeur
 	void calcul_fitness(const vector<vector<bool>> data); 
-	arbre creer_fille();
+	arbre* creer_fille();
 	int fitness_;
-	
 
 	//attributs
 private : 
@@ -33,8 +32,6 @@ private :
 	void lister_noeuds(); //Liste les noeuds de l'arbre dans liste_noeuds_
 	void cree_arbre_random(); //Crée un arbre aléatoire avec 5 noeuds
 	int nbrvar_;
-
-
 
 };
 #endif
