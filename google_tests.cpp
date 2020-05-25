@@ -104,3 +104,20 @@ TEST(GTestTests, TestCopie){
 	delete[] liste_noeud;
 	delete copie;
 };
+
+
+TEST(GTestTests, TestMutAjout){
+
+	noeud** liste_noeud = new noeud*[1];
+	liste_noeud[0] = new noeud(1);
+	
+	arbre arbretest(5, 1);
+	arbretest.mutation_ajout();
+	
+	
+	
+
+}
+
+
+
