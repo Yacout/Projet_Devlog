@@ -163,6 +163,9 @@ noeud::noeud(const noeud &acopier){
 //============================================================================
 
 noeud::~noeud(){
+	for (int i = 0; i<nb_aretes_; i++){
+		aretes_[i]->~noeud();
+	}
 	delete[] var_;
 	delete[] consts_;
 	delete[] aretes_;
