@@ -1,8 +1,7 @@
 #include "gtest/gtest.h"
-#include "noeud.h"
+#include "arbre.h"
 #include <vector>
 #include <iostream>
-
 TEST(GTestTests, ExampleTest){
 
 	std::vector<bool> list(2);
@@ -114,10 +113,23 @@ TEST(GTestTests, TestMutAjout){
 	arbre arbretest(5, 1);
 	arbretest.mutation_ajout();
 	
-	
-	
-
 }
 
+TEST(GTestTests, TestFitness){
+	std::vector<bool> l1{0, 0, 0, 0, 1, 0 };
+
+	std::vector<bool> l2{0,1,1,1,0,1};
+
+	std::vector<bool> l3{1,1,0,1,0,0};
+
+	std::vector<vector<bool>> test{l1, l2, l3};
+		
+	arbre* tree = new arbre(1,5);
+
+	tree->calcul_fitness(test);
+
+	EXPECT_EQ(tree->fitness_,5);
+
+};
 
 

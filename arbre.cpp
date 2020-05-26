@@ -1,7 +1,8 @@
 #include "arbre.h"
 #include <random>
 #include <stdlib.h> 
-#include <cstring> 
+#include <cstring>
+#include <iostream>
 
 using namespace std;
 
@@ -37,16 +38,17 @@ arbre::arbre(int nbrvar, int dummyfactor){
 
 void arbre::calcul_fitness(const vector<vector<bool>> data) {
 	int f=0;
-	for(unsigned i=0; i<data.size(); i++){ 
+	for(unsigned i=1; i<data.size(); i++){
 		int diff=noeud1_->compute(data[i]) -data[i][data[i].size()-1]; //Conversion implicite de bool Ã  int
 		f=f+ diff*diff; //Il faut fournir la liste de donnÃ©es Ã  compute (liste qui correspond Ã  une ligne du tableau)
+
 	}
 	fitness_=-f;
 }
 
 void arbre::cree_arbre_random() {
-	//Crée un arbre aléatoire avec 5 opérateurs
-	//Création d'un arbre avec un opérateur puis 4 mutations ajout successives
+	//Crï¿½e un arbre alï¿½atoire avec 5 opï¿½rateurs
+	//Crï¿½ation d'un arbre avec un opï¿½rateur puis 4 mutations ajout successives
 	
 	int operation = rand() %3+1;
 	if(operation==3){
@@ -60,11 +62,13 @@ void arbre::cree_arbre_random() {
 	nbr_noeuds_=1;
 	lister_noeuds();
 
-	//Ajouter les une ou deux variables en dessous de l'opérateur dans le tableau
+	//Ajouter les une ou deux variables en dessous de l'opï¿½rateur dans le tableau
 	for (int i = 1; i < 5; ++i) {
-		//Sélection d'un noeud random où faire l'ajout
-		mutation_ajout(); //Dépend de comment marche les noeuds
+		//Sï¿½lection d'un noeud random oï¿½ faire l'ajout
+		mutation_ajout(); //Dï¿½pend de comment marche les noeuds
 		nbr_noeuds_++;
+        delete [] liste_noeuds_;
+        lister_noeuds();
 	}
     delete [] liste_noeuds_;
     liste_noeuds_ = NULL;
@@ -160,13 +164,13 @@ void arbre::mutation_ajout() {
 			}
 		}
 	}
-	monrand = rand() % 3 + 1;
+	int monrand1 = rand() % 3 + 1;
 	noeud* nvnoeud;
-	if (monrand==3){ //Si le nouveau noeud est un NOT
+	if (monrand1==3){ //Si le nouveau noeud est un NOT
 		nvnoeud = (israccordvar ? new noeud(raccordvar) : new noeud(raccord));
 	} else {
 		int varcomp = rand() % nbrvar_;
-		nvnoeud = (israccordvar ? new noeud(monrand,raccordvar,varcomp) : new noeud(monrand,raccord,varcomp));
+		nvnoeud = (israccordvar ? new noeud(monrand1,raccordvar,varcomp) : new noeud(monrand1,raccord,varcomp));
 	}
  	liste_noeuds_[nbr_noeuds_] = nvnoeud; //On suppose qu'il reste au moins une place dans le tableau liste_noeuds_ (cas normal)
  	if(israccordvar){
@@ -176,8 +180,15 @@ void arbre::mutation_ajout() {
  	    }
  	    delete[] liste_noeuds_[numnoeud]->aretes_;
         liste_noeuds_[numnoeud]->aretes_=temp;
+        liste_noeuds_[numnoeud]->nb_aretes_=liste_noeuds_[numnoeud]->nb_aretes_+1;
+        liste_noeuds_[numnoeud]->nb_var_=liste_noeuds_[numnoeud]->nb_var_-1;
+        liste_noeuds_[numnoeud] -> aretes()[nbrarete]=nvnoeud;
+    }else if(nbrarete==1){
+ 	    liste_noeuds_[numnoeud] ->aretes()[0]=nvnoeud;
+ 	}else{
+        liste_noeuds_[numnoeud] ->aretes()[monrand]=nvnoeud;
  	}
-	liste_noeuds_[numnoeud] -> aretes()[nbrarete]=nvnoeud;
+
 }
 
 void arbre::mutation_deletion() {
@@ -195,9 +206,9 @@ void arbre::mutation_deletion() {
 }
 
 void arbre::mutation_substitution() {
-	//Choix du noeud à modifier
+	//Choix du noeud ï¿½ modifier
 	int numnoeud = rand() % nbr_noeuds_;
-	//Choix du nouveau type d'opérateur du noeud
+	//Choix du nouveau type d'opï¿½rateur du noeud
 	int monrand = rand() % 100;
 	int newop;
 	switch (liste_noeuds_[numnoeud]->op())
@@ -226,9 +237,9 @@ void arbre::mutation_substitution() {
 		break;
 	}
 	noeud* noeudm = liste_noeuds_[numnoeud];
-	if (noeudm->op_!=3 && newop != 3){ //Si le noeud n'était pas un NOT et ne devient pas un NOT
+	if (noeudm->op_!=3 && newop != 3){ //Si le noeud n'ï¿½tait pas un NOT et ne devient pas un NOT
 		noeudm -> op_ = newop;
-	}else if (noeudm->op_==3){ //Si le noeud était un NOT
+	}else if (noeudm->op_==3){ //Si le noeud ï¿½tait un NOT
 		noeudm->op_=newop;
 		int * temp = new int[noeudm->nb_var_+1];
 		for(int i =0; i<noeudm->nb_var_;i++){
@@ -243,7 +254,7 @@ void arbre::mutation_substitution() {
 		noeudm->op_=newop;
 		switch(noeudm->nb_aretes_)
 		{
-		case 0: //Le noeud était relié à deux variables
+		case 0: //Le noeud ï¿½tait reliï¿½ ï¿½ deux variables
 			{
 			int* temp1 = new int[1];
 			temp1[monrand]=noeudm->var_[monrand];
@@ -252,7 +263,7 @@ void arbre::mutation_substitution() {
 			noeudm -> nb_var_=1;
 			}
 			break;
-		case 1: //Le noeud était relié à une variable et un noeud
+		case 1: //Le noeud ï¿½tait reliï¿½ ï¿½ une variable et un noeud
 			if (monrand==0){
 				delete[] noeudm->var_;
 				noeudm ->var_=nullptr;
@@ -264,7 +275,7 @@ void arbre::mutation_substitution() {
 				noeudm -> nb_aretes_=0;
 			}
 			break;
-		default: //Le noeud était relié à deux noeuds
+		default: //Le noeud ï¿½tait reliï¿½ ï¿½ deux noeuds
 			{
 			noeud** temp2 = new noeud*[1];
 			temp2[monrand]=noeudm->aretes_[monrand];
