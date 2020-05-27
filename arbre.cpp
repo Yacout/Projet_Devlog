@@ -291,9 +291,10 @@ void arbre::mutation_substitution() {
 }
 
 arbre::~arbre(){
-	for(int i=0; i<nbr_noeuds_;i++){
-		delete[] liste_noeuds_[i];
-	}
+	//for(int i=0; i<nbr_noeuds_;i++){
+	//	delete[] liste_noeuds_[i];
+	//}
+	delete noeud1_;
 	delete[] liste_noeuds_;
 }
 
