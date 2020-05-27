@@ -2,6 +2,7 @@
 #include "arbre.h"
 #include <vector>
 #include <iostream>
+
 TEST(GTestTests, ExampleTest){
 
 	std::vector<bool> list(2);
@@ -23,6 +24,64 @@ TEST(GTestTests, ExampleTest){
 
 	delete liste_noeud[4];
 	delete[] liste_noeud;
+};
+
+TEST(GTestTests, TestComputeConst){
+
+	std::vector<bool> list(1);
+	
+	noeud noeud1(1, true, true);
+	noeud noeud2(1, true, false);
+	noeud noeud3(1, false, true);
+	noeud noeud4(1, false, false);
+
+	EXPECT_EQ(noeud1.compute(list), 1);
+	EXPECT_EQ(noeud2.compute(list), 0);
+	EXPECT_EQ(noeud3.compute(list), 0);
+	EXPECT_EQ(noeud4.compute(list), 0);
+
+	noeud noeud5(2, true, true);
+	noeud noeud6(2, true, false);
+	noeud noeud7(2, false, true);
+	noeud noeud8(2, false, false);
+
+	EXPECT_EQ(noeud5.compute(list), 1);
+	EXPECT_EQ(noeud6.compute(list), 1);
+	EXPECT_EQ(noeud7.compute(list), 1);
+	EXPECT_EQ(noeud8.compute(list), 0);
+};
+
+TEST(GTestTests, TestComputeVar){
+
+	std::vector<bool> list(2);
+	list[0] = true;
+	list[1] = false;
+	
+	noeud noeud1(1, 0, 0);
+	noeud noeud2(1, 0, 1);
+	noeud noeud3(1, 1, 0);
+	noeud noeud4(1, 1, 1);
+
+	EXPECT_EQ(noeud1.compute(list), true);
+	EXPECT_EQ(noeud2.compute(list), false);
+	EXPECT_EQ(noeud3.compute(list), false);
+	EXPECT_EQ(noeud4.compute(list), false);
+
+	noeud noeud5(2, 0, 0);
+	noeud noeud6(2, 0, 1);
+	noeud noeud7(2, 1, 0);
+	noeud noeud8(2, 1, 1);
+
+	EXPECT_EQ(noeud5.compute(list), true);
+	EXPECT_EQ(noeud6.compute(list), true);
+	EXPECT_EQ(noeud7.compute(list), true);
+	EXPECT_EQ(noeud8.compute(list), false);
+
+	noeud noeud9(0);
+	noeud noeud10(1);
+
+	EXPECT_EQ(noeud9.compute(list), false);
+	EXPECT_EQ(noeud10.compute(list), true);
 };
 
 TEST(GTestTests, TestSize){
@@ -94,10 +153,11 @@ TEST(GTestTests, TestCopie){
 	liste_noeud[4] = new noeud(1, liste_noeud[2], liste_noeud[3]);
 
 	noeud* copie = new noeud(*liste_noeud[4]);
-	std::cout << copie->compute(list) << std::endl;
+	//std::cout << copie->compute(list) << std::endl;
 	EXPECT_EQ(copie->compute(list), 1);
-	std::cout << copie->aretes()[0] << std::endl;
-	std::cout << liste_noeud[4]->aretes()[0] << std::endl; //Pas les mêmes adresses
+	//std::cout << copie->aretes()[0] << std::endl;
+	//std::cout << liste_noeud[4]->aretes()[0] << std::endl; //Pas les mêmes adresses
+	EXPECT_FALSE(copie->aretes()[0] == liste_noeud[4]->aretes()[0]);
 
 	delete liste_noeud[4];
 	delete[] liste_noeud;
@@ -116,7 +176,7 @@ TEST(GTestTests, TestCopie){
 //}
 
 TEST(GTestTests, TestFitness){
-	std::vector<bool> l1{0, 0, 0, 0, 1, 0 };
+	std::vector<bool> l1{0,0,0,0,1,0};
 
 	std::vector<bool> l2{0,1,1,1,0,1};
 
@@ -128,7 +188,7 @@ TEST(GTestTests, TestFitness){
 
 	tree->calcul_fitness(test);
 
-	EXPECT_EQ(tree->fitness_,5);
+	EXPECT_EQ(tree->fitness_,-1);
 
 	delete tree;
 

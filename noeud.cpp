@@ -163,8 +163,15 @@ noeud::noeud(const noeud &acopier){
 //============================================================================
 
 noeud::~noeud(){
-	for (int i = 0; i<nb_aretes_; i++){
-		delete aretes_[i];
+	if (nb_aretes_ == 2){
+		if (aretes_[0] == aretes_[1]){
+			delete aretes_[0];
+		} else {
+			delete aretes_[0];
+			delete aretes_[1];
+		}
+	} else if (nb_aretes_ == 1){
+		delete aretes_[0];
 	}
 	delete[] var_;
 	delete[] consts_;
@@ -278,15 +285,20 @@ bool noeud::compute(const vector<bool> list){
 	
 	//Un noeud
 	else if (op_ == 3 && nb_aretes_ == 1){
-		return !aretes_[0]->compute(list);
+		return !(aretes_[0]->compute(list));
 	}
 
 	//Une variable
 	else if (op_ == 3 && nb_var_ == 1){
-		return !list[var_[0]];
+		return !(list[var_[0]]);
 	}
 
-	return 0; //return par défaut pour éviter les erreurs de compilation,
+	else {
+		std::cout << "Erreur calcul" << std::endl;
+		return 0;
+	}
+
+	//return 0; //return par défaut pour éviter les erreurs de compilation,
 			  //à modifier
 }
 
