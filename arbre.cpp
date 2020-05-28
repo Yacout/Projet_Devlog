@@ -38,7 +38,7 @@ arbre::arbre(int nbrvar, int dummyfactor){
 
 void arbre::calcul_fitness(const vector<vector<bool>> data) {
 	int f=0;
-	for(unsigned i=0; i<data.size(); i++){
+	for(unsigned i=1; i<data.size(); i++){ //La première ligne de data est vide, à skip
 		int diff = noeud1_->compute(data[i]) - data[i][data[i].size()-1]; //Conversion implicite de bool à int
 		f = f + diff*diff; //Il faut fournir la liste de données à compute (liste qui correspond à une ligne du tableau)
 
@@ -257,7 +257,7 @@ void arbre::mutation_substitution() {
 		case 0: //Le noeud �tait reli� � deux variables
 			{
 			int* temp1 = new int[1];
-			temp1[monrand]=noeudm->var_[monrand];
+			temp1[0]=noeudm->var_[monrand];
 			delete[] noeudm->var_;
 			noeudm->var_=temp1;
 			noeudm -> nb_var_=1;
