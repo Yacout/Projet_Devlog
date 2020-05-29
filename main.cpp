@@ -154,7 +154,10 @@ int main() {
     cout<<"hi";
     delete a1;*/
 
-
+    int nb_generationsmax = 50;
+    int seuil_fitness = -50;
+    int nbr_filles = 20;
+    int nbgeneration = 0;
 
     vector<vector<string>> tab;
 
@@ -166,7 +169,7 @@ int main() {
 
     tab2= ConversionTableau(tab);
     
-    arbre** arbres_acomparer = new arbre*[20];
+    arbre** arbres_acomparer = new arbre*[nbr_filles];
     arbre* candidat;
     int indexCandidat=0;
     //cout << tab2.at(0).at(119) << endl;
@@ -180,12 +183,37 @@ int main() {
     	    indexCandidat=i;
     	}
     }
-    int* scores = new int[5];
     for(int i=0;i<5;i++){
         cout << arbres_acomparer[i]->fitness_ <<endl;
-        //delete arbres_acomparer[i];
+        if (i != indexCandidat) {
+            delete arbres_acomparer[i];
+        }
     }
+    cout << indexCandidat << endl;
 
+    candidat = arbres_acomparer[indexCandidat];
+    
+    while (nb_generationsmax > nbgeneration&& seuil_fitness > candidat->fitness_) {
+        indexCandidat = 0;
+        for (int i = 0; i < nbr_filles; i++) {
+            arbres_acomparer[i] = candidat->creer_fille();
+            arbres_acomparer[i]->calcul_fitness(tab2);
+            if (arbres_acomparer[indexCandidat]->fitness_ < arbres_acomparer[i]->fitness_) {
+                indexCandidat = i;
+            }
+        }
+        delete candidat;
+        candidat = arbres_acomparer[indexCandidat];
+
+        for (int i = 0; i < nbr_filles; i++) {
+            if (i != indexCandidat) {
+                delete arbres_acomparer[i];
+            }
+        }
+        nbgeneration++;
+    }
+    cout << candidat->fitness_ << endl;
+    
     //Affichage(tab2);
 
     //cout<<tab2.size()<<endl;
