@@ -74,7 +74,7 @@ void arbre::cree_arbre_random() {
 		int var2 = rand() %nbrvar_ ;
 		noeud1_ = new noeud(operation, var1, var2);
 	}
-	nbr_noeuds_=1;
+	nbr_noeuds_ = 1;
 	liste_noeuds_ = new noeud * [5]; //Une liste assez grande pour accueillir tous les noeuds
 	liste_noeuds_[0] = noeud1_;
 
@@ -105,7 +105,8 @@ arbre* arbre::creer_fille(){
 
 void arbre::lister_noeuds(){
 	liste_noeuds_ = new noeud*[nbr_noeuds_+1]; //Place pour une mutation ajout éventuelle
-	noeud1_->liste(liste_noeuds_);
+	int i = 0;
+	noeud1_->liste(liste_noeuds_,i);
 }
 
 void arbre::compter_noeuds() {
@@ -148,28 +149,28 @@ void arbre::mutation_ajout() {
 	
 	if(liste_noeuds_[numnoeud]->op()==3){ //Si le noeud sélectionné est un NOT
 		if (nbrvar!=0){
-			raccordvar=liste_noeuds_[numnoeud] -> var()[0];
+			raccordvar=liste_noeuds_[numnoeud] -> var_[0];
 			israccordvar=true;
 		}else{
-			raccord=liste_noeuds_[numnoeud] -> aretes()[0];
+			raccord=liste_noeuds_[numnoeud] -> aretes_[0];
 		}
 	}else{ //Si le noeud sélectionné est un AND ou un OR
 		if(nbrvar==2){
-			raccordvar=liste_noeuds_[numnoeud] -> var()[monrand];
+			raccordvar=liste_noeuds_[numnoeud] -> var_[monrand];
 			israccordvar=true;
 		} else if (nbrarete==2){
-			raccord=liste_noeuds_[numnoeud] -> aretes()[monrand];
+			raccord=liste_noeuds_[numnoeud] -> aretes_[monrand];
 		} else {
 			if (monrand==0){
-				raccordvar=liste_noeuds_[numnoeud] -> var()[0];
+				raccordvar=liste_noeuds_[numnoeud] -> var_[0];
 				israccordvar=true;
 			} else {
-				raccord = liste_noeuds_[numnoeud] -> aretes()[0];
+				raccord = liste_noeuds_[numnoeud] -> aretes_[0];
 			}
 		}
 	}
 	int monrand1 = rand() % 3 + 1;
-	noeud* nvnoeud;
+	noeud* nvnoeud=nullptr;
 	if (monrand1==3){ //Si le nouveau noeud est un NOT
 		nvnoeud = (israccordvar ? new noeud(raccordvar) : new noeud(raccord));
 	} else {
@@ -184,13 +185,24 @@ void arbre::mutation_ajout() {
  	    }
  	    delete[] liste_noeuds_[numnoeud]->aretes_;
         liste_noeuds_[numnoeud]->aretes_=temp;
-        liste_noeuds_[numnoeud]->nb_aretes_=liste_noeuds_[numnoeud]->nb_aretes_+1;
-        liste_noeuds_[numnoeud]->nb_var_=liste_noeuds_[numnoeud]->nb_var_-1;
-        liste_noeuds_[numnoeud] -> aretes()[nbrarete]=nvnoeud;
+        liste_noeuds_[numnoeud]->nb_aretes_++;
+		int* temp1=nullptr;
+		if (nbrvar == 1) {
+			delete[] liste_noeuds_[numnoeud]->var_;
+			liste_noeuds_[numnoeud]->var_ = nullptr;
+		}
+		else {
+			temp1 = new int[1];
+			temp1[0] = liste_noeuds_[numnoeud]->var_[1-monrand];
+			delete[] liste_noeuds_[numnoeud]->var_;
+			liste_noeuds_[numnoeud]->var_ = temp1;
+		}
+		liste_noeuds_[numnoeud]->nb_var_--;
+        liste_noeuds_[numnoeud] -> aretes_[nbrarete]=nvnoeud;
     }else if(nbrarete==1){
- 	    liste_noeuds_[numnoeud] ->aretes()[0]=nvnoeud;
- 	}else{
-        liste_noeuds_[numnoeud] ->aretes()[monrand]=nvnoeud;
+ 	    liste_noeuds_[numnoeud] ->aretes_[0]=nvnoeud;
+ 	}else {
+        liste_noeuds_[numnoeud] ->aretes_[monrand]=nvnoeud;
  	}
 
 }
@@ -198,10 +210,11 @@ void arbre::mutation_ajout() {
 void arbre::mutation_deletion() {
 	int numnoeud = rand() % nbr_noeuds_;
 	if(liste_noeuds_[numnoeud]->nb_aretes() >= 1){
-		if (liste_noeuds_[numnoeud]->nb_aretes() == 1) {
-			delete (liste_noeuds_[numnoeud]->aretes()[0]); //Supression du noeud retiré
+		if (liste_noeuds_[numnoeud]->nb_aretes_ == 1) {
+			delete (liste_noeuds_[numnoeud]->aretes_[0]); //Supression du noeud retiré
 
 			delete[] liste_noeuds_[numnoeud]->aretes_; //Supression du tableau d'arètes car il n'y en a plus
+			liste_noeuds_[numnoeud]->aretes_ = nullptr;
 			int* temp = new int[liste_noeuds_[numnoeud]->nb_var_ + 1];
 			for (int i = 0; i < liste_noeuds_[numnoeud]->nb_var_; i++) {
 				temp[i] = liste_noeuds_[numnoeud]->var_[i];
@@ -213,16 +226,21 @@ void arbre::mutation_deletion() {
 
 		}else{
 			int monrand = rand() % 2;
-			delete (liste_noeuds_[numnoeud]->aretes()[monrand]); 
+			delete (liste_noeuds_[numnoeud]->aretes_[monrand]); 
 
-			liste_noeuds_[numnoeud]->var_ = new int[0];
+			noeud** temp = new noeud * [1];
+			temp[0] = liste_noeuds_[numnoeud]->aretes_[1 - monrand];
+			delete[] liste_noeuds_[numnoeud]->aretes_;
+			liste_noeuds_[numnoeud]->aretes_ = temp;
+
+			liste_noeuds_[numnoeud]->var_ = new int[1];
 			liste_noeuds_[numnoeud]->nb_var_ = 1; //1 nouvelle variable
 			liste_noeuds_[numnoeud]->nb_aretes_ = 1; //Plus qu'une seule arete
 
 
 		}
 		int monrand = rand() % nbrvar_;
-		liste_noeuds_[numnoeud]->var()[liste_noeuds_[numnoeud]->nb_var_-1]=monrand; 
+		liste_noeuds_[numnoeud]->var_[liste_noeuds_[numnoeud]->nb_var_-1]=monrand; 
 	}
 }
 
@@ -263,10 +281,10 @@ void arbre::mutation_substitution() {
 	}else if (noeudm->op_==3){ //Si le noeud �tait un NOT
 		noeudm->op_=newop;
 		int * temp = new int[noeudm->nb_var_+1];
-		for(int i =0; i<noeudm->nb_var_;i++){
-			temp[i]=noeudm -> var_[0];
-			delete[] noeudm->var_;
+		for(int i =0; i<(noeudm->nb_var_);i++){
+			temp[i]=noeudm -> var_[i];
 		}
+		delete[] noeudm->var_;
 		temp[noeudm->nb_var_]= rand() % nbrvar_;
 		noeudm->var_ = temp;
 		noeudm ->nb_var_=noeudm ->nb_var_+1;
@@ -290,7 +308,7 @@ void arbre::mutation_substitution() {
 				noeudm ->var_=nullptr;
 				noeudm -> nb_var_=0;
 			} else {
-				delete [] noeudm ->aretes_[0];
+				delete  noeudm ->aretes_[0];
 				delete[] noeudm->aretes_;
 				noeudm -> aretes_=nullptr;
 				noeudm -> nb_aretes_=0;
@@ -300,7 +318,7 @@ void arbre::mutation_substitution() {
 			{
 			noeud** temp2 = new noeud*[1];
 			temp2[0]=noeudm->aretes_[monrand];
-			delete[] noeudm -> aretes_[1-monrand];
+			delete noeudm -> aretes_[1-monrand];
 			delete[] noeudm->aretes_;
 			noeudm->aretes_=temp2;
 			noeudm -> nb_aretes_=1;

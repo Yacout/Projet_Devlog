@@ -154,7 +154,7 @@ int main() {
     cout<<"hi";
     delete a1;*/
 
-    int nb_generationsmax = 50;
+    int nb_generationsmax = 100;
     int seuil_fitness = -50;
     int nbr_filles = 20;
     int nbgeneration = 0;
@@ -213,6 +213,7 @@ int main() {
         nbgeneration++;
     }
     cout << candidat->fitness_ << endl;
+    cout << nbgeneration << endl;
     
     //Affichage(tab2);
 
