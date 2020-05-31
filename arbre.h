@@ -1,6 +1,6 @@
 /// \class arbre
 ///
-/// Un objet de la classe arbre contient une formule de booléens qui peut être mutée
+/// Un objet de la classe arbre contient une formule de booléens qui peut être mutée selon trois mutations (délétion, insertion ou modification)
 ///
 /// Chaque arbre est obtenu à partir d'un parent dont l'on obtient une copie à laquelle on applique une mutation
 /// La fitness de l'arbre obtenue peut être calculée en lui fournissant un tableau contenant des observations et leurs résultats
@@ -15,28 +15,27 @@ using namespace std;
 
 class arbre{
 
-	//méthodes
 public :
     /**
-     * constructeur random prmière gen avec 5 noeuds
-     * @param nbrvar le nbr de variables observées
+     * constructeur aléatoire pour générer un arbre de première génération avec 5 noeuds
+     * @param nbrvar le nombre de variables observées
      */
 	arbre(int nbrvar);
 	/**
 	 * constructeur de copie non utilisé
 	 * @param arbre_copie
 	 */
-	arbre(const arbre& arbre_copie); //constructeur à partir d'un arbre
+	arbre(const arbre& arbre_copie); //Constructeur à partir d'un arbre
 	/**
-	 * constructeur sans random utilisé dans les tests
-	 * @param nbrvar
-	 * @param dummyfacor
+	 * constructeur d'un arbre à partir d'un autre sans random utilisé dans les tests
+	 * @param nbrvar le nombre de variables observées
+	 * @param dummyfacor variable inutile pour différencier les constructeurs
 	 */
 	arbre(int nbrvar,int dummyfacor); //Dummy constructor
 	/**
 	 * constructeur d'arbre fille
 	 * @param noeudf premier noeud de l'arborescence donnée au nouvel arbre
-	 * @param nbrvar
+	 * @param nbrvar le nombre de variables observées
 	 */
 	arbre(noeud* noeudf, int nbrvar); // Constructeur de l'arbre fille
 	/**
@@ -80,11 +79,11 @@ private :
 	 */
 	void mutation_substitution();
 	/**
-	 * Choisir aléatoirement un des trois types de mut et l'applique
+	 * Choisit aléatoirement un des trois types de mutations et l'applique
 	 */
 	void mutation_random();
 	/**
-	 * Compte le nbr de noeuds dans l'arbre, met à jour nbr_noeuds_
+	 * Compte le nombre de noeuds dans l'arbre, met à jour nbr_noeuds_
 	 */
 	void compter_noeuds();
 	/**
