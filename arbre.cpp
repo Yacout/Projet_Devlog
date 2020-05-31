@@ -6,11 +6,24 @@
 
 using namespace std;
 
+//====================================================================
+//
+//Constructeurs
+//
+//====================================================================
+
+//====================================================================
+//Constructeur aléatoire
+//====================================================================
+
 arbre::arbre(int nbrvar) {
 	nbrvar_=nbrvar;
 	cree_arbre_random();
 }
 
+//====================================================================
+//Constructeur de copir
+//====================================================================
 //Constructeur de copie. Supprimer si non utilisé (mais pas du .h pour éviter que C++ esssaye d'en faire un par lui même)
 
 arbre::arbre(const arbre& arbre_copie) {
@@ -21,7 +34,9 @@ arbre::arbre(const arbre& arbre_copie) {
 	nbrvar_=arbre_copie.nbrvar_;
 }
 
-//Dummy constructor pour les tests
+//====================================================================
+//Dummy constructeur pour les tests
+//====================================================================
 
 arbre::arbre(int nbrvar, int dummyfactor){
 	liste_noeuds_=new noeud*[5];
@@ -34,6 +49,10 @@ arbre::arbre(int nbrvar, int dummyfactor){
 	noeud1_ = liste_noeuds_[4];
 	nbrvar_=nbrvar;
 }
+
+//====================================================================
+//Constructeur à partir d'une arborescence de noeuds
+//====================================================================
 
 arbre::arbre(noeud* noeudf,int nbrvar) {
 	noeud1_ = noeudf;
@@ -50,6 +69,43 @@ arbre::arbre(noeud* noeudf,int nbrvar) {
 
 }
 
+//====================================================================
+//Création d'un arbre aléatoire à 5 noeuds
+//====================================================================
+
+void arbre::cree_arbre_random() {
+    //Création d'un arbre avec un opérateur puis 4 mutations ajout successives
+
+    int operation = rand() %3+1;
+    if(operation==3){
+        int var = rand() %nbrvar_ ;
+        noeud1_ = new noeud(var);
+    } else {
+        int var1 = rand() %nbrvar_ ;
+        int var2 = rand() %nbrvar_ ;
+        noeud1_ = new noeud(operation, var1, var2);
+    }
+    nbr_noeuds_ = 1;
+    liste_noeuds_ = new noeud * [5]; //Une liste assez grande pour accueillir tous les noeuds
+    liste_noeuds_[0] = noeud1_;
+
+    //Ajouter les une ou deux variables en dessous de l'op�rateur dans le tableau
+    for (int i = 1; i < 5; ++i) {
+        //S�lection d'un noeud random o� faire l'ajout
+        mutation_ajout(); //D�pend de comment marche les noeuds
+        nbr_noeuds_++;
+        //delete [] liste_noeuds_; //Pas besoin à priori, mutation rajoute automatiquement le noeud
+        //lister_noeuds();
+    }
+    //delete [] liste_noeuds_; Pas besoin, que des mutations ajout
+    //liste_noeuds_ = NULL;
+    //lister_noeuds();
+
+}
+
+//====================================================================
+//Calcul du score (fitness) de l'arbre
+//====================================================================
 
 void arbre::calcul_fitness(const vector<vector<bool>> data) {
 	int f=0;
@@ -61,39 +117,9 @@ void arbre::calcul_fitness(const vector<vector<bool>> data) {
 	fitness_=-f;
 }
 
-void arbre::cree_arbre_random() {
-	//Cr�e un arbre al�atoire avec 5 op�rateurs
-	//Cr�ation d'un arbre avec un op�rateur puis 4 mutations ajout successives
-	
-	int operation = rand() %3+1;
-	if(operation==3){
-		int var = rand() %nbrvar_ ;
-		noeud1_ = new noeud(var);
-	} else {
-		int var1 = rand() %nbrvar_ ;
-		int var2 = rand() %nbrvar_ ;
-		noeud1_ = new noeud(operation, var1, var2);
-	}
-	nbr_noeuds_ = 1;
-	liste_noeuds_ = new noeud * [5]; //Une liste assez grande pour accueillir tous les noeuds
-	liste_noeuds_[0] = noeud1_;
-
-	//Ajouter les une ou deux variables en dessous de l'op�rateur dans le tableau
-	for (int i = 1; i < 5; ++i) {
-		//S�lection d'un noeud random o� faire l'ajout
-		mutation_ajout(); //D�pend de comment marche les noeuds
-		nbr_noeuds_++;
-        //delete [] liste_noeuds_; //Pas besoin à priori, mutation rajoute automatiquement le noeud 
-        //lister_noeuds();
-	}
-    //delete [] liste_noeuds_; Pas besoin, que des mutations ajout
-    //liste_noeuds_ = NULL;
-	//lister_noeuds();
-	
-}
-
-
-
+//====================================================================
+//Méthode pour créer une fille
+//====================================================================
 
 arbre* arbre::creer_fille(){
 	noeud* noeudf = new noeud(*noeud1_);
@@ -102,12 +128,19 @@ arbre* arbre::creer_fille(){
 	return arbrette;
 }
 
+//====================================================================
+//Création de l'attribut liste_noeuds_
+//====================================================================
 
 void arbre::lister_noeuds(){
 	liste_noeuds_ = new noeud*[nbr_noeuds_+1]; //Place pour une mutation ajout éventuelle
 	int i = 0;
 	noeud1_->liste(liste_noeuds_,i);
 }
+
+//====================================================================
+//Mise à jour de l'attribut nombre_noeuds_
+//====================================================================
 
 void arbre::compter_noeuds() {
         nbr_noeuds_ = 1;
@@ -121,6 +154,9 @@ void arbre::compter_noeuds() {
 
 }
 
+//====================================================================
+//Choix et exécution d'une mutation
+//====================================================================
 
 void arbre::mutation_random() {
 
@@ -137,6 +173,10 @@ void arbre::mutation_random() {
     }
 
 }
+
+//====================================================================
+//Mutation d'ajout d'un noeud
+//====================================================================
 
 void arbre::mutation_ajout() {
 	noeud* raccord=nullptr;
@@ -207,6 +247,10 @@ void arbre::mutation_ajout() {
 
 }
 
+//====================================================================
+//Mutation délétion d'un noeud
+//====================================================================
+
 void arbre::mutation_deletion() {
 	int numnoeud = rand() % nbr_noeuds_;
 	if(liste_noeuds_[numnoeud]->nb_aretes() >= 1){
@@ -243,6 +287,10 @@ void arbre::mutation_deletion() {
 		liste_noeuds_[numnoeud]->var_[liste_noeuds_[numnoeud]->nb_var_-1]=monrand; 
 	}
 }
+
+//====================================================================
+//Mutation du type d'un noeud
+//====================================================================
 
 void arbre::mutation_substitution() {
 	//Choix du noeud � modifier
@@ -328,6 +376,10 @@ void arbre::mutation_substitution() {
 	}
 	
 }
+
+//====================================================================
+//Destructeur
+//====================================================================
 
 arbre::~arbre(){
 	//for(int i=0; i<nbr_noeuds_;i++){
