@@ -330,3 +330,6 @@ void noeud::liste(noeud** array, int& i){
 		aretes_[j]->liste(array, i);
 	}
 }
+
+string noeud::expr(){
+}

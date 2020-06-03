@@ -8,6 +8,7 @@
 /// depuis le premier noeud de ce dernier.
 
 #include <vector>
+#include <string>
 class arbre;
 using namespace std;
 
@@ -271,5 +272,7 @@ class noeud
 
 		void liste(noeud** array,int&); //attend en paramètre une liste 
 											  //de la bonne taille
+
+		string expr();
 
 };
