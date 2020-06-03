@@ -146,12 +146,19 @@ void Affichage(vector<vector<bool>> tab){
 
 }
 
-int main() {
+int main(int argc, char* argv[]) {
+    
 
+    int nb_generationsmax = atoi(argv[1]);
+    int seuil_fitness = atoi(argv[2]);
+    int nbr_filles = atoi(argv[3]);
 
-    int nb_generationsmax = 1000;
-    int seuil_fitness = -50;
-    int nbr_filles = 50;
+    //int nb_generationsmax = 1000;
+    //int seuil_fitness = -50;
+    //int nbr_filles = 20;
+    cout << nb_generationsmax << endl;
+    cout << nbr_filles << endl;
+    cout << seuil_fitness << endl;
     int nbgeneration = 0;
 
     vector<vector<string>> tab;
@@ -209,9 +216,6 @@ int main() {
     cout << nbgeneration << endl;
     cout << candidat->expression() << endl;
     
-    //Affichage(tab2);
-
-    //cout<<tab2.size()<<endl;
 
     return 0;
 }
