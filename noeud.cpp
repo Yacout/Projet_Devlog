@@ -367,9 +367,9 @@ string noeud::expr(){
     //Deux variables
 	else if (nb_var_ == 2){
 		switch (op_){
-			case 1: return "( " + to_string(var_[0]) + " & x" 
+			case 1: return "( x" + to_string(var_[0]) + " & x" 
 					+ to_string(var_[1]) + " )";
-			case 2: return "( " + to_string(var_[0]) + " | x"
+			case 2: return "( x" + to_string(var_[0]) + " | x"
 					+ to_string(var_[1]) + " )";
 		}
 	} 
@@ -398,7 +398,7 @@ string noeud::expr(){
 	
 	//Un noeud
 	else if (op_ == 3 && nb_aretes_ == 1){
-		return "~x " + aretes_[0]->expr();
+		return "~" + aretes_[0]->expr();
 	}
 
 	//Une variable
