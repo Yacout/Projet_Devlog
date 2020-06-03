@@ -122,8 +122,10 @@ TEST(GTestTests, TestListe){
 	int s=0;
 	liste_noeud[4]->size(s);
 	noeud* arr2[s];
+
+	int count = 0;
 	
-	liste_noeud[4]->liste(arr2);			
+	liste_noeud[4]->liste(arr2, count);			
 	
 	EXPECT_EQ(arr2[0],liste_noeud[4]);
 	EXPECT_EQ(arr2[1],liste_noeud[2]);
@@ -176,11 +178,11 @@ TEST(GTestTests, TestCopie){
 //}
 
 TEST(GTestTests, TestFitness){
-	std::vector<bool> l1{0,0,0,0,1,0};
+	std::vector<bool> l1{0,0,0,0,1,0,0};
 
-	std::vector<bool> l2{0,1,1,1,0,1};
+	std::vector<bool> l2{0,1,1,1,0,1,1};
 
-	std::vector<bool> l3{1,1,0,1,0,0};
+	std::vector<bool> l3{1,1,0,1,0,0,1};
 
 	std::vector<vector<bool>> test{l1, l2, l3};
 		

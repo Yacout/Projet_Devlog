@@ -269,7 +269,7 @@ class noeud
 		 * de la liste à modifier, ne pas changer la valeur par défaut
 		 */
 
-		void liste(noeud** array,int& i); //attend en paramètre une liste 
+		void liste(noeud** array,int&); //attend en paramètre une liste 
 											  //de la bonne taille
 
 };
