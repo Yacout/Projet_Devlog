@@ -398,7 +398,7 @@ string noeud::expr(){
 	
 	//Un noeud
 	else if (op_ == 3 && nb_aretes_ == 1){
-		return "~x" + aretes_[0]->expr();
+		return "~x " + aretes_[0]->expr();
 	}
 
 	//Une variable
