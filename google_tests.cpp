@@ -20,6 +20,8 @@ TEST(GTestTests, ExampleTest){
 	liste_noeud[3] = new noeud(2, liste_noeud[0], liste_noeud[1]);
 	liste_noeud[4] = new noeud(1, liste_noeud[2], liste_noeud[3]);
 
+	std::cout << liste_noeud[4]->expr() << std::endl;
+
 	EXPECT_EQ(liste_noeud[4]->compute(list), 1);
 
 	delete liste_noeud[4];

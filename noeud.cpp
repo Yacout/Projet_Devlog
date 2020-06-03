@@ -332,4 +332,82 @@ void noeud::liste(noeud** array, int& i){
 }
 
 string noeud::expr(){
+
+	//========================================================================
+	//Cas pour AND and OR 
+	//========================================================================
+	
+	//Deux noeuds
+	if (nb_aretes_ == 2){ 
+		switch (op_){
+			case 1: return "( " + aretes_[0]->expr() + " & " 
+					+ aretes_[1]->expr() + " )";
+			case 2: return "( " + aretes_[0]->expr() + " | " 
+					+ aretes_[1]->expr() + " )";
+		}
+	} 
+	//Un noeud et une variable
+	else if (nb_aretes_ == 1 && nb_var_ == 1){
+		switch (op_){
+			case 1: return "( " + aretes_[0]->expr() + " & x" 
+					+ to_string(var_[0]) + " )";
+			case 2: return "( " + aretes_[0]->expr() + " | x" 
+					+ to_string(var_[0]) + " )";
+		}
+	} 
+	//Un noeud et une constante
+	else if (nb_aretes_ == 1 && nb_const_ == 1){
+		switch (op_){
+			case 1: return "( " + aretes_[0]->expr() + " & x" 
+					+ to_string(consts_[0]) +" )";
+			case 2: return "( " + aretes_[0]->expr() + " | x" 
+					+ to_string(consts_[0]) + " )";
+		}
+	} 
+    //Deux variables
+	else if (nb_var_ == 2){
+		switch (op_){
+			case 1: return "( " + to_string(var_[0]) + " & x" 
+					+ to_string(var_[1]) + " )";
+			case 2: return "( " + to_string(var_[0]) + " | x"
+					+ to_string(var_[1]) + " )";
+		}
+	} 
+	//Une variable et une constante
+	else if (nb_var_ == 1 && nb_const_ == 1){
+		switch (op_){
+			case 1: return "( " + to_string(consts_[0]) + " & x"
+					+ to_string(var_[0]) + " )";
+			case 2: return "( " + to_string(consts_[0]) + " | x"
+					+ to_string(var_[0]) + " )";
+		}
+	} 
+	//Deux constantes
+	else if (nb_const_ == 2){
+		switch (op_){
+			case 1: return "( " + to_string(consts_[1]) + " & x"
+					+ to_string(consts_[1]) + " )";
+			case 2: return "( " + to_string(consts_[1]) + " | x"
+					+ to_string(consts_[1]) + " )";
+		}
+	}
+
+	//========================================================================
+	//Cas pour NOT
+	//======================================================================== 
+	
+	//Un noeud
+	else if (op_ == 3 && nb_aretes_ == 1){
+		return "~x" + aretes_[0]->expr();
+	}
+
+	//Une variable
+	else if (op_ == 3 && nb_var_ == 1){
+		return "~x"+ to_string(var_[0]);
+	}
+
+	else {
+		return "Erreur";
+	}
+
 }
