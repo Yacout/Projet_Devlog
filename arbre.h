@@ -7,6 +7,7 @@
 
 #include "noeud.h"
 #include <vector>
+#include <string>
 using namespace std;
 #if ! defined(ARBRE_H)
 #define ARBRE_H
@@ -55,10 +56,15 @@ public :
 	 */
 	arbre* creer_fille();
 	/**
-	 * définit après le 1er appel de calcul fitness
+	 * Définit après le 1er appel de calcul fitness
 	 * Plus elle est grande (proche de 0), meilleure est la formule de l'arbre
 	 */
 	int fitness_=-1000;
+
+	/**
+	* Renvoie l'expression de l'arbre dans une String
+	*/
+	string expression();
 
 private :
 

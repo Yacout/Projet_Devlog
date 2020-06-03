@@ -147,16 +147,11 @@ void Affichage(vector<vector<bool>> tab){
 }
 
 int main() {
-    /*arbre* a1 = new arbre(119);
-    arbre* a2 = new arbre(119);
 
-    delete a2;
-    cout<<"hi";
-    delete a1;*/
 
-    int nb_generationsmax = 100;
+    int nb_generationsmax = 1000;
     int seuil_fitness = -50;
-    int nbr_filles = 20;
+    int nbr_filles = 50;
     int nbgeneration = 0;
 
     vector<vector<string>> tab;
@@ -172,9 +167,7 @@ int main() {
     arbre** arbres_acomparer = new arbre*[nbr_filles];
     arbre* candidat;
     int indexCandidat=0;
-    //cout << tab2.at(0).at(119) << endl;
-    //int nombrevar = (tab2[1].size())-1;
-    ///arbre* monarbre = new arbre(119);
+
     
     for(int i=0; i<5;i++){
     	arbres_acomparer[i] = new arbre(119);
@@ -214,6 +207,7 @@ int main() {
     }
     cout << candidat->fitness_ << endl;
     cout << nbgeneration << endl;
+    cout << candidat->expression() << endl;
     
     //Affichage(tab2);
 
