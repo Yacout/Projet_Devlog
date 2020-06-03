@@ -20,8 +20,6 @@ TEST(GTestTests, ExampleTest){
 	liste_noeud[3] = new noeud(2, liste_noeud[0], liste_noeud[1]);
 	liste_noeud[4] = new noeud(1, liste_noeud[2], liste_noeud[3]);
 
-	std::cout << liste_noeud[4]->expr() << std::endl;
-
 	EXPECT_EQ(liste_noeud[4]->compute(list), 1);
 
 	delete liste_noeud[4];
@@ -135,6 +133,29 @@ TEST(GTestTests, TestListe){
 	EXPECT_EQ(arr2[3],liste_noeud[0]);
 	EXPECT_EQ(arr2[4],liste_noeud[1]);
 	
+	delete liste_noeud[4];
+	delete[] liste_noeud;
+};
+
+TEST(GTestTests, TestExpr){
+
+	std::vector<bool> list(2);
+	list[0] = 1;
+	list[1] = 0;
+
+	bool F = 0;
+	bool T = 1;
+
+	noeud** liste_noeud = new noeud*[5];
+
+	liste_noeud[0] = new noeud(1);
+	liste_noeud[1] = new noeud(1, F, T);
+	liste_noeud[2] = new noeud(1, true, 0);
+	liste_noeud[3] = new noeud(2, liste_noeud[0], liste_noeud[1]);
+	liste_noeud[4] = new noeud(1, liste_noeud[2], liste_noeud[3]);
+
+	EXPECT_EQ(liste_noeud[4]->expr(), "( ( 1 & x0 ) & ( ~x1 | ( 0 & 1 ) ) )");
+
 	delete liste_noeud[4];
 	delete[] liste_noeud;
 };
