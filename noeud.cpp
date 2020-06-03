@@ -17,6 +17,7 @@
 
 noeud::noeud(int op_par, int var1, int var2){
 	op_ = op_par;	
+	aretes_ = new noeud * [2];
 	var_ = new int[2];
     var_[0] = var1;
 	var_[1] = var2;
@@ -32,6 +33,7 @@ noeud::noeud(int op_par, int var1, int var2){
 noeud::noeud(int op_par, noeud* noeud1, noeud* noeud2){
 	op_ = op_par;	
 	aretes_ = new noeud*[2];
+	var_ = new int[2];
 	aretes_[0] = noeud1;
 	aretes_[1] = noeud2;
 	nb_aretes_ = 2;
@@ -45,8 +47,8 @@ noeud::noeud(int op_par, noeud* noeud1, noeud* noeud2){
 
 noeud::noeud(int op_par, int var1, noeud* noeud1){
 	op_ = op_par;	
-	aretes_ = new noeud*[1];
-	var_ = new int[1];
+	aretes_ = new noeud*[2];
+	var_ = new int[2];
 	aretes_[0] = noeud1;
 	var_[0] = var1;
 	nb_aretes_ = 1;
@@ -61,6 +63,8 @@ noeud::noeud(int op_par, int var1, noeud* noeud1){
 noeud::noeud(int op_par, bool const1, bool const2){
 	op_ = op_par;	
 	consts_ = new bool[2];
+	aretes_ = new noeud * [2];
+	var_ = new int[2];
 	consts_[0] = const1;
 	consts_[1] = const2;
 	nb_aretes_ = 0;
@@ -74,7 +78,8 @@ noeud::noeud(int op_par, bool const1, bool const2){
 
 noeud::noeud(int op_par, bool const1, noeud* noeud1){
 	op_ = op_par;	
-	aretes_ = new noeud*[1];
+	aretes_ = new noeud * [2];
+	var_ = new int[2];
 	consts_ = new bool[1];
 	aretes_[0] = noeud1;
 	consts_[0] = const1;
@@ -89,7 +94,8 @@ noeud::noeud(int op_par, bool const1, noeud* noeud1){
 
 noeud::noeud(int op_par, bool const1, int var1){
 	op_ = op_par;	
-	var_ = new int[1];
+	aretes_ = new noeud * [2];
+	var_ = new int[2];
 	consts_ = new bool[1];
 	var_[0] = var1;
 	consts_[0] = const1;
@@ -104,7 +110,8 @@ noeud::noeud(int op_par, bool const1, int var1){
 
 noeud::noeud(int var1){
 	op_ = 3;	
-	var_ = new int[1];
+	aretes_ = new noeud * [2];
+	var_ = new int[2];
 	var_[0] = var1;
 	nb_aretes_ = 0;
 	nb_var_ = 1;
@@ -117,7 +124,8 @@ noeud::noeud(int var1){
 
 noeud::noeud(noeud* noeud1){
 	op_ = 3;	
-	aretes_ = new noeud*[1];
+	aretes_ = new noeud * [2];
+	var_ = new int[2];
 	aretes_[0] = noeud1;
 	nb_aretes_ = 1;
 	nb_var_ = 0;
@@ -133,16 +141,18 @@ noeud::noeud(const noeud &acopier){
 	nb_aretes_ = acopier.nb_aretes();
 	nb_var_ = acopier.nb_var();
 	nb_const_ = acopier.nb_const();
+	aretes_ = new noeud * [2];
+	var_ = new int[2];
 
 	if (nb_aretes_!=0){
-		aretes_=new noeud*[nb_aretes_];
+		
 		for (int i=0;i<nb_aretes_;i++){
 			aretes_[i]= new noeud(*(acopier.aretes()[i])); 
 		}
 	}
 
 	if (nb_var_!=0){
-		var_=new int[nb_var_];
+		
 		for (int i=0;i<nb_var_;i++){
 			var_[i]=acopier.var()[i]; 
 		}

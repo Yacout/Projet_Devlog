@@ -97,12 +97,9 @@ void arbre::cree_arbre_random() {
         //Sélection d'un noeud random où faire l'ajout
         mutation_ajout(); //Dépend de comment marche les noeuds
         nbr_noeuds_++;
-        //delete [] liste_noeuds_; //Pas besoin à priori, mutation rajoute automatiquement le noeud
-        //lister_noeuds();
+        
     }
-    //delete [] liste_noeuds_; Pas besoin, que des mutations ajout
-    //liste_noeuds_ = NULL;
-    //lister_noeuds();
+    
 
 }
 
@@ -221,25 +218,28 @@ void arbre::mutation_ajout() {
 		nvnoeud = (israccordvar ? new noeud(monrand1,raccordvar,varcomp) : new noeud(monrand1,varcomp,raccord));
 	}
  	liste_noeuds_[nbr_noeuds_] = nvnoeud; //On suppose qu'il reste au moins une place dans le tableau liste_noeuds_ (cas normal)
- 	if(israccordvar){
- 	    noeud** temp = new noeud*[nbrarete+1];
+ 	
+	if(israccordvar){
+ 	    /*noeud** temp = new noeud*[nbrarete+1];
  	    for(int i=0;i<nbrarete;i++){
  	        temp[i]=liste_noeuds_[numnoeud]->aretes_[i];
  	    }
  	    delete[] liste_noeuds_[numnoeud]->aretes_;
-        liste_noeuds_[numnoeud]->aretes_=temp;
+        liste_noeuds_[numnoeud]->aretes_=temp;*/
         liste_noeuds_[numnoeud]->nb_aretes_++;
-		int* temp1=nullptr;
+		//int* temp1=nullptr;
 		if (nbrvar == 1) {
-			delete[] liste_noeuds_[numnoeud]->var_;
-			liste_noeuds_[numnoeud]->var_ = nullptr;
+			//delete[] liste_noeuds_[numnoeud]->var_;
+			//liste_noeuds_[numnoeud]->var_[0] = 0;
 		}
 		else {
-			temp1 = new int[1];
-			temp1[0] = liste_noeuds_[numnoeud]->var_[1-monrand];
-			delete[] liste_noeuds_[numnoeud]->var_;
-			liste_noeuds_[numnoeud]->var_ = temp1;
+			//temp1 = new int[1];
+			//temp1[0] = liste_noeuds_[numnoeud]->var_[1-monrand];
+			//delete[] liste_noeuds_[numnoeud]->var_;
+			//liste_noeuds_[numnoeud]->var_ = temp1;
+			liste_noeuds_[numnoeud]->var_[0] = liste_noeuds_[numnoeud]->var_[1 - monrand]; //Replace la variable qui reste au début du tableau
 		}
+		
 		liste_noeuds_[numnoeud]->nb_var_--;
         liste_noeuds_[numnoeud] -> aretes_[nbrarete]=nvnoeud;
     }else if(nbrarete==1){
@@ -260,14 +260,14 @@ void arbre::mutation_deletion() {
 		if (liste_noeuds_[numnoeud]->nb_aretes_ == 1) {
 			delete (liste_noeuds_[numnoeud]->aretes_[0]); //Supression du noeud retiré
 
-			delete[] liste_noeuds_[numnoeud]->aretes_; //Supression du tableau d'arêtes car il n'y en a plus
-			liste_noeuds_[numnoeud]->aretes_ = nullptr;
-			int* temp = new int[liste_noeuds_[numnoeud]->nb_var_ + 1];
-			for (int i = 0; i < liste_noeuds_[numnoeud]->nb_var_; i++) {
+			//delete[] liste_noeuds_[numnoeud]->aretes_; //Supression du tableau d'arêtes car il n'y en a plus
+			//liste_noeuds_[numnoeud]->aretes_ = nullptr;
+			//int* temp = new int[liste_noeuds_[numnoeud]->nb_var_ + 1];
+			/*for (int i = 0; i < liste_noeuds_[numnoeud]->nb_var_; i++) {
 				temp[i] = liste_noeuds_[numnoeud]->var_[i];
-			}
-			delete[]liste_noeuds_[numnoeud]->var_;
-			liste_noeuds_[numnoeud]->var_ = temp;
+			}*/
+			//delete[]liste_noeuds_[numnoeud]->var_;
+			//liste_noeuds_[numnoeud]->var_ = temp;
 			liste_noeuds_[numnoeud]->nb_var_++; //1 ou deux variables selon s'il s'agit d'un NOT ou non
 			liste_noeuds_[numnoeud]->nb_aretes_ = 0; //Plus d'arête
 
@@ -275,12 +275,13 @@ void arbre::mutation_deletion() {
 			int monrand = rand() % 2;
 			delete (liste_noeuds_[numnoeud]->aretes_[monrand]); 
 
-			noeud** temp = new noeud * [1];
-			temp[0] = liste_noeuds_[numnoeud]->aretes_[1 - monrand];
-			delete[] liste_noeuds_[numnoeud]->aretes_;
-			liste_noeuds_[numnoeud]->aretes_ = temp;
+			//noeud** temp = new noeud * [1];
+			//temp[0] = liste_noeuds_[numnoeud]->aretes_[1 - monrand];
+			//delete[] liste_noeuds_[numnoeud]->aretes_;
+			//liste_noeuds_[numnoeud]->aretes_ = temp;
+			liste_noeuds_[numnoeud]->aretes_[0] = liste_noeuds_[numnoeud]->aretes_[1 - monrand]; //On remet le noeud restant en place
 
-			liste_noeuds_[numnoeud]->var_ = new int[1];
+			//liste_noeuds_[numnoeud]->var_ = new int[1];
 			liste_noeuds_[numnoeud]->nb_var_ = 1; //1 nouvelle variable
 			liste_noeuds_[numnoeud]->nb_aretes_ = 1; //Plus qu'une seule arete
 
@@ -331,13 +332,14 @@ void arbre::mutation_substitution() {
 		noeudm -> op_ = newop;
 	}else if (noeudm->op_==3){ //Si le noeud était un NOT
 		noeudm->op_=newop;
-		int * temp = new int[noeudm->nb_var_+1];
-		for(int i =0; i<(noeudm->nb_var_);i++){
+		//int * temp = new int[noeudm->nb_var_+1];
+		/*for(int i =0; i<(noeudm->nb_var_);i++){
 			temp[i]=noeudm -> var_[i];
 		}
 		delete[] noeudm->var_;
 		temp[noeudm->nb_var_]= rand() % nbrvar_;
-		noeudm->var_ = temp;
+		noeudm->var_ = temp;*/
+		noeudm->var_[noeudm->nb_var_] = rand() % nbrvar_;
 		noeudm ->nb_var_=noeudm ->nb_var_+1;
 	}else{ //Si le noeud devient un NOT
 		monrand = rand() % 2;
@@ -346,32 +348,34 @@ void arbre::mutation_substitution() {
 		{
 		case 0: //Le noeud était relié à deux variables
 			{
-			int* temp1 = new int[1];
+			/*int* temp1 = new int[1];
 			temp1[0]=noeudm->var_[monrand];
 			delete[] noeudm->var_;
-			noeudm->var_=temp1;
+			noeudm->var_=temp1;*/
+			noeudm->var_[0] = noeudm->var_[monrand]; //On remet la variable conservée en place
 			noeudm -> nb_var_=1;
 			}
 			break;
 		case 1: //Le noeud était relié à une variable et un noeud
 			if (monrand==0){
-				delete[] noeudm->var_;
-				noeudm ->var_=nullptr;
+				//delete[] noeudm->var_;
+				//noeudm ->var_=nullptr;
 				noeudm -> nb_var_=0;
 			} else {
 				delete  noeudm ->aretes_[0];
-				delete[] noeudm->aretes_;
-				noeudm -> aretes_=nullptr;
+				//delete[] noeudm->aretes_;
+				//noeudm -> aretes_=nullptr;
 				noeudm -> nb_aretes_=0;
 			}
 			break;
 		default: //Le noeud était relié à deux noeuds
 			{
-			noeud** temp2 = new noeud*[1];
-			temp2[0]=noeudm->aretes_[monrand];
+			//noeud** temp2 = new noeud*[1];
+			//temp2[0]=noeudm->aretes_[monrand];
+			noeudm->aretes_[0] = noeudm->aretes_[monrand]; // On remet le noeud conservé en place
 			delete noeudm -> aretes_[1-monrand];
-			delete[] noeudm->aretes_;
-			noeudm->aretes_=temp2;
+			//delete[] noeudm->aretes_;
+			//noeudm->aretes_=temp2;
 			noeudm -> nb_aretes_=1;
 			}
 			break;
