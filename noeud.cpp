@@ -385,9 +385,9 @@ string noeud::expr(){
 	//Deux constantes
 	else if (nb_const_ == 2){
 		switch (op_){
-			case 1: return "( " + to_string(consts_[1]) + " & x"
+			case 1: return "( " + to_string(consts_[0]) + " & "
 					+ to_string(consts_[1]) + " )";
-			case 2: return "( " + to_string(consts_[1]) + " | x"
+			case 2: return "( " + to_string(consts_[0]) + " | "
 					+ to_string(consts_[1]) + " )";
 		}
 	}
