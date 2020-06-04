@@ -255,10 +255,12 @@ TEST(GTestTests, TestMutAjout){
 
 	arbre* arbretest=new arbre(5);
 	EXPECT_EQ(arbretest->nbr_noeuds_,5);
+	arbretest->lister_noeuds();  //ajout d'une case au tableau stockant les noeuds.
 	arbretest->mutation_ajout();
 	arbretest->compter_noeuds();
 	EXPECT_EQ(arbretest->nbr_noeuds_,6);
 	delete arbretest;
+
 };
 TEST(GTestTests, TestMutationDeletion){
 	
