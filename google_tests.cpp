@@ -137,28 +137,7 @@ TEST(GTestTests, TestListe){
 	delete[] liste_noeud;
 };
 
-TEST(GTestTests, TestExpr){
 
-	std::vector<bool> list(2);
-	list[0] = 1;
-	list[1] = 0;
-
-	bool F = 0;
-	bool T = 1;
-
-	noeud** liste_noeud = new noeud*[5];
-
-	liste_noeud[0] = new noeud(1);
-	liste_noeud[1] = new noeud(1, F, T);
-	liste_noeud[2] = new noeud(1, true, 0);
-	liste_noeud[3] = new noeud(2, liste_noeud[0], liste_noeud[1]);
-	liste_noeud[4] = new noeud(1, liste_noeud[2], liste_noeud[3]);
-
-	EXPECT_EQ(liste_noeud[4]->expr(), "( ( 1 & x0 ) & ( ~x1 | ( 0 & 1 ) ) )");
-
-	delete liste_noeud[4];
-	delete[] liste_noeud;
-};
 
 TEST(GTestTests, TestCopie){
 
@@ -200,6 +179,23 @@ TEST(GTestTests, TestCopie){
 	
 //}
 
+
+
+
+
+TEST(GTestTests, TestConstructeurAleatoire1G){
+
+};
+
+TEST(GTestTests, TestConstructeurFille){
+
+};
+
+
+TEST(GTestTests, TestConstructeurAleatoire5noeuds){
+
+};
+
 TEST(GTestTests, TestFitness){
 	std::vector<bool> l1{0,0,0,0,1,0,0};
 
@@ -218,5 +214,65 @@ TEST(GTestTests, TestFitness){
 	delete tree;
 
 };
+
+TEST(GTestTests, TestExpr){
+
+	std::vector<bool> list(2);
+	list[0] = 1;
+	list[1] = 0;
+
+	bool F = 0;
+	bool T = 1;
+
+	noeud** liste_noeud = new noeud*[5];
+
+	liste_noeud[0] = new noeud(1);
+	liste_noeud[1] = new noeud(1, F, T);
+	liste_noeud[2] = new noeud(1, true, 0);
+	liste_noeud[3] = new noeud(2, liste_noeud[0], liste_noeud[1]);
+	liste_noeud[4] = new noeud(1, liste_noeud[2], liste_noeud[3]);
+
+	EXPECT_EQ(liste_noeud[4]->expr(), "( ( 1 & x0 ) & ( ~x1 | ( 0 & 1 ) ) )");
+
+	delete liste_noeud[4];
+	delete[] liste_noeud;
+};
+
+
+TEST(GTestTests, TestCreerFille){
+
+};
+
+
+TEST(GTestTests, TestLister_Noeuds){
+
+};
+
+TEST(GTestTests, TestDenombrer_Noeuds){
+	
+};
+
+
+TEST(GTestTests, TestMutationRandom){
+
+};
+
+TEST(GTestTests, TestMutationAjout){
+
+};
+
+TEST(GTestTests, TestMutationDeletion){
+
+};
+
+TEST(GTestTests, TestMutationSubstitution){
+
+};
+
+
+
+
+
+
 
 
