@@ -169,17 +169,6 @@ TEST(GTestTests, TestCopie){
 };
 
 
-//TEST(GTestTests, TestMutAjout){
-
-	//noeud** liste_noeud = new noeud*[1];
-	//liste_noeud[0] = new noeud(1);
-	
-	//arbre arbretest(5, 1);
-	//arbretest.mutation_ajout();
-	
-//}
-
-
 
 
 
@@ -253,15 +242,33 @@ TEST(GTestTests, TestDenombrer_Noeuds){
 };
 
 
-TEST(GTestTests, TestMutationRandom){
+/*TEST(GTestTests, TestMutationRandom){
+	noeud** liste_noeud = new noeud*[1];
+	liste_noeud[0] = new noeud(1);
+	arbre* arbretest1=new arbre(5);
+	arbretest1->mutation_random();
+	delete arbretest1;
+};*/
 
+
+TEST(GTestTests, TestMutAjout){
+
+	arbre* arbretest=new arbre(5);
+	EXPECT_EQ(arbretest->nbr_noeuds_,5);
+	arbretest->mutation_ajout();
+	arbretest->compter_noeuds();
+	EXPECT_EQ(arbretest->nbr_noeuds_,6);
+	delete arbretest;
 };
-
-TEST(GTestTests, TestMutationAjout){
-
-};
-
 TEST(GTestTests, TestMutationDeletion){
+	
+	arbre* brebre=new arbre(5);
+	EXPECT_EQ(brebre->nbr_noeuds_,5);
+	brebre->mutation_deletion();
+	brebre->compter_noeuds();
+	EXPECT_LT(brebre->nbr_noeuds_,5);
+	delete brebre;
+
 
 };
 
