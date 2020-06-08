@@ -24,6 +24,8 @@ noeud::noeud(int op_par, int var1, int var2){
 	nb_aretes_ = 0;
 	nb_var_ = 2;
 	nb_const_ = 0;
+	id_ = identifiant;
+	identifiant++;
 }
 
 //============================================================================
@@ -39,6 +41,8 @@ noeud::noeud(int op_par, noeud* noeud1, noeud* noeud2){
 	nb_aretes_ = 2;
 	nb_var_ = 0;
 	nb_const_ = 0;
+	id_ = identifiant;
+	identifiant++;
 }
 
 //============================================================================
@@ -54,6 +58,8 @@ noeud::noeud(int op_par, int var1, noeud* noeud1){
 	nb_aretes_ = 1;
 	nb_var_ = 1;
 	nb_const_ = 0;
+	id_ = identifiant;
+	identifiant++;
 }
 
 //============================================================================
@@ -70,6 +76,8 @@ noeud::noeud(int op_par, bool const1, bool const2){
 	nb_aretes_ = 0;
 	nb_var_ = 0;
 	nb_const_ = 2;
+	id_ = identifiant;
+	identifiant++;
 }
 
 //============================================================================
@@ -86,6 +94,8 @@ noeud::noeud(int op_par, bool const1, noeud* noeud1){
 	nb_aretes_ = 1;
 	nb_var_ = 0;
 	nb_const_ = 1;
+	id_ = identifiant;
+	identifiant++;
 }
 
 //============================================================================
@@ -102,6 +112,8 @@ noeud::noeud(int op_par, bool const1, int var1){
 	nb_aretes_ = 0;
 	nb_var_ = 1;
 	nb_const_ = 1;
+	id_ = identifiant;
+	identifiant++;
 }
 
 //============================================================================
@@ -116,6 +128,8 @@ noeud::noeud(int var1){
 	nb_aretes_ = 0;
 	nb_var_ = 1;
 	nb_const_ = 0;
+	id_ = identifiant;
+	identifiant++;
 }
 
 //============================================================================
@@ -130,6 +144,8 @@ noeud::noeud(noeud* noeud1){
 	nb_aretes_ = 1;
 	nb_var_ = 0;
 	nb_const_ = 0;
+	id_ = identifiant;
+	identifiant++;
 }
 
 //============================================================================
@@ -164,6 +180,8 @@ noeud::noeud(const noeud &acopier){
 			consts_[i]=acopier.consts()[i]; 
 		}
 	}
+	id_ = identifiant;
+	identifiant++;
 }
 
 //============================================================================
