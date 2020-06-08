@@ -273,8 +273,16 @@ class noeud
 		 */
 
 		void liste(noeud** array,int&); //attend en paramètre une liste 
-											  //de la bonne taille
-
+						 //de la bonne taille
+		/**
+		 * Ajoute dans le vecteur fournit les aretes du noeud sous forme de String
+		 *
+		 * @param vecteur un vecteur de string qui contient dans chaque string une
+		 * arete entre deux noeuds identifiés par leur identifiant
+		 * exemple : "1 4"
+		*/
+										  
+		void inventaire_aretes(vector<string> vecteur);
 		string expr();
 
 };
