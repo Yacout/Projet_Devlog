@@ -13,6 +13,9 @@ class arbre;
 using namespace std;
 #if ! defined(NOEUD_H)
 #define NOEUD_H
+
+string toString(int);
+
 class noeud
 {
 
