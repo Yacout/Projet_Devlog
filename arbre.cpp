@@ -166,6 +166,15 @@ void arbre::lister_aretes(vector<string> &vecteur){
 	noeud1_->inventaire_aretes(vecteur);
 }
 
+void arbre::infos_noeuds(vector<string> &vecteur){
+	compter_noeuds();
+	lister_noeuds(); //Pour être sûr d'être à jour
+	for(int i=0;i<nbr_noeuds_;i++){
+		vecteur.push_back(to_string(liste_noeuds_[i]->id_) + " " + to_string(liste_noeuds_[i]->op_));
+	}
+	
+}
+
 ///====================================================================
 ///Choix et exécution d'une mutation
 ///====================================================================
