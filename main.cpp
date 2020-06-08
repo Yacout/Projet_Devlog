@@ -171,7 +171,7 @@ int main(int argc, char* argv[]) {
     cout << nb_generationsmax << endl;
     cout << nbr_filles << endl;
     cout << seuil_fitness << endl;
-    int nbgeneration = 0;
+    int nbgeneration = 1;
 
     vector<vector<string>> tab;
 
@@ -186,6 +186,7 @@ int main(int argc, char* argv[]) {
     arbre** arbres_acomparer = new arbre*[nbr_filles];
     arbre* candidat;
     int indexCandidat=0;
+    int* historiquefit = new int[nb_generationsmax];
 
     
     for(int i=0; i<5;i++){
@@ -204,6 +205,8 @@ int main(int argc, char* argv[]) {
     cout << indexCandidat << endl;
 
     candidat = arbres_acomparer[indexCandidat];
+    historiquefit[nbgeneration-1]=candidat->fitness_;
+    nbgeneration++;
     
     while (nb_generationsmax > nbgeneration&& seuil_fitness > candidat->fitness_) {
         indexCandidat = 0;
@@ -216,6 +219,7 @@ int main(int argc, char* argv[]) {
         }
         delete candidat;
         candidat = arbres_acomparer[indexCandidat];
+        historiquefit[nbgeneration-1]=candidat->fitness_;
 
         for (int i = 0; i < nbr_filles; i++) {
             if (i != indexCandidat) {
@@ -223,7 +227,6 @@ int main(int argc, char* argv[]) {
             }
         }
         nbgeneration++;
-		cout << nbgeneration << endl;
     }
     cout << candidat->fitness_ << endl;
     cout << nbgeneration << endl;
