@@ -282,7 +282,7 @@ class noeud
 		 * exemple : "1 4"
 		*/
 										  
-		void inventaire_aretes(vector<string> vecteur);
+		void inventaire_aretes(vector<string> &vecteur);
 		string expr();
 
 };

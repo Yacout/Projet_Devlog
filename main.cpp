@@ -259,10 +259,19 @@ int main(int argc, char* argv[]) {
     cout << candidat->fitness_ << endl;
     cout << nbgeneration << endl;
     //cout << candidat->expression() << endl;
+    
+    vector<string> aretes;
+    candidat->lister_aretes(aretes);
+    /*for (size_t i=1; i<aretes.size(); ++i){
+    	cout << aretes.at(i) <<endl;
+    }*/
+    
+
 	
 	stockage_formule(candidat, nomfichier);
 	stockage_fit(historiquefit, nb_generationsmax);
 	stockage_aretes(candidat);
+
 
     return 0;
 }
