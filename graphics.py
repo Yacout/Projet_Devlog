@@ -98,25 +98,10 @@ def aretes_ordonnees_horizontalement(converted_list):
             elif(doublon[1]==duo[0]):
                 list_ordo.append(duo)
     return list_ordo;
+#on a une liste de tuples comme avec un parcours horizontal
 
 
-
-"""    for i, doublon in enumerate(converted_list):
-        list_ordo.append(doublon)
-        for j,autre in enumerate(converted_list):
-            if(doublon[0]==autre[0] and doublon[1]!=autre[1]):
-                liste_ordo.append(autre)
-                break
-        for k,duolon in enumerate(converted_list):
-            if(doublon[1]==duolon[0]):
-                liste_ordo.append(duolon)
-                break 
-"""        
-    
-
-
-
-
+#création d'un dico qui associe à chaque identifiant de noeud son numéro d'opérateur
 def cree_dico():
     dico={}
     mon_fichier = open("infos_noeuds", "r")
@@ -130,6 +115,7 @@ def cree_dico():
         
     return dico
 
+#création d'un dictionnaire qui associe à chaque noeud un tuple avec 3 éléments
 def parcours_liste_aretes(liste_aretes,dico):
     dic_comp={}
     for val in liste_aretes:
@@ -146,6 +132,7 @@ def parcours_liste_aretes(liste_aretes,dico):
                                                 
     return dic_comp;
 
+#création de la liste d'arêtes qui associe à chaque noeud du tuple de deux noeuds, le tuple avec les trois éléments du noeud spécifique
 def aretes_definitif(dic_comp, liste_aretes):
     edges=[]
     for val in liste_aretes:
