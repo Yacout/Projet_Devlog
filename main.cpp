@@ -146,6 +146,18 @@ void Affichage(vector<vector<bool>> tab){
 
 }
 
+void stockage_formule(arbre* arbre, string nomfichier){
+	ofstream f(nomfichier);
+
+	if (f){
+		f << arbre->expression() << "\n";
+	}else {
+		std:: cout << "Impossible d'ouvrir le fichier en écriture" 
+			<< std::endl;
+	}
+	f.close();
+}
+
 int main(int argc, char* argv[]) {
     
 
@@ -216,11 +228,8 @@ int main(int argc, char* argv[]) {
     cout << candidat->fitness_ << endl;
     cout << nbgeneration << endl;
     //cout << candidat->expression() << endl;
-    
-	fstream myfile;
-	myfile.open(nomfichier,ios::out);
-	myfile<< candidat->expression() << endl;
-	myfile.close();
+	
+	stockage_formule(candidat, nomfichier);
 
     return 0;
 }
