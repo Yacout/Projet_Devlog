@@ -162,6 +162,10 @@ void arbre::compter_noeuds() {
 
 }
 
+void arbre::lister_aretes(vector<string> &vecteur){
+	noeud1_->inventaire_aretes(vecteur);
+}
+
 ///====================================================================
 ///Choix et exécution d'une mutation
 ///====================================================================

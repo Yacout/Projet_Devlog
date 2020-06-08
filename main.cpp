@@ -220,6 +220,12 @@ int main(int argc, char* argv[]) {
     cout << nbgeneration << endl;
     //cout << candidat->expression() << endl;
     
+    vector<string> aretes;
+    candidat->lister_aretes(aretes);
+    /*for (size_t i=1; i<aretes.size(); ++i){
+    	cout << aretes.at(i) <<endl;
+    }*/
+    
 	fstream myfile;
 	myfile.open(nomfichier,ios::out);
 	myfile<< candidat->expression() << endl;
