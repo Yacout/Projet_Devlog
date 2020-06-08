@@ -174,9 +174,8 @@ void stockage_aretes(arbre* candidat){
 	ofstream f("aretes");
 	if (f){
 		vector<string> list_aretes;
-		candidat->aretes(list_aretes);
+		candidat->lister_aretes(list_aretes);
 		for (int i = 0; i < list_aretes.size(); i++){
-			std::cout << list_aretes[i] << std::endl;
 			f << list_aretes[i] << "\n";
 		}
 	}else {
