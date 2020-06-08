@@ -174,7 +174,7 @@ void arbre::mutation_random() {
     
     if (dis(gen)==1) {
     	mutation_ajout();
-    } else if (dis(gen)==2){
+  } else if (dis(gen)==2){
     	mutation_deletion();
     } else{
     	mutation_substitution();
@@ -342,6 +342,14 @@ void arbre::mutation_substitution() {
 		}
 	}
 	
+}
+
+void arbre::aretes(vector<string> aretes_list){
+	noeud1_->inventaire_aretes(aretes_list);
+	std::cout << aretes_list.size() << std::endl;
+	for(int i = 0; i < aretes_list.size(); i++){
+		std::cout << aretes_list[i] << std::endl;
+	}
 }
 
 ///====================================================================

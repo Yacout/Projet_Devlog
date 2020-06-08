@@ -65,6 +65,7 @@ public :
 	* Renvoie l'expression de l'arbre dans une String
 	*/
 	string expression();
+	void aretes(vector<string> aretes_list);
 
 private :
 
