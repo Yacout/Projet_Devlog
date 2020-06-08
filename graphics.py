@@ -39,3 +39,45 @@ def plot_adjacency_list(edges_list,file_name):
         g.edge(edge[0][0], edge[1][0])
     # to pdf
     g.render()
+
+
+def import_txt():
+	mon_fichier=open("stockage_txt_formule.txt","r")
+	contenu=mon_fichier.read()
+	print(contenu)
+	mon_fichier.close()
+	return contenu 
+
+def import_txt_aretes():
+	mon_fichier=open("stockage_txt_aretes.txt","r")
+	contenu=mon_fichier.read()
+	print(contenu)
+	mon_fichier.close()
+	return contenu 
+
+
+ #création d'une tuple par noeud
+
+def cree_tuples_noeuds(contenu) : 
+	liste_noeuds=[]
+	
+	for line in contenu :
+		for i,caractere in enumerate(line) :
+			if(i<len(contenu)-3) :
+				if (caractere == 'x'):
+					liste_noeuds.append(len(liste_noeuds),'x'+str(caractere[i+1])+str(caractere[i+2]),'firebrick1')
+			else :       
+				elif(caractere == '&'):
+					liste_noeuds.append((len(liste_noeuds),'&','deepskyblue4'))
+				elif(caractere == '~'):
+					liste_noeuds.append((len(liste_noeuds),'~','deepskyblue4'))
+				elif(caractere == '|'):
+					liste_noeuds.append((len(liste_noeuds),'|','deepskyblue4'))
+			    
+	return liste_noeuds
+
+
+contenu=import_txt()
+contenu_aretes=import_txt_aretes()
+liste_noeuds=cree_tuples_noeuds(contenu)
+print(liste_noeuds)
