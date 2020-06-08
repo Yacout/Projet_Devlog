@@ -11,7 +11,8 @@
 #include <string>
 class arbre;
 using namespace std;
-
+#if ! defined(NOEUD_H)
+#define NOEUD_H
 class noeud
 {
 
@@ -32,9 +33,9 @@ class noeud
 								   * noeud */
 		noeud** aretes_ = nullptr; /*!< tableau de pointeurs vers les noeuds
 									 * auxquels le noeud est relié */
-
+	
 	public: 
-
+		static int identifiant;
 		//====================================================================
 		//Constructeurs
 		//====================================================================
@@ -276,3 +277,7 @@ class noeud
 		string expr();
 
 };
+
+
+
+#endif

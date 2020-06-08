@@ -11,7 +11,7 @@
 #include "arbre.h"
 
 using namespace std;
-
+int noeud::identifiant=0;
 /**
 
  * Fonction qui sert a supprimer le premier element d'un vecteur
@@ -152,7 +152,7 @@ int main(int argc, char* argv[]) {
     int nb_generationsmax = atoi(argv[1]);
     int seuil_fitness = atoi(argv[2]);
     int nbr_filles = atoi(argv[3]);
-
+	string nomfichier=argv[4];
     //int nb_generationsmax = 1000;
     //int seuil_fitness = -50;
     //int nbr_filles = 20;
@@ -211,11 +211,16 @@ int main(int argc, char* argv[]) {
             }
         }
         nbgeneration++;
+		cout << nbgeneration << endl;
     }
     cout << candidat->fitness_ << endl;
     cout << nbgeneration << endl;
-    cout << candidat->expression() << endl;
+    //cout << candidat->expression() << endl;
     
+	fstream myfile;
+	myfile.open(nomfichier,ios::out);
+	myfile<< candidat->expression() << endl;
+	myfile.close();
 
     return 0;
 }
