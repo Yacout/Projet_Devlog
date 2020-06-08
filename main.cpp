@@ -148,9 +148,21 @@ void Affichage(vector<vector<bool>> tab){
 
 void stockage_formule(arbre* arbre, string nomfichier){
 	ofstream f(nomfichier);
-
 	if (f){
 		f << arbre->expression() << "\n";
+	}else {
+		std:: cout << "Impossible d'ouvrir le fichier en écriture" 
+			<< std::endl;
+	}
+	f.close();
+}
+
+void stockage_fit(int* histo, int nb_gen){
+	ofstream f("fitness");
+	if (f){
+		for (int i = 0; i < nb_gen - 1; i++){
+			f << histo[i] << "\n";
+		}
 	}else {
 		std:: cout << "Impossible d'ouvrir le fichier en écriture" 
 			<< std::endl;
@@ -233,6 +245,7 @@ int main(int argc, char* argv[]) {
     //cout << candidat->expression() << endl;
 	
 	stockage_formule(candidat, nomfichier);
+	stockage_fit(historiquefit, nb_generationsmax);
 
     return 0;
 }
