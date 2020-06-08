@@ -28,9 +28,6 @@ def plot_adjacency_list(list_edges,file_name):
     node7 = ("x6", 'x4', 'firebrick1')
     list_edges = [(node1, node2),(node1,node3),(node2,node4),(node2,node5),(node3,node6),(node3,node7)]
 """
-	
-            
-    
     # get nodes
     nodes = []
     for edge in list_edges:
@@ -41,34 +38,12 @@ def plot_adjacency_list(list_edges,file_name):
     g = Digraph('G', filename=file_name)
     # add nodes to graph
     for node in nodes:
-        g.node(name=str(node[0]), label=str(node[1]), color=str(node[2]), style='filled')
+        g.node(name=node[0], label=node[1], color=node[2], style='filled')
     # add edges
     for edge in list_edges:
         g.edge(edge[0][0], edge[1][0])
     # to pdf
     g.render()
-
-
-def import_txt():
-    mon_fichier = open("stockage_txt_formule.txt", "r")
-    contenu = mon_fichier.read()
-    print(contenu)
-    mon_fichier.close()
-    return contenu
-
-
-def import_txt_aretes():
-    mon_fichier = open("aretes", "r")
-    contenu = mon_fichier.read()
-    print(contenu)
-    mon_fichier.close()
-    return contenu
-
- # création d'une tuple par noeud
-
-
-
-
 
      
 def cree_tuples_aretes():
@@ -91,13 +66,13 @@ def aretes_ordonnees_horizontalement(converted_list):
                 list_ordo.append(doublon)
                 break
 #parcourscomplet
-    for i, doublon in enumerate(converted_list):
-        for j,duo in enumerate(converted_list):
-            if('x' in doublon[1]):
+    for i, doublon in enumerate(converted_list) :
+        for j,duo in enumerate(converted_list) :
+            if('x' in doublon[1]) :
                 break
-            elif(doublon[1]==duo[0]):
+            elif(doublon[1]==duo[0]) :
                 list_ordo.append(duo)
-    return list_ordo;
+    return list_ordo
 #on a une liste de tuples comme avec un parcours horizontal
 
 
@@ -107,52 +82,48 @@ def cree_dico():
     mon_fichier = open("infos_noeuds", "r")
     #lecture=mon_fichier.readline
     for line in mon_fichier:
-        lune=line[:len(line)-1]
-        lune=lune.split(" ")
-        a=lune[0]
-        b=lune[1]
-        dico[a]=b
+        lune = line[:len(line)-1]
+        lune = lune.split(" ")
+        a = lune[0]
+        b = lune[1]
+        dico[a] = b
         
     return dico
 
 #création d'un dictionnaire qui associe à chaque noeud un tuple avec 3 éléments
-def parcours_liste_aretes(liste_aretes,dico):
-    dic_comp={}
+def parcours_liste_aretes(liste_ordo,dico):
+    dic_comp = {}
     for val in liste_aretes:
         for ident in val:
             if 'x' in ident:
-                dic_comp[ident]=(ident,ident,'firebrick')
+                dic_comp[ident] = (ident,ident,'firebrick')
             else:
-                if(dico[ident]=='1'):
-                    dic_comp[ident]=(ident,'AND','deepskyblue4')
-                elif(dico[ident]=='2'):
-                    dic_comp[ident]=(ident,'OR','deepskyblue4')
+                if (dico[ident] == '1'):
+                    dic_comp[ident] = (ident,'AND','deepskyblue4')
+                elif (dico[ident] == '2'):
+                    dic_comp[ident] = (ident,'OR','deepskyblue4')
                 elif(dico[ident]=='3'):
-                    dic_comp[ident]=(ident,'NOT','deepskyblue4')
+                    dic_comp[ident] = (ident,'NOT','deepskyblue4')
                                                 
     return dic_comp;
 
 #création de la liste d'arêtes qui associe à chaque noeud du tuple de deux noeuds, le tuple avec les trois éléments du noeud spécifique
-def aretes_definitif(dic_comp, liste_aretes):
-    edges=[]
+def aretes_definitif(dic_comp , liste_ordo):
+    edges = []
     for val in liste_aretes:
-        node1=dic_comp[val[0]]
-        node2=dic_comp[val[1]]
-        nodes=(node1,node2)
+        node1 = dic_comp[val[0]]
+        node2 = dic_comp[val[1]]
+        nodes = (node1,node2)
         edges.append(nodes)
         
     return edges
    
 
 
-liste_aretes=cree_tuples_aretes()
-liste_ordonnee=aretes_ordonnees_horizontalement(liste_aretes)
-
-
-#liste_noeuds = cree_tuples_noeuds(contenu)
-a=parcours_liste_aretes(liste_ordonnee,cree_dico())
-listedef=aretes_definitif(a, liste_ordonnee)
-#print(listedef)
+liste_aretes = cree_tuples_aretes()
+liste_ordonnee = aretes_ordonnees_horizontalement(liste_aretes)
+dico_trituples = parcours_liste_aretes(liste_ordonnee,cree_dico())
+listedef = aretes_definitif(dico_trituples, liste_ordonnee)
 plot_adjacency_list(listedef,'essai')
 
 
