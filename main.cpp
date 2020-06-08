@@ -283,14 +283,11 @@ int main(int argc, char* argv[]) {
     for (size_t i=1; i<noeuds.size(); ++i){
     	cout << noeuds.at(i) <<endl;
     }
-   
-
 	
 	stockage_formule(candidat, nomfichier);
 	stockage_fit(historiquefit, nb_generationsmax);
 	stockage_aretes(candidat);
 	stockage_infos_noeuds(candidat);
-
 
     return 0;
 }

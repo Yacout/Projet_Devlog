@@ -361,11 +361,11 @@ void noeud::liste(noeud** array, int& i){
 
 void noeud ::inventaire_aretes(vector<string> &vecteur){
 	for (int i=0; i<nb_aretes_;i++){
-		vecteur.push_back( to_string(id_) +" "+ to_string(aretes_[i]->id_));
+		vecteur.push_back( toString(id_) +" "+ toString(aretes_[i]->id_));
 		aretes_[i]->inventaire_aretes(vecteur);
 	}
 	for (int i=0; i<nb_var_;i++){
-		vecteur.push_back( to_string(id_) +" x"+ to_string(var_[i]));
+		vecteur.push_back( toString(id_) +" x"+ toString(var_[i]));
 	}
 }
 
