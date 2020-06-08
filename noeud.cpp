@@ -389,45 +389,45 @@ string noeud::expr(){
 	else if (nb_aretes_ == 1 && nb_var_ == 1){
 		switch (op_){
 			case 1: return "( " + aretes_[0]->expr() + " & x" 
-					+ to_string(var_[0]) + " )";
+					+ toString(var_[0]) + " )";
 			case 2: return "( " + aretes_[0]->expr() + " | x" 
-					+ to_string(var_[0]) + " )";
+					+ toString(var_[0]) + " )";
 		}
 	} 
 	//Un noeud et une constante
 	else if (nb_aretes_ == 1 && nb_const_ == 1){
 		switch (op_){
 			case 1: return "( " + aretes_[0]->expr() + " & x" 
-					+ to_string(consts_[0]) +" )";
+					+ toString(consts_[0]) +" )";
 			case 2: return "( " + aretes_[0]->expr() + " | x" 
-					+ to_string(consts_[0]) + " )";
+					+ toString(consts_[0]) + " )";
 		}
 	} 
     //Deux variables
 	else if (nb_var_ == 2){
 		switch (op_){
-			case 1: return "( x" + to_string(var_[0]) + " & x" 
-					+ to_string(var_[1]) + " )";
-			case 2: return "( x" + to_string(var_[0]) + " | x"
-					+ to_string(var_[1]) + " )";
+			case 1: return "( x" + toString(var_[0]) + " & x" 
+					+ toString(var_[1]) + " )";
+			case 2: return "( x" + toString(var_[0]) + " | x"
+					+ toString(var_[1]) + " )";
 		}
 	} 
 	//Une variable et une constante
 	else if (nb_var_ == 1 && nb_const_ == 1){
 		switch (op_){
-			case 1: return "( " + to_string(consts_[0]) + " & x"
-					+ to_string(var_[0]) + " )";
-			case 2: return "( " + to_string(consts_[0]) + " | x"
-					+ to_string(var_[0]) + " )";
+			case 1: return "( " + toString(consts_[0]) + " & x"
+					+ toString(var_[0]) + " )";
+			case 2: return "( " + toString(consts_[0]) + " | x"
+					+ toString(var_[0]) + " )";
 		}
 	} 
 	//Deux constantes
 	else if (nb_const_ == 2){
 		switch (op_){
-			case 1: return "( " + to_string(consts_[0]) + " & "
-					+ to_string(consts_[1]) + " )";
-			case 2: return "( " + to_string(consts_[0]) + " | "
-					+ to_string(consts_[1]) + " )";
+			case 1: return "( " + toString(consts_[0]) + " & "
+					+ toString(consts_[1]) + " )";
+			case 2: return "( " + toString(consts_[0]) + " | "
+					+ toString(consts_[1]) + " )";
 		}
 	}
 
@@ -442,11 +442,27 @@ string noeud::expr(){
 
 	//Une variable
 	else if (op_ == 3 && nb_var_ == 1){
-		return "~x"+ to_string(var_[0]);
+		return "~x"+ toString(var_[0]);
 	}
 
 	else {
 		return "Erreur";
 	}
 
+}
+
+//============================================================================
+//
+//Fonction annexe
+//
+//============================================================================
+
+string toString(int i){
+	if (i<10){
+		return "00" + to_string(i);
+	} else if (i < 100){
+		return "0" + to_string(i);
+	} else {
+		return to_string(i);
+	}
 }

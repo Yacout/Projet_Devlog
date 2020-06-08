@@ -65,8 +65,7 @@ public :
 	* Renvoie l'expression de l'arbre dans une String
 	*/
 	string expression();
-	
-	
+
 	/**
 	* Ajoute les aretes de l'arbre dans le vecteur fournit
 	* @param vecteur vecteur de string, une arete par string ex : "1 4"

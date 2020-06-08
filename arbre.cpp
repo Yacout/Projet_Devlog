@@ -187,7 +187,7 @@ void arbre::mutation_random() {
     
     if (dis(gen)==1) {
     	mutation_ajout();
-    } else if (dis(gen)==2){
+  } else if (dis(gen)==2){
     	mutation_deletion();
     } else{
     	mutation_substitution();

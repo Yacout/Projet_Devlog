@@ -170,6 +170,36 @@ void stockage_fit(int* histo, int nb_gen){
 	f.close();
 }
 
+void stockage_aretes(arbre* candidat){
+	ofstream f("aretes");
+	if (f){
+		vector<string> list_aretes;
+		candidat->lister_aretes(list_aretes);
+		for (int i = 0; i < list_aretes.size(); i++){
+			f << list_aretes[i] << "\n";
+		}
+	}else {
+		std:: cout << "Impossible d'ouvrir le fichier en écriture" 
+			<< std::endl;
+	}
+	f.close();
+}
+
+void stockage_infos_noeuds(arbre* candidat){
+	ofstream f("infos_noeuds");
+	if (f){
+		vector<string> infos_noeuds;
+		candidat->infos_noeuds(infos_noeuds);
+		for (int i = 0; i < infos_noeuds.size(); i++){
+			f << infos_noeuds[i] << "\n";
+		}
+	}else {
+		std:: cout << "Impossible d'ouvrir le fichier en écriture" 
+			<< std::endl;
+	}
+	f.close();
+}
+
 int main(int argc, char* argv[]) {
     
 
@@ -258,6 +288,8 @@ int main(int argc, char* argv[]) {
 	
 	stockage_formule(candidat, nomfichier);
 	stockage_fit(historiquefit, nb_generationsmax);
+	stockage_aretes(candidat);
+	stockage_infos_noeuds(candidat);
 
 
     return 0;
