@@ -246,10 +246,14 @@ int main(int argc, char* argv[]) {
     
     vector<string> aretes;
     candidat->lister_aretes(aretes);
-    /*for (size_t i=1; i<aretes.size(); ++i){
-    	cout << aretes.at(i) <<endl;
-    }*/
     
+    vector<string> noeuds;
+    candidat->infos_noeuds(noeuds);
+    
+    for (size_t i=1; i<noeuds.size(); ++i){
+    	cout << noeuds.at(i) <<endl;
+    }
+   
 
 	
 	stockage_formule(candidat, nomfichier);

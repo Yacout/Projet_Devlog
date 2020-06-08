@@ -72,6 +72,12 @@ public :
 	* @param vecteur vecteur de string, une arete par string ex : "1 4"
 	*/
 	void lister_aretes(vector<string> &vecteur);
+	
+	/**
+	* Ajoute des informations (id et op_)sur les noeuds de l'arbre dans le vecteur fournit
+	* @param vecteur vecteur de string, un noeud par string ex : "90 1"
+	*/
+	void infos_noeuds(vector<string> &vecteur);
 
 private :
 
