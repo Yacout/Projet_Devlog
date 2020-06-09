@@ -93,7 +93,7 @@ def cree_dico():
 #création d'un dictionnaire qui associe à chaque noeud un tuple avec 3 éléments
 def parcours_liste_aretes(liste_ordo,dico):
     dic_comp = {}
-    for val in liste_aretes:
+    for val in liste_ordo:
         for ident in val:
             if 'x' in ident:
                 dic_comp[ident] = (ident,ident,'firebrick')
@@ -110,7 +110,7 @@ def parcours_liste_aretes(liste_ordo,dico):
 #création de la liste d'arêtes qui associe à chaque noeud du tuple de deux noeuds, le tuple avec les trois éléments du noeud spécifique
 def aretes_definitif(dic_comp , liste_ordo):
     edges = []
-    for val in liste_aretes:
+    for val in liste_ordo:
         node1 = dic_comp[val[0]]
         node2 = dic_comp[val[1]]
         nodes = (node1,node2)
@@ -119,14 +119,18 @@ def aretes_definitif(dic_comp , liste_ordo):
     return edges
    
 
+#méthode finale qui appellent toutes les précédentes méthodes et renvoie un graphe
+def encapsulation():
+    liste_aretes = cree_tuples_aretes()
+    liste_ordonnee = aretes_ordonnees_horizontalement(liste_aretes)
+    dico_trituples = parcours_liste_aretes(liste_ordonnee,cree_dico())
+    listedef = aretes_definitif(dico_trituples, liste_ordonnee)
+    plot_adjacency_list(listedef,'essai')
+    return 1;
 
-liste_aretes = cree_tuples_aretes()
-liste_ordonnee = aretes_ordonnees_horizontalement(liste_aretes)
-dico_trituples = parcours_liste_aretes(liste_ordonnee,cree_dico())
-listedef = aretes_definitif(dico_trituples, liste_ordonnee)
-plot_adjacency_list(listedef,'essai')
 
 
+a=encapsulation()
 
 
 
