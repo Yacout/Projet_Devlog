@@ -2,6 +2,8 @@
 
 import subprocess
 import os
+from graphics import encapsulation
+from plot_fitness import affichage_fitness
 
 nbGenerations=int(input("Combien de générations voulez-vous calculer au maximum ?"))
 seuilFitness=int(input("A partir de quelle fitness les calculs peuvent s'arrêter ?"))
@@ -13,7 +15,8 @@ def compilation_cpp():
 	first=subprocess.call(["make","clean"])
 	subprocess.call(["make"])
 	tmp=subprocess.call(["./main",str(nbGenerations),str(seuilFitness),str(nbFilles),nomFichier])
-		
+	encapsulation()
+	affichage_fitness()	
 	print (tmp)
 
 
