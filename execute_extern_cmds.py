@@ -3,10 +3,17 @@
 import subprocess
 import os
 
-def compilation_cpp():
+nbGenerations=int(input("Combien de générations voulez-vous calculer au maximum ?"))
+seuilFitness=int(input("A partir de quelle fitness les calculs peuvent s'arrêter ?"))
+nbFilles=int(input("Combien de filles à chaque génération doivent être générées ?"))
+nomFichier=str(input("Comment doit s'appeler le fichier qui stockera la formule du meilleur arbre ?"))
+nbGenerations,seuilFitness,nbFilles,str(nomFichier)
 
-	subprocess.call(["g++", "main.cpp"])
-	tmp=subprocess.call("./main")
+def compilation_cpp():
+	first=subprocess.call(["make","clean"])
+	subprocess.call(["make"])
+	tmp=subprocess.call(["./main",str(nbGenerations),str(seuilFitness),str(nbFilles),nomFichier])
+		
 	print (tmp)
 
 
