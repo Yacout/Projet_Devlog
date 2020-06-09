@@ -93,10 +93,12 @@ def cree_dico():
 #création d'un dictionnaire qui associe à chaque noeud un tuple avec 3 éléments
 def parcours_liste_aretes(liste_ordo,dico):
     dic_comp = {}
+    compt=0
     for val in liste_ordo:
         for ident in val:
             if 'x' in ident:
-                dic_comp[ident] = (ident,ident,'firebrick')
+                dic_comp[(ident, compt)] = (str(compt),ident,'firebrick')
+                compt+=1
             else:
                 if (dico[ident] == '1'):
                     dic_comp[ident] = (ident,'AND','deepskyblue4')
@@ -110,27 +112,36 @@ def parcours_liste_aretes(liste_ordo,dico):
 #création de la liste d'arêtes qui associe à chaque noeud du tuple de deux noeuds, le tuple avec les trois éléments du noeud spécifique
 def aretes_definitif(dic_comp , liste_ordo):
     edges = []
+    compt=0
     for val in liste_ordo:
-        node1 = dic_comp[val[0]]
-        node2 = dic_comp[val[1]]
-        nodes = (node1,node2)
-        edges.append(nodes)
+#seul le deuxième élément du tuple peut contenir une variable car un "noeud variable" ne peut être père
+        if 'x' in val[1]:
+            node1 = dic_comp[val[0]]
+            node2 = dic_comp[(val[1],compt)]
+            compt+=1
+            nodes = (node1,node2)
+            edges.append(nodes)            
+        else:
+            node1 = dic_comp[val[0]]
+            node2 = dic_comp[val[1]]
+            nodes = (node1,node2)
+            edges.append(nodes)
         
     return edges
    
 
-#méthode finale qui appellent toutes les précédentes méthodes et renvoie un graphe
+#méthode finale qui appelle toutes les précédentes méthodes et renvoie le graphe de l'arbre
 def encapsulation():
     liste_aretes = cree_tuples_aretes()
     liste_ordonnee = aretes_ordonnees_horizontalement(liste_aretes)
     dico_trituples = parcours_liste_aretes(liste_ordonnee,cree_dico())
     listedef = aretes_definitif(dico_trituples, liste_ordonnee)
     plot_adjacency_list(listedef,'essai')
-    return 1;
+    
 
 
 
-a=encapsulation()
+
 
 
 
