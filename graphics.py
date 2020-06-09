@@ -97,6 +97,7 @@ def parcours_liste_aretes(liste_ordo,dico):
     for val in liste_ordo:
         for ident in val:
             if 'x' in ident:
+#chaque noeud variable a un identifiant unique compt qui pourra lui être restitué lors du parcours suivant
                 dic_comp[(ident, compt)] = (str(compt),ident,'firebrick')
                 compt+=1
             else:
