@@ -11,7 +11,7 @@
 #include "arbre.h"
 
 using namespace std;
-int noeud::identifiant=0;
+unsigned long noeud::identifiant=0;
 /**
 
  * Fonction qui sert a supprimer le premier element d'un vecteur
