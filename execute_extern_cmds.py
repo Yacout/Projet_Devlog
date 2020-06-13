@@ -9,15 +9,16 @@ nbGenerations=int(input("Combien de générations voulez-vous calculer au maximu
 seuilFitness=int(input("A partir de quelle fitness les calculs peuvent s'arrêter ?"))
 nbFilles=int(input("Combien de filles à chaque génération doivent être générées ?"))
 nomFichier=str(input("Comment doit s'appeler le fichier qui stockera la formule du meilleur arbre ?"))
-nbGenerations,seuilFitness,nbFilles,str(nomFichier)
+nomTableau=str(input("Comment s'appelle le fichier csv utilisé ?"))
+
 
 def compilation_cpp():
-	first=subprocess.call(["make","clean"])
-	subprocess.call(["make"])
-	tmp=subprocess.call(["./main",str(nbGenerations),str(seuilFitness),str(nbFilles),nomFichier])
-	encapsulation()
-	affichage_fitness()	
-	print (tmp)
+    first=subprocess.call(["make","clean"])
+    subprocess.call(["make"])
+    tmp=subprocess.call(["./main",str(nbGenerations),str(seuilFitness),str(nbFilles),nomFichier],nomTableau)
+    encapsulation()
+    affichage_fitness()	
+    print (tmp)
 
 
 compilation_cpp()

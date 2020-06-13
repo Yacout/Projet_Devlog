@@ -169,22 +169,6 @@ TEST(GTestTests, TestCopie){
 };
 
 
-
-
-
-TEST(GTestTests, TestConstructeurAleatoire1G){
-
-};
-
-TEST(GTestTests, TestConstructeurFille){
-
-};
-
-
-TEST(GTestTests, TestConstructeurAleatoire5noeuds){
-
-};
-
 TEST(GTestTests, TestFitness){
 	std::vector<bool> l1{0,0,0,0,1,0,0};
 
@@ -226,7 +210,6 @@ TEST(GTestTests, TestExpr){
 	delete liste_noeud[4];
 	delete[] liste_noeud;
 };
-
 
 
 TEST(GTestTests, TestMutAjout){
