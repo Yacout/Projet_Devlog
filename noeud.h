@@ -36,10 +36,10 @@ class noeud
 								   * noeud */
 		noeud** aretes_ = nullptr; /*!< tableau de pointeurs vers les noeuds
 									 * auxquels le noeud est relié */
-		int id_;
+		unsigned long id_;
 	
 	public: 
-		static int identifiant;
+		static unsigned long identifiant;
 		//====================================================================
 		//Constructeurs
 		//====================================================================
