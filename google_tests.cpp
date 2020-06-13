@@ -228,28 +228,6 @@ TEST(GTestTests, TestExpr){
 };
 
 
-TEST(GTestTests, TestCreerFille){
-
-};
-
-
-TEST(GTestTests, TestLister_Noeuds){
-
-};
-
-TEST(GTestTests, TestDenombrer_Noeuds){
-	
-};
-
-
-/*TEST(GTestTests, TestMutationRandom){
-	noeud** liste_noeud = new noeud*[1];
-	liste_noeud[0] = new noeud(1);
-	arbre* arbretest1=new arbre(5);
-	arbretest1->mutation_random();
-	delete arbretest1;
-};*/
-
 
 TEST(GTestTests, TestMutAjout){
 
@@ -274,9 +252,6 @@ TEST(GTestTests, TestMutationDeletion){
 
 };
 
-TEST(GTestTests, TestMutationSubstitution){
-
-};
 
 
 
