@@ -15,7 +15,7 @@ nomTableau=str(input("Comment s'appelle le fichier csv utilisé ?"))
 def compilation_cpp():
     first=subprocess.call(["make","clean"])
     subprocess.call(["make"])
-    tmp=subprocess.call(["./main",str(nbGenerations),str(seuilFitness),str(nbFilles),nomFichier],nomTableau)
+    tmp=subprocess.call(["./main",str(nbGenerations),str(seuilFitness),str(nbFilles),nomFichier,nomTableau])
     encapsulation()
     affichage_fitness()	
     print (tmp)
