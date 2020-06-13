@@ -35,11 +35,11 @@ void pop_front(vector<T> &v){
 }
 
 
-vector<vector<string>> CreerTableau(){
+vector<vector<string>> CreerTableau(string data){
 
     //Upload du fichier
 
-    ifstream in("binary_gene_expression_ACE2_tfs.csv");
+    ifstream in(data);
 
     string line, field;
 
@@ -175,7 +175,7 @@ void stockage_aretes(arbre* candidat){
 	if (f){
 		vector<string> list_aretes;
 		candidat->lister_aretes(list_aretes);
-		for (int i = 0; i < list_aretes.size(); i++){
+		for (unsigned int i = 0; i < list_aretes.size(); i++){
 			f << list_aretes[i] << "\n";
 		}
 	}else {
@@ -190,7 +190,7 @@ void stockage_infos_noeuds(arbre* candidat){
 	if (f){
 		vector<string> infos_noeuds;
 		candidat->infos_noeuds(infos_noeuds);
-		for (int i = 0; i < infos_noeuds.size(); i++){
+		for (unsigned int i = 0; i < infos_noeuds.size(); i++){
 			f << infos_noeuds[i] << "\n";
 		}
 	}else {
@@ -207,6 +207,7 @@ int main(int argc, char* argv[]) {
     int seuil_fitness = atoi(argv[2]);
     int nbr_filles = atoi(argv[3]);
 	string nomfichier=argv[4];
+	string datafile = argv[5];
     //int nb_generationsmax = 1000;
     //int seuil_fitness = -50;
     //int nbr_filles = 20;
@@ -219,7 +220,7 @@ int main(int argc, char* argv[]) {
 
     vector<vector<bool>> tab2;
 
-    tab =CreerTableau();
+    tab =CreerTableau(datafile);
 
     //AffichageString(tab);
 
@@ -229,17 +230,16 @@ int main(int argc, char* argv[]) {
     arbre* candidat;
     int indexCandidat=0;
     int* historiquefit = new int[nb_generationsmax];
-
+	int nbvar = tab2[3].size()-1;
     
     for(int i=0; i<5;i++){
-    	arbres_acomparer[i] = new arbre(119);
+    	arbres_acomparer[i] = new arbre(nbvar);
     	arbres_acomparer[i]->calcul_fitness(tab2);
     	if (arbres_acomparer[indexCandidat]->fitness_ < arbres_acomparer[i]->fitness_){
     	    indexCandidat=i;
     	}
     }
     for(int i=0;i<5;i++){
-        cout << arbres_acomparer[i]->fitness_ <<endl;
         if (i != indexCandidat) {
             delete arbres_acomparer[i];
         }
@@ -280,9 +280,9 @@ int main(int argc, char* argv[]) {
     vector<string> noeuds;
     candidat->infos_noeuds(noeuds);
     
-    for (size_t i=1; i<noeuds.size(); ++i){
+    /*for (size_t i=1; i<noeuds.size(); ++i){
     	cout << noeuds.at(i) <<endl;
-    }
+    }*/
 	
 	stockage_formule(candidat, nomfichier);
 	stockage_fit(historiquefit, nb_generationsmax);

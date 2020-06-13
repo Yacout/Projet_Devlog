@@ -22,18 +22,6 @@ arbre::arbre(int nbrvar) {
 	cree_arbre_random();
 }
 
-///====================================================================
-///Constructeur de copie
-///====================================================================
-///Constructeur de copie. Non utilisé (ne pas supprimer du .h pour éviter que C++ esssaye d'en faire un par lui même)
-
-arbre::arbre(const arbre& arbre_copie) {
-	fitness_ = arbre_copie.fitness_;
-	memcpy(liste_noeuds_, arbre_copie.liste_noeuds_, arbre_copie.nbr_noeuds_); //Vieille fonction, ne plait pas au compileur
-	nbr_noeuds_ = arbre_copie.nbr_noeuds_;
-	noeud1_ = arbre_copie.noeud1_;
-	nbrvar_=arbre_copie.nbrvar_;
-}
 
 ///====================================================================
 ///Dummy constructeur pour les tests
