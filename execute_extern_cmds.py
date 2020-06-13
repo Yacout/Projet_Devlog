@@ -2,8 +2,11 @@
 
 import subprocess
 import os
+import sympy as sp
 from graphics import encapsulation
 from plot_fitness import affichage_fitness
+from Sympy_Expression import simplification_formule
+
 
 nbGenerations=int(input("Combien de générations voulez-vous calculer au maximum ?"))
 seuilFitness=int(input("A partir de quelle fitness les calculs peuvent s'arrêter ?"))
@@ -18,6 +21,7 @@ def compilation_cpp():
     tmp=subprocess.call(["./main",str(nbGenerations),str(seuilFitness),str(nbFilles),nomFichier,nomTableau])
     encapsulation()
     affichage_fitness()	
+    simplification_formule(nomFichier)
     print (tmp)
 
 

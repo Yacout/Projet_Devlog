@@ -6,16 +6,14 @@ import sympy as sp
 
 #fonction qui importe le contenu du fichier texte contenant la formule
 
-def import_txt():
-	mon_fichier=open("stockage_txt_formule.txt","r")
+def import_txt(nomFichier):
+	mon_fichier=open(nomFichier,"r")
 	contenu=mon_fichier.read()
-	print(contenu)
 	mon_fichier.close()
 	return contenu 
 
 
-contenu=import_txt()
-
+"""
 sp.init_printing() #pour que les expressions soient print de façon jolie
 
 #simplification de la formule
@@ -34,3 +32,18 @@ print(f(3)) #retourne la valeur de cette fonction
 x1, x2, x3 =sp.symbols('x1, x2, x3')
 f1= (x1 & x2 & x3) | (~x1 & ~x3)
 print(sp.simplify(f1))
+
+"""
+
+def simplification_formule(nomFichier):
+    contenu=import_txt(nomFichier)
+    x=sp.symbols('x')
+    b=sp.simplify(contenu)
+    mon_fichier=open("stockage_txt_formule_simplifié.txt","w")
+    mon_fichier.write(str(b))
+    mon_fichier.close()
+    return b    
+
+    
+                                
+    
