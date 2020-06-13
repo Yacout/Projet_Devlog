@@ -229,17 +229,16 @@ int main(int argc, char* argv[]) {
     arbre* candidat;
     int indexCandidat=0;
     int* historiquefit = new int[nb_generationsmax];
-
+	int nbvar = tab2[3].size()-1;
     
     for(int i=0; i<5;i++){
-    	arbres_acomparer[i] = new arbre(119);
+    	arbres_acomparer[i] = new arbre(nbvar);
     	arbres_acomparer[i]->calcul_fitness(tab2);
     	if (arbres_acomparer[indexCandidat]->fitness_ < arbres_acomparer[i]->fitness_){
     	    indexCandidat=i;
     	}
     }
     for(int i=0;i<5;i++){
-        cout << arbres_acomparer[i]->fitness_ <<endl;
         if (i != indexCandidat) {
             delete arbres_acomparer[i];
         }
@@ -280,9 +279,9 @@ int main(int argc, char* argv[]) {
     vector<string> noeuds;
     candidat->infos_noeuds(noeuds);
     
-    for (size_t i=1; i<noeuds.size(); ++i){
+    /*for (size_t i=1; i<noeuds.size(); ++i){
     	cout << noeuds.at(i) <<endl;
-    }
+    }*/
 	
 	stockage_formule(candidat, nomfichier);
 	stockage_fit(historiquefit, nb_generationsmax);
