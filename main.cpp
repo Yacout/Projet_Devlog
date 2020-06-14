@@ -231,6 +231,7 @@ int main(int argc, char* argv[]) {
     int indexCandidat=0;
     int* historiquefit = new int[nb_generationsmax];
 	int nbvar = tab2[3].size()-1;
+    bool fille_meilleure=false;
     
     for(int i=0; i<5;i++){
     	arbres_acomparer[i] = new arbre(nbvar);
@@ -255,16 +256,20 @@ int main(int argc, char* argv[]) {
         for (int i = 0; i < nbr_filles; i++) {
             arbres_acomparer[i] = candidat->creer_fille();
             arbres_acomparer[i]->calcul_fitness(tab2);
-            if (arbres_acomparer[indexCandidat]->fitness_ < arbres_acomparer[i]->fitness_) {
+            if (candidat->fitness_ < arbres_acomparer[i]->fitness_ && arbres_acomparer[indexCandidat]->fitness_ <= arbres_acomparer[i]->fitness_) {
                 indexCandidat = i;
+                fille_meilleure = true;
             }
         }
-        delete candidat;
-        candidat = arbres_acomparer[indexCandidat];
+        
+        if (fille_meilleure) {
+            delete candidat;
+            candidat = arbres_acomparer[indexCandidat];
+        }
         historiquefit[nbgeneration-1]=candidat->fitness_;
 
         for (int i = 0; i < nbr_filles; i++) {
-            if (i != indexCandidat) {
+            if (i != indexCandidat || ! fille_meilleure) {
                 delete arbres_acomparer[i];
             }
         }
